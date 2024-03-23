@@ -1,0 +1,28 @@
+package com.arara.security.repository;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
+
+import com.arara.security.model.User;
+
+public interface UserRepository extends Repository<User, Long> {
+
+	User save(User user);
+
+	Optional<User> findById(long id);
+
+	Optional<User> findByEmail(String email);
+
+	List<User> findAll();
+	
+	@Modifying
+	@Query("update User u set u.lastLoginAt = :lastLoginAt where u.email = :email")
+	int setLastLoginAtByEmail(@Param("lastLoginAt") Instant lastLoginAt, @Param("email") String email);
+
+}
