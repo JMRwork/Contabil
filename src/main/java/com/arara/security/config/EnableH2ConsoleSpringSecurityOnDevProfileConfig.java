@@ -16,7 +16,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class EnableH2ConsoleSpringSecurityOnDevProfileConfig {
 
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
 				auth -> auth.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll())
 				.headers(headers -> headers.frameOptions().disable())
