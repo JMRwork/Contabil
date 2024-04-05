@@ -92,6 +92,7 @@ erDiagram
     	string name
     	string legal_name
     	string cnpj
+    	boolean is_active
     	int created_by
     	timestamp created_at
     	timestamp last_modified_at
