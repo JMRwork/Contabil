@@ -28,8 +28,23 @@
 
 > [!TIP]
 > [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+> [Code blocks with syntax highlighting](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
+> [Tables on readme.md syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables)
+> [Docs for diagrams on readme.md, Mermaid syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
+> [Mermaid syntax](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
 
 ## Reference
+
+### Thymeleaf
+
+- [Thymeleaf + Spring](https://www.thymeleaf.org/doc/tutorials/3.1/thymeleafspring.html)
+- [Using thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
+
+### Spring
+
+- [Spring Framework](https://spring.io/)
+- [Spring Data JPA](https://docs.spring.io/spring-data/jpa/reference/jpa.html)
+- [Spring Security](https://docs.spring.io/spring-security/reference/index.html)
 
 ### SQL
 
