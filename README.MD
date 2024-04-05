@@ -45,3 +45,41 @@ inner join organizations
   on users_organizations.organization_id = organizations.id
 where organizations.id = 1;
 ```
+
+### SQL Diagram
+
+```mermaid
+---
+title: Contabil
+---
+erDiagram
+    users ||--o{ users_organizations : has
+    users_organizations }o--|| organizations : has
+    users {
+    	int id
+    	string email
+    	string password
+    	string full_name
+    	string role
+    	enum status
+    	int created_by
+    	timestamp created_at
+    	timestamp last_modified_at
+    	timestamp last_login_at
+    	int last_modified_by
+    }
+    users_organizations {
+    	int user_id
+    	int organization_id
+    }
+    organizations {
+    	int id
+    	string name
+    	string legal_name
+    	string cnpj
+    	int created_by
+    	timestamp created_at
+    	timestamp last_modified_at
+    	int last_modified_by
+    }
+```
