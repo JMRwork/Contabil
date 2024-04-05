@@ -9,9 +9,9 @@
 - [ ] movimento table
 - [ ] organizations x movimento
 - [ ] users x organizations x movimento authorization
-- [x] organizations screen
-- [ ] movimento screen
-- [ ] header and footer screen
+- [x] organizations page
+- [ ] movimento page
+- [ ] header and footer page
 - [ ] user add
 - [ ] user edit
 - [ ] organization add
