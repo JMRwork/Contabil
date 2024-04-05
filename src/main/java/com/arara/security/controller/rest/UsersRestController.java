@@ -1,4 +1,4 @@
-package com.arara.security.controller;
+package com.arara.security.controller.rest;
 
 import java.util.List;
 
@@ -21,6 +21,6 @@ public class UsersRestController {
     public List<User> listUsers() {
     	
         return userService.listUsers();
-    } 
+    }
 
 }

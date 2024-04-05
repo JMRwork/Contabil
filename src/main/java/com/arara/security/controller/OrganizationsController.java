@@ -5,17 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.arara.security.service.UserService;
+import com.arara.security.service.OrganizationService;
 
 @Controller
-public class UsersController {
+public class OrganizationsController {
 	
 	@Autowired
-	private UserService userService;
-
-    @GetMapping("/users")
+	private OrganizationService organizationService;
+	
+    @GetMapping("/organizations")
     public String showUsers(Model model) {
-        model.addAttribute("users", userService.listUsers());
-        return "users";
+        model.addAttribute("organizations", organizationService.listOrganizations());
+        return "organizations";
     }
 }

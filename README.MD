@@ -9,7 +9,7 @@
 - [ ] movimento table
 - [ ] organizations x movimento
 - [ ] users x organizations x movimento authorization
-- [ ] organizations screen
+- [x] organizations screen
 - [ ] movimento screen
 - [ ] header and footer screen
 - [ ] user add
@@ -19,7 +19,7 @@
 - [ ] movimento add
 - [ ] movimento edit
 - [ ] audit table
-- [ ] add spring boot devtools
+- [x] add spring boot devtools
 
 > [!TIP]
 > Access this docs for readme.md markdown syntax https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
