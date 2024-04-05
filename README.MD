@@ -11,7 +11,6 @@
 - [ ] users x organizations x movimento authorization
 - [x] organizations page
 - [ ] movimento page
-- [ ] header and footer page
 - [ ] user add
 - [ ] user edit
 - [ ] organization add
@@ -20,9 +19,15 @@
 - [ ] movimento edit
 - [ ] audit table
 - [x] add spring boot devtools
+- [ ] add pagination to queries and repositories
+- [ ] add header to pages
+- [ ] add footer to pages
+- [ ] add menu to pages
+- [ ] add css framework - bootstrap or material
+- [ ] add table handler to pages
 
 > [!TIP]
-> Access this docs for readme.md markdown syntax https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+> [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 ## Reference
 
