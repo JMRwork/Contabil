@@ -22,11 +22,16 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Transactional
-	public void updateLastLoginAtByEmail(String email) {
-		int result = userRepository.setLastLoginAtByEmail(Instant.now(), email);
-		logger.debug("updateLastLoginAtByEmail(" + email + ") -> " + result);
+	public void updateLastLoginAtByUsername(String username) {
+		try {
+			Long id = Long.parseLong(username);
+			int result = userRepository.setLastLoginAtById(Instant.now(), id);
+			logger.debug("updateLastLoginAtByUsername(" + username + ") -> " + result);
+		} catch (Exception e) {
+			logger.error("Error parsing username {" + username + "} to Long at UserService.updateLastLoginAtByUsername()", e);
+		}
 	}
-	
+
 	public List<User> listUsers() {
 		return userRepository.findAll();
 	}

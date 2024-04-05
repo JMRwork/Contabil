@@ -15,6 +15,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class EnableH2ConsoleSpringSecurityOnDevProfileConfig {
 
+	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(

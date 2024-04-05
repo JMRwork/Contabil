@@ -24,5 +24,9 @@ public interface UserRepository extends Repository<User, Long> {
 	@Modifying
 	@Query("update User u set u.lastLoginAt = :lastLoginAt where u.email = :email")
 	int setLastLoginAtByEmail(@Param("lastLoginAt") Instant lastLoginAt, @Param("email") String email);
+	
+	@Modifying
+	@Query("update User u set u.lastLoginAt = :lastLoginAt where u.id = :id")
+	int setLastLoginAtById(@Param("lastLoginAt") Instant lastLoginAt, @Param("id") Long id);
 
 }

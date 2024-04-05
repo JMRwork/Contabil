@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		UserDetails userDetails = userRepository.findByEmail(email).map(u -> {
 			
-			String username = u.getEmail();
+			String username = u.getId().toString();
 			String password = u.getPassword();
 			Boolean enabledUser = !u.getStatus().equals(UserStatus.DELETED);
 			Boolean accountNonExpired = u.getStatus().equals(UserStatus.ACTIVE) || u.getStatus().equals(UserStatus.RESET_PASSWORD);

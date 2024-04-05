@@ -2,8 +2,11 @@ package com.arara.security.model;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Entity;
@@ -12,6 +15,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +35,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
     
+	@CreatedBy
+	private Long createdBy;
+	
+    @LastModifiedBy
+    private Long lastModifiedBy;
+    
     @CreatedDate
     private Instant createdAt;
     
@@ -37,6 +49,12 @@ public class User {
     
     private Instant lastLoginAt;
     
+    @ManyToMany
+    @JoinTable(
+    		name = "users_organizations",
+    		joinColumns = @JoinColumn(name = "user_id"),
+    		inverseJoinColumns = @JoinColumn(name = "organization_id"))
+    Set<Organization> organizations;
 
 	public Long getId() {
 		return id;
@@ -86,6 +104,14 @@ public class User {
 		this.status = status;
 	}
 
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+
+	public Long getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
@@ -121,7 +147,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", role=" + role + ", status=" + status + ", createdAt="
+		return "User [id=" + id + ", email=" + email + ", fullName=" + fullName + ", role=" + role + ", status="
+				+ status + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt="
 				+ createdAt + ", lastModifiedAt=" + lastModifiedAt + ", lastLoginAt=" + lastLoginAt + "]";
 	}
 
