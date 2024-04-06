@@ -2,6 +2,7 @@ package com.arara.security.service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,5 +35,18 @@ public class UserService {
 
 	public List<User> listUsers() {
 		return userRepository.findAll();
+	}
+	public void createUser(User user) {
+		try {
+			Optional<User> result = userRepository.findByEmail(user.getEmail());
+			if (result == null) {
+				userRepository.save(user);
+				logger.debug("User " + user.getEmail() +" created");
+			} else {
+				logger.debug("this user already exists");
+			}
+		} catch (Exception e) {
+			logger.error("Error:" + e);
+		}
 	}
 }

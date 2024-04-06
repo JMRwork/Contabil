@@ -4,6 +4,10 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -31,10 +35,8 @@ public class User {
 	private String password;
 	private String fullName;
 	private String role;
-
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-    
 	@CreatedBy
 	private Long createdBy;
 	
