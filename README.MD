@@ -5,12 +5,13 @@
 - [x] login
 - [x] users table
 - [x] organizations table
+- [x] movimento table
 - [x] users x organizations
-- [ ] movimento table
-- [ ] organizations x movimento
+- [x] organizations x movimento
 - [ ] users x organizations x movimento authorization
+- [x] users page
 - [x] organizations page
-- [ ] movimento page
+- [x] movimento page
 - [ ] user add
 - [ ] user edit
 - [ ] organization add
@@ -70,32 +71,48 @@ title: Contabil
 erDiagram
     users ||--o{ users_organizations : has
     users_organizations }o--|| organizations : has
+    organizations ||--o{ movimento : has
     users {
-    	int id
-    	string email
-    	string password
-    	string full_name
-    	string role
-    	enum status
-    	int created_by
-    	timestamp created_at
-    	timestamp last_modified_at
-    	timestamp last_login_at
-    	int last_modified_by
+      int id
+      string email
+      string password
+      string full_name
+      string role
+      enum status
+      int created_by
+      timestamp created_at
+      timestamp last_modified_at
+      timestamp last_login_at
+      int last_modified_by
+      timestamp deleted_at
     }
     users_organizations {
-    	int user_id
-    	int organization_id
+      int user_id
+      int organization_id
     }
     organizations {
-    	int id
-    	string name
-    	string legal_name
-    	string cnpj
-    	boolean is_active
-    	int created_by
-    	timestamp created_at
-    	timestamp last_modified_at
-    	int last_modified_by
+      int id
+      string name
+      string legal_name
+      string cnpj
+      boolean is_active
+      int created_by
+      timestamp created_at
+      timestamp last_modified_at
+      int last_modified_by
+      timestamp deleted_at
+    }
+    movimento {
+      int id
+      string descricao
+      enum tipo
+      date data_lancamento
+      numeric(38,2) valor
+      int organization_id
+      id created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+      timestamp deleted_at
     }
 ```
