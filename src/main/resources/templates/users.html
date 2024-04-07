@@ -1,43 +1,39 @@
-<html th:replace="~{template :: layout (~{:: main})}">
-<body>
-<main>
-    <div th:switch="${users}">
-    <h2 th:case="null">No users yet!</h2>
-        <div th:case="*">
-            <h2>Users</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-												<th>Role</th>
-												<th>Status</th>
-												<th>Created By</th>
-												<th>Created At</th>
-												<th>Last Modified By</th>
-												<th>Last Modified At</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.fullName}"></td>
-                    <td th:text="${user.email}"></td>
-										<td th:text="${user.role}"></td>
-										<td th:text="${user.status}"></td>
-										<td th:text="${user.createdBy}"></td>
-										<td th:text="${user.createdAt}"></td>
-										<td th:text="${user.lastModifiedBy}"></td>
-										<td th:text="${user.lastModifiedAt}"></td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>      
-    <p><a href="/">Home</a></p>
-    </div>
-</main>
-</body>
-</html>
+<div th:switch="${users}">
+	<h2 th:case="null">No users yet!</h2>
+	<div th:case="*">
+		<h2>Users</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Status</th>
+					<th>Created By</th>
+					<th>Created At</th>
+					<th>Last Modified By</th>
+					<th>Last Modified At</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.fullName}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.role}"></td>
+					<td th:text="${user.status}"></td>
+					<td th:text="${user.createdBy}"></td>
+					<td th:text="${user.createdAt}"></td>
+					<td th:text="${user.lastModifiedBy}"></td>
+					<td th:text="${user.lastModifiedAt}"></td>
+					<td><a href="">Edit</a></td>
+					<td><a href="">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p><a href="/">Home</a></p>
+</div>

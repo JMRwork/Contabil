@@ -19,7 +19,14 @@ public interface UserRepository extends Repository<User, Long> {
 
 	Optional<User> findByEmail(String email);
 
+	// Busca todos os usuarios
 	List<User> findAll();
+	
+	// Busca todos os usuarios, exceto deletados
+	List<User> findAllByDeletedAtNull();
+
+	// Busca todos usuarios deletados
+	List<User> findAllByDeletedAtNotNull();
 	
 	@Modifying
 	@Query("update User u set u.lastLoginAt = :lastLoginAt where u.email = :email")

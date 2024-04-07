@@ -6,11 +6,10 @@ import java.util.Optional;
 import org.springframework.data.repository.Repository;
 
 import com.arara.security.model.Organization;
-import com.arara.security.model.User;
 
 public interface OrganizationRepository extends Repository<Organization, Long> {
 
-	User save(Organization org);
+	Organization save(Organization org);
 
 	Optional<Organization> findById(Long id);
 

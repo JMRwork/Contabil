@@ -47,6 +47,8 @@ public class User {
     
     private Instant lastLoginAt;
     
+    private Instant deletedAt;
+    
     @ManyToMany
     @JoinTable(
     		name = "users_organizations",
@@ -126,6 +128,14 @@ public class User {
 		this.lastLoginAt = lastLoginAt;
 	}
 
+	public Instant getDeletedAt() {
+		return deletedAt;
+	}
+
+	public void setDeletedAt(Instant deletedAt) {
+		this.deletedAt = deletedAt;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -147,7 +157,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", fullName=" + fullName + ", role=" + role + ", status="
 				+ status + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt="
-				+ createdAt + ", lastModifiedAt=" + lastModifiedAt + ", lastLoginAt=" + lastLoginAt + "]";
+				+ createdAt + ", lastModifiedAt=" + lastModifiedAt + ", lastLoginAt=" + lastLoginAt + ", deletedAt="
+				+ deletedAt + "]";
 	}
-
 }
