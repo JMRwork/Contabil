@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.arara.security.model.User;
+import com.arara.security.model.UserStatus;
 import com.arara.security.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -21,6 +23,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public void updateLastLoginAtByUsername(String username) {
@@ -39,6 +44,8 @@ public class UserService {
 	public Boolean createUser(User user) {
 		Optional<User> result = userRepository.findByEmail(user.getEmail());
 		if (result.isEmpty()) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setStatus(UserStatus.ACTIVE);
 			userRepository.save(user);
 			logger.debug("User " + user.getEmail() +" created");
 			return true;

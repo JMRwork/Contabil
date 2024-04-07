@@ -1,7 +1,6 @@
 package com.arara.security.model;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -44,7 +43,7 @@ public class User {
 	private Long lastModifiedBy;
 	
 	@CreatedDate
-	private LocalDateTime createdAt;
+	private Instant createdAt;
 	
 	@LastModifiedDate
 	private Instant lastModifiedAt;
@@ -116,7 +115,7 @@ public class User {
 		return lastModifiedBy;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
