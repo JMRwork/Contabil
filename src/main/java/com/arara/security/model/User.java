@@ -31,10 +31,8 @@ public class User {
 	private String password;
 	private String fullName;
 	private String role;
-
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-    
 	@CreatedBy
 	private Long createdBy;
 	
