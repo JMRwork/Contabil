@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Criar Usuário')}">
 
-<body>
 	<main class="container">
 		<style>.error {color: red; font-size: small;}</style>
 		<form th:action="@{/users/register}" th:object="${userDto}" method="post">
@@ -42,6 +41,5 @@
 		<button type="submit" class="btn btn-primary mb-3">Submit</button>
 		</form>
 	</main>
-</body>
 
 </html>

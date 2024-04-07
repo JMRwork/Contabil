@@ -24,7 +24,7 @@ import jakarta.persistence.ManyToOne;
 public class Movimento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String descricao;

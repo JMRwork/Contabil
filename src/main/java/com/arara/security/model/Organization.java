@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 public class Organization {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String legalName;

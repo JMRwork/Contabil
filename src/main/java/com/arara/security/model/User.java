@@ -1,6 +1,7 @@
 package com.arara.security.model;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,8 +9,10 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +25,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="users")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
 	@Id
@@ -31,30 +35,30 @@ public class User {
 	private String password;
 	private String fullName;
 	private String role;
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
+	@Enumerated(EnumType.STRING)
+	private UserStatus status;
 	@CreatedBy
 	private Long createdBy;
 	
-    @LastModifiedBy
-    private Long lastModifiedBy;
-    
-    @CreatedDate
-    private Instant createdAt;
-    
-    @LastModifiedDate
-    private Instant lastModifiedAt;
-    
-    private Instant lastLoginAt;
-    
-    private Instant deletedAt;
-    
-    @ManyToMany
-    @JoinTable(
-    		name = "users_organizations",
-    		joinColumns = @JoinColumn(name = "user_id"),
-    		inverseJoinColumns = @JoinColumn(name = "organization_id"))
-    Set<Organization> organizations;
+	@LastModifiedBy
+	private Long lastModifiedBy;
+	
+	@CreatedDate
+	private LocalDateTime createdAt;
+	
+	@LastModifiedDate
+	private Instant lastModifiedAt;
+	
+	private Instant lastLoginAt;
+	
+	private Instant deletedAt;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "users_organizations",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id"))
+	Set<Organization> organizations;
 
 	public Long getId() {
 		return id;
@@ -112,7 +116,7 @@ public class User {
 		return lastModifiedBy;
 	}
 
-	public Instant getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 

@@ -28,13 +28,13 @@ public class UsersController {
     }
     @GetMapping("/users/register")
     public String registerPage(UserDto userDto) {
-        return "registerUser";
+        return "register-user";
     }
 
     @PostMapping("/users/register")
     public String userRegister(@Validated UserDto userDto, BindingResult result){
     	if(result.hasErrors()){
-            return "registerUser";
+            return "register-user";
         }
     	User user = new User();
     	user.setFullName(userDto.getFullName());
@@ -46,6 +46,6 @@ public class UsersController {
     	}
     	ObjectError error = new ObjectError("globalError", "Este usuário já existe.");
     	result.addError(error);
-    	return "registerUser";
+    	return "register-user";
     }
 }
