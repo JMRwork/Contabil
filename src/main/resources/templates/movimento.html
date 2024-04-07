@@ -1,0 +1,39 @@
+<div th:switch="${movimento}">
+	<h2 th:case="null">No movimento yet!</h2>
+	<div th:case="*">
+		<h2>Movimento</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Descrição</th>
+					<th>Tipo</th>
+					<th>Data Lançamento</th>
+					<th>Valor</th>
+					<th>Created By</th>
+					<th>Created At</th>
+					<th>Last Modified By</th>
+					<th>Last Modified At</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="lancamento : ${movimento}">
+					<td th:text="${lancamento.id}"></td>
+					<td th:text="${lancamento.descricao}"></td>
+					<td th:text="${lancamento.tipo}"></td>
+					<td th:text="${lancamento.dataLancamento}"></td>
+					<td th:text="${lancamento.valor}"></td>
+					<td th:text="${lancamento.createdBy}"></td>
+					<td th:text="${lancamento.createdAt}"></td>
+					<td th:text="${lancamento.lastModifiedBy}"></td>
+					<td th:text="${lancamento.lastModifiedAt}"></td>
+					<td><a href="">Edit</a></td>
+					<td><a href="">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p><a href="/">Home</a></p>
+</div>

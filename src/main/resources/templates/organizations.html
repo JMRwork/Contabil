@@ -1,37 +1,41 @@
 <div th:switch="${organizations}">
-    <h2 th:case="null">No organizations yet!</h2>
-        <div th:case="*">
-            <h2>Organizations</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Legal Name</th>
-												<th>CNPJ</th>
-												<th>Status</th>
-												<th>Created By</th>
-												<th>Created At</th>
-												<th>Last Modified By</th>
-												<th>Last Modified At</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr th:each="org : ${organizations}">
-                    <td th:text="${org.name}"></td>
-                    <td th:text="${org.legalName}"></td>
-										<td th:text="${org.cnpj}"></td>
-										<td th:text="${org.isActive ? 'Active' : 'Disabled'}"></td>
-										<td th:text="${org.createdBy}"></td>
-										<td th:text="${org.createdAt}"></td>
-										<td th:text="${org.lastModifiedBy}"></td>
-										<td th:text="${org.lastModifiedAt}"></td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>      
-    <p><a href="/">Home</a></p>
+	<h2 th:case="null">No organizations yet!</h2>
+	<div th:case="*">
+		<h2>Organizations</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Legal Name</th>
+					<th>CNPJ</th>
+					<th>Status</th>
+					<th>Created By</th>
+					<th>Created At</th>
+					<th>Last Modified By</th>
+					<th>Last Modified At</th>
+					<th>Edit</th>
+					<th>Delete</th>
+					<th>Movimento</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="org : ${organizations}">
+					<td th:text="${org.id}"></td>
+					<td th:text="${org.name}"></td>
+					<td th:text="${org.legalName}"></td>
+					<td th:text="${org.cnpj}"></td>
+					<td th:text="${org.isActive ? 'Active' : 'Disabled'}"></td>
+					<td th:text="${org.createdBy}"></td>
+					<td th:text="${org.createdAt}"></td>
+					<td th:text="${org.lastModifiedBy}"></td>
+					<td th:text="${org.lastModifiedAt}"></td>
+					<td><a href="">Edit</a></td>
+					<td><a href="">Delete</a></td>
+					<td><a th:href="@{/movimento/{id}(id=${org.id})}">Ver Movimento</a></tr>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p><a href="/">Home</a></p>
 </div>

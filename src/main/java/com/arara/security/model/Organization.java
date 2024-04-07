@@ -1,6 +1,7 @@
 package com.arara.security.model;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,8 +47,13 @@ public class Organization {
     @LastModifiedDate
     private Instant lastModifiedAt;
     
+    private Instant deletedAt;
+    
     @ManyToMany(mappedBy = "organizations")
     Set<User> users;
+    
+    @OneToMany(mappedBy = "organization")
+    private List<Movimento> movimento;
 
 	public Long getId() {
 		return id;
@@ -105,6 +112,18 @@ public class Organization {
 		return lastModifiedBy;
 	}
 
+	public Instant getDeletedAt() {
+		return deletedAt;
+	}
+
+	public void setDeletedAt(Instant deletedAt) {
+		this.deletedAt = deletedAt;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -126,7 +145,7 @@ public class Organization {
 	public String toString() {
 		return "Organization [id=" + id + ", name=" + name + ", legalName=" + legalName + ", cnpj=" + cnpj
 				+ ", isActive=" + isActive + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy
-				+ ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + "]";
+				+ ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + ", deletedAt=" + deletedAt + "]";
 	}
 	
 }
