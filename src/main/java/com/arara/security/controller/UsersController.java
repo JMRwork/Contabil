@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,16 +31,19 @@ public class UsersController {
     }
     @GetMapping("/users/register")
     public String registerPage(Model model) {
+    	model.addAttribute("userForm", new UserDto());
         return "registerUser";
     }
 
     @PostMapping("/users/register")
-    public String userRegister(@ModelAttribute @Validated UserDto newUser, Errors errors, Model model){
-        if(errors.hasErrors()){
+    public String userRegister(@Validated UserDto userForm, BindingResult result, Model model){
+    	System.out.println(userForm);
+    	if(result.hasErrors()){
+    		//model.addAttribute("a", errors)
             return "registerUser";
         }
-        System.out.println(newUser);
-        System.out.println(newUser.getPassword());
+        System.out.println(userForm);
+        System.out.println(userForm.getPassword());
         return "redirect:/users";
     }
 }

@@ -32,12 +32,13 @@ public class UserDto {
     private Instant lastModifiedAt;
     private Instant lastLoginAt;
 
-    public UserDto(String email, String password, String fullName, String role) {
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.role = role;
-    }
+	/*
+	 * public UserDto() { super(); }
+	 * 
+	 * public UserDto(String email, String password, String fullName, String role) {
+	 * this.email = email; this.password = password; this.fullName = fullName;
+	 * this.role = role; }
+	 */
 
     public Long getId() {
         return id;
@@ -126,4 +127,10 @@ public class UserDto {
     public void setLastLoginAt(Instant lastLoginAt) {
         this.lastLoginAt = lastLoginAt;
     }
+
+	@Override
+	public String toString() {
+		return "UserDto [email=" + email + ", password=" + password + ", fullName=" + fullName + ", role=" + role + "]";
+	}
+    
 }
