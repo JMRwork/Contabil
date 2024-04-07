@@ -107,7 +107,7 @@ erDiagram
       string descricao
       enum tipo
       date data_lancamento
-      numeric(38,2) valor
+      numeric valor
       int organization_id
       id created_by
       int last_modified_by
