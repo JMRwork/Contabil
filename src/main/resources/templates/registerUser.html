@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html th:replace="~{template :: layout (~{:: main})}">
+<html th:replace="~{template :: layout (~{:: main}, 'Criar Usuário')}">
 
 <body>
 	<main class="container">
+		<style>.error {color: red; font-size: small;}</style>
 		<form th:action="@{/users/register}" th:object="${userDto}" method="post">
 			<div class="form-group mb-3">
 				<label class="col-form-label col-sm-2" for="fullName">Full Name</label>
@@ -26,16 +27,19 @@
 				<p class="error" th:errors="${userDto.password}"></p>
 			</div>
 			<div class="form-group mb-3">
-				<label class="col-form-label col-sm-2" for="inputRole">Account Role</label>
+				<label class="col-form-label col-sm-2" for="role">Account Role</label>
 				<div class="col-sm-10">
 					<select class="form-control col-sm-10" th:field="*{role}">
-						<option value="ROLE_userDto">User</option>
+						<option value="ROLE_USER">User</option>
 						<option value="ROLE_ACCOUNTANT">Accountant</option>
 						<option value="ROLE_ADMIN">Admin</option>
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary mb-3">Submit</button>
+			<div th:if="${#fields.hasErrors('global')}">
+		    	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+			</div>
+		<button type="submit" class="btn btn-primary mb-3">Submit</button>
 		</form>
 	</main>
 </body>

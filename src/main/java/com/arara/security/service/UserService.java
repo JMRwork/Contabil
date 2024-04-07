@@ -36,17 +36,16 @@ public class UserService {
 	public List<User> listUsers() {
 		return userRepository.findAll();
 	}
-	public void createUser(User user) {
-		try {
-			Optional<User> result = userRepository.findByEmail(user.getEmail());
-			if (result == null) {
-				userRepository.save(user);
-				logger.debug("User " + user.getEmail() +" created");
-			} else {
-				logger.debug("this user already exists");
-			}
-		} catch (Exception e) {
-			logger.error("Error:" + e);
-		}
+	public Boolean createUser(User user) {
+		Optional<User> result = userRepository.findByEmail(user.getEmail());
+		if (result.isEmpty()) {
+			userRepository.save(user);
+			logger.debug("User " + user.getEmail() +" created");
+			return true;
+		} else {
+			logger.debug("this user "+ user.getEmail() +" already exists");
+			return false;
+			
+		}	
 	}
 }

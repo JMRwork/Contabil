@@ -5,11 +5,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.arara.security.dto.UserDto;
+import com.arara.security.model.User;
 import com.arara.security.service.UserService;
 
 @Controller
@@ -34,6 +36,16 @@ public class UsersController {
     	if(result.hasErrors()){
             return "registerUser";
         }
-        return "redirect:/users";
+    	User user = new User();
+    	user.setFullName(userDto.getFullName());
+    	user.setEmail(userDto.getEmail());
+    	user.setPassword(userDto.getPassword());
+    	user.setRole(userDto.getRole());
+    	if (userService.createUser(user)) {
+    		return "redirect:/users";
+    	}
+    	ObjectError error = new ObjectError("globalError", "Este usuário já existe.");
+    	result.addError(error);
+    	return "registerUser";
     }
 }
