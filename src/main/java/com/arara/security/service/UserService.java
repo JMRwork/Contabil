@@ -37,6 +37,9 @@ public class UserService {
 			logger.error("Error parsing username {" + username + "} to Long at UserService.updateLastLoginAtByUsername()", e);
 		}
 	}
+	public Optional<User> findUserById(long id) {
+		return userRepository.findById(id);
+	}
 
 	public List<User> listUsers() {
 		return userRepository.findAll();
@@ -54,5 +57,5 @@ public class UserService {
 			return false;
 			
 		}	
-	}
+	} public void updateUser(){} 
 }

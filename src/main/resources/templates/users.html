@@ -33,7 +33,7 @@
 							<td th:text="${user.createdAt}"></td>
 							<td th:text="${user.lastModifiedBy}"></td>
 							<td th:text="${user.lastModifiedAt}"></td>
-							<td><a href="">Edit</a></td>
+							<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a></td>
 							<td><a href="">Delete</a></td>
 						</tr>
 					</tbody>
