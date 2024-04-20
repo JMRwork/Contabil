@@ -18,8 +18,9 @@
 							<th>Created At</th>
 							<th>Last Modified By</th>
 							<th>Last Modified At</th>
-							<th>Edit</th>
-							<th>Delete</th>
+							<th>Detalhes</th>
+							<th>Editar</th>
+							<th>Deletar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,8 +34,9 @@
 							<td th:text="${user.createdAt}"></td>
 							<td th:text="${user.lastModifiedBy}"></td>
 							<td th:text="${user.lastModifiedAt}"></td>
-							<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a></td>
-							<td><a href="">Delete</a></td>
+							<td><a th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
+							<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
+							<td><a href="">Deletar</a></td>
 						</tr>
 					</tbody>
 				</table>

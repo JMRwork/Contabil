@@ -1,7 +1,9 @@
 package com.arara.security.dto;
 
 import java.time.Instant;
+import java.util.Set;
 
+import com.arara.security.model.Organization;
 import com.arara.security.model.UserStatus;
 
 import jakarta.validation.constraints.Email;
@@ -9,14 +11,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserDto {
+public class ViewUserDto {
 	private Long id;
 	@Email(message = "Invalid Email.")
 	@NotBlank(message = "A Email is required.")
 	private String email;
-	@NotBlank(message = "A password is needed.")
-	@Size(min = 6, message = "Password need at least 6 character.")
-	private String password;
 	@NotBlank(message = "A Full Name is required.")
 	@Size(min = 3, max = 60, message = "A Name must have between 3 and 60 characters.")
 	private String fullName;
@@ -27,20 +26,9 @@ public class UserDto {
 	private Instant createdAt;
 	private Instant lastModifiedAt;
 	private Instant lastLoginAt;
+	private Set<Organization> organizations;
 
 	
-	public UserDto() {
-		super();
-	}
-	
-	public UserDto(String email, String password, String fullName, String role) {
-		this.email = email;
-		this.password = password;
-		this.fullName = fullName;
-		this.role = role;
-	}
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -55,14 +43,6 @@ public class UserDto {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getFullName() {
@@ -131,7 +111,17 @@ public class UserDto {
 
 	@Override
 	public String toString() {
-		return "UserDto [email=" + email + ", password=" + password + ", fullName=" + fullName + ", role=" + role + "]";
+		return "ViewUserDto [id=" + id + ", email=" + email + ", fullName=" + fullName + ", role=" + role + ", status="
+				+ status + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt="
+				+ createdAt + ", lastModifiedAt=" + lastModifiedAt + ", lastLoginAt=" + lastLoginAt + "]";
+	}
+
+	public Set<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(Set<Organization> organizations) {
+		this.organizations = organizations;
 	}
 
 }

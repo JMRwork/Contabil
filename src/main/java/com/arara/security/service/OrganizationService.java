@@ -1,6 +1,7 @@
 package com.arara.security.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,5 +21,8 @@ public class OrganizationService {
 
 	public List<Organization> listOrganizations() {
 		return organizationRepository.findAll();
+	}
+	public Optional<Organization> findById(long id) {
+		return organizationRepository.findById(id);
 	}
 }

@@ -139,6 +139,14 @@ public class User {
 		this.deletedAt = deletedAt;
 	}
 
+	public Set<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(Set<Organization> organizations) {
+		this.organizations = organizations;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

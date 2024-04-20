@@ -12,8 +12,9 @@
 - [x] users page
 - [x] organizations page
 - [x] movimento page
-- [ ] user add
-- [ ] user edit
+- [x] user add
+- [x] user edit
+- [x] user view
 - [ ] organization add
 - [ ] organization edit
 - [ ] movimento add
@@ -28,11 +29,11 @@
 - [ ] add table handler to pages
 
 > [!TIP]
-> [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-> [Code blocks with syntax highlighting](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
-> [Tables on readme.md syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables)
-> [Docs for diagrams on readme.md, Mermaid syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
-> [Mermaid syntax](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
+> - [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+> - [Code blocks with syntax highlighting](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
+> - [Tables on readme.md syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables)
+> - [Docs for diagrams on readme.md, Mermaid syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
+> - [Mermaid syntax](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
 
 ## Reference
 

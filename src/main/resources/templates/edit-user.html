@@ -4,39 +4,52 @@
 		<div th:switch="${user}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Role</th>
-							<th>Status</th>
-							<th>Created By</th>
-							<th>Created At</th>
-							<th>Last Modified By</th>
-							<th>Last Modified At</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td th:text="${user.id}"></td>
-							<td th:text="${user.fullName}"></td>
-							<td th:text="${user.email}"></td>
-							<td th:text="${user.role}"></td>
-							<td th:text="${user.status}"></td>
-							<td th:text="${user.createdBy}"></td>
-							<td th:text="${user.createdAt}"></td>
-							<td th:text="${user.lastModifiedBy}"></td>
-							<td th:text="${user.lastModifiedAt}"></td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="text-center p-1" th:each="org : ${organizations}">
-					<span class="col-4" th:text="${org.name}"></span>
-					<button class="btn btn-primary btn-sm col-1" >Vincular</button>
-					<button class="btn btn-danger btn-sm col-1" >Desvincular</button>
-				</div>
+				<form class="d-flex justify-content-evenly" th:action="@{/users/{userId}/edit(userId=${user.id})}" th:object="${editUserDto}" method="post">
+					<div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="fullName">Novo Nome</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{fullName}" value="${user.fullName}" placeholder="Enter Full Name">
+							</div>
+							<p class="error" th:errors="${editUserDto.fullName}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="role">Account Role</label>
+							<div>
+								<select class="form-control" th:field="*{role}" value="${user.role}">
+									<option value="ROLE_USER">User</option>
+									<option value="ROLE_ACCOUNTANT">Accountant</option>
+									<option value="ROLE_ADMIN">Admin</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="role">Account Status</label>
+							<div>
+								<select class="form-control" th:field="*{status}" value="${user.status}">
+									<option value="ACTIVE">Active</option>
+									<option value="DISABLED">Disabled</option>
+									<option value="DELETED">Deleted</option>
+									<option value="RESET_PASSWORD">Reset Password</option>
+								</select>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success mb-3">Alterar</button>
+					</div>
+					<div class="form-check">
+						<div class="p-1 justify-content-center">
+							<table class="table">
+								<tbody>
+									<tr th:each="org : ${organizations}">
+										<td>
+											<input class="form-check-input" type="checkbox" name="organizations" th:text="|${org.cnpj} - ${org.name}|" th:value="${org.id}" th:field="*{organizations}" />
+										</td>
+								 	</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</main>

@@ -57,5 +57,10 @@ public class UserService {
 			return false;
 			
 		}	
-	} public void updateUser(){} 
+	} 
+	public Boolean updateUser(User user){
+		userRepository.save(user);
+		return true;
+		// Revisar
+	} 
 }
