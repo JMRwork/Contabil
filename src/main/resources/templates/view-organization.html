@@ -70,7 +70,7 @@
 							</div>
 							<label class="form-label">Criado em:</label>
 							<div>
-								<input type="text" class="form-control" th:field="*{createdAt}" value="${organization.createdAt}" disabled>
+								<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(organization.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
 							</div>
 							<label class="form-label">Ultima modificação por:</label>
 							<div>
@@ -78,11 +78,11 @@
 							</div>
 							<label class="form-label">Ultima modificação em:</label>
 							<div>
-								<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${organization.lastModifiedAt}" disabled>
+								<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(organization.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
 							</div>
 							<label class="form-label">Desativada em:</label>
 							<div>
-								<input type="text" class="form-control" th:field="*{deletedAt}" value="${organization.deletedAt}" disabled>
+								<input type="text" class="form-control" th:field="*{deletedAt}" value="${#temporals.format(organization.deletedAt, 'yyyy/MM/dd HH:mm')}" disabled>
 							</div>
 						</div>
 					</div>

@@ -51,7 +51,7 @@
 					<div class="form-group mb-3">
 						<label class="form-label">Criado em:</label>
 						<div>
-							<input type="text" class="form-control" th:field="*{createdAt}" value="${user.createdAt}" disabled>
+							<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(user.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
 						</div>
 						</div>
 					<div class="form-group mb-3">
@@ -63,13 +63,13 @@
 					<div class="form-group mb-3">
 						<label class="form-label">Ultima modificação em:</label>
 						<div>
-							<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${user.lastModifiedAt}" disabled>
+							<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(user.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
 						</div>
 					</div>
 					<div class="form-group mb-3">
 						<label class="form-label">Ultimo login em:</label>
 						<div>
-							<input type="text" class="form-control" th:field="*{lastLoginAt}" value="${user.lastLoginAt}" disabled>
+							<input type="text" class="form-control" th:field="*{lastLoginAt}" value="${#temporals.format(user.lastLoginAt, 'yyyy/MM/dd HH:mm')}" disabled>
 						</div>
 					</div>
 						<a class="btn btn-success" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>

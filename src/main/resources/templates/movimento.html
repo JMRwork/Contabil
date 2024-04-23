@@ -28,12 +28,12 @@
 								<td th:text="${lancamento.id}"></td>
 								<td th:text="${lancamento.descricao}"></td>
 								<td th:text="${lancamento.tipo}"></td>
-								<td th:text="${lancamento.dataLancamento}"></td>
+								<td th:text="${#temporals.format(lancamento.dataLancamento, 'yyyy/MM/dd HH:mm')}"></td>
 								<td th:text="${lancamento.valor}"></td>
 								<td th:text="${lancamento.createdBy}"></td>
-								<td th:text="${lancamento.createdAt}"></td>
+								<td th:text="${#temporals.format(lancamento.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td th:text="${lancamento.lastModifiedBy}"></td>
-								<td th:text="${lancamento.lastModifiedAt}"></td>
+								<td th:text="${#temporals.format(lancamento.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td><a class="btn btn-outline-success" role="button" href="">Edit</a></td>
 								<td><a class="btn btn-outline-danger"  role="button" href="">Delete</a></td>
 							</tr>
@@ -41,7 +41,7 @@
 					</table>
 				</div>
 			</div>
-			<p><a href="/">Home</a></p>
+			<p><a class="btn btn-outline-dark" role="button" href="/">Home</a></p>
 		</div>
 	</main>
 </html>

@@ -33,9 +33,9 @@
 								<td th:text="${org.cnpj}"></td>
 								<td th:text="${org.isActive ? 'Active' : 'Disabled'}"></td>
 								<td th:text="${org.createdBy}"></td>
-								<td th:text="${org.createdAt}"></td>
+								<td th:text="${#temporals.format(org.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td th:text="${org.lastModifiedBy}"></td>
-								<td th:text="${org.lastModifiedAt}"></td>
+								<td th:text="${#temporals.format(org.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td><a class="btn btn-outline-primary" role="button" th:href="@{/movimento/{id}(id=${org.id})}">Ver Movimento</a></td>
 								<td><a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a></td>
 								<td><a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Edit</a></td>
@@ -45,7 +45,7 @@
 					</table>
 				</div>
 			</div>
-			<p><a href="/">Home</a></p>
+			<p><a class="btn btn-outline-dark" role="button" href="/">Home</a></p>
 		</div>
 	</main>
 </html>
