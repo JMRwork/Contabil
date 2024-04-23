@@ -62,5 +62,16 @@ public class UserService {
 		userRepository.save(user);
 		return true;
 		// Revisar
+	}
+	public Boolean deleteUser(User user) {
+		user.setStatus(UserStatus.DELETED);
+		userRepository.save(user);
+		return true;
+		// Criar função no Repositorio
 	} 
+	public Boolean changeUserPassword(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		userRepository.save(user);
+		return true;
+	}
 }

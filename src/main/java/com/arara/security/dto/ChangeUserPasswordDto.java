@@ -8,6 +8,8 @@ public class ChangeUserPasswordDto {
 	@NotBlank(message = "A password is needed.")
 	@Size(min = 6, message = "Password need at least 6 character.")
 	private String password;
+	@NotBlank(message = "A password is needed.")
+	@Size(min = 6, message = "Password need at least 6 character.")
 	private String repeatPassword;
 
 	public String getRepeatPassword() {

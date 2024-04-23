@@ -50,6 +50,7 @@ public class ConverterService {
 		ViewUserDto viewUserDto = new ViewUserDto();
 		viewUserDto.setId(user.getId());
 		viewUserDto.setFullName(user.getFullName());
+		viewUserDto.setEmail(user.getEmail());
 		viewUserDto.setRole(user.getRole());
 		viewUserDto.setStatus(user.getStatus());
 		viewUserDto.setOrganizations(user.getOrganizations());
