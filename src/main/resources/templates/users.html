@@ -35,9 +35,9 @@
 								<td th:text="${user.createdAt}"></td>
 								<td th:text="${user.lastModifiedBy}"></td>
 								<td th:text="${user.lastModifiedAt}"></td>
-								<td><a th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
-								<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
-								<td><a th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a></td>
+								<td><a class="btn btn-outline-info"    role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
+								<td><a class="btn btn-outline-success" role="button" th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
+								<td><a class="btn btn-outline-danger"  role="button" th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a></td>
 							</tr>
 						</tbody>
 					</table>
