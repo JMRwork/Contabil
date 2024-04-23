@@ -18,9 +18,10 @@
 							<th>Created At</th>
 							<th>Last Modified By</th>
 							<th>Last Modified At</th>
+							<th>Movimento</th>
+							<th>Detalhes</th>
 							<th>Edit</th>
 							<th>Delete</th>
-							<th>Movimento</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,9 +35,10 @@
 							<td th:text="${org.createdAt}"></td>
 							<td th:text="${org.lastModifiedBy}"></td>
 							<td th:text="${org.lastModifiedAt}"></td>
-							<td><a href="">Edit</a></td>
-							<td><a href="">Delete</a></td>
-							<td><a th:href="@{/movimento/{id}(id=${org.id})}">Ver Movimento</a></tr>
+							<td><a class="btn btn-outline-primary" role="button" th:href="@{/movimento/{id}(id=${org.id})}">Ver Movimento</a></td>
+							<td><a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a></td>
+							<td><a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Edit</a></td>
+							<td><a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/delete(id=${org.id})}">Delete</a></td>
 						</tr>
 					</tbody>
 				</table>

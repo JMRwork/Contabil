@@ -1,13 +1,11 @@
 package com.arara.security.dto;
 
-import java.time.Instant;
 import java.util.Set;
 
 import com.arara.security.model.UserStatus;
 import com.arara.security.model.Organization;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
