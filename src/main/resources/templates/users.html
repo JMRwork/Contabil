@@ -6,40 +6,42 @@
 			<div th:case="*">
 				<h2>Users</h2>
 				<a class="btn btn-primary" th:href="@{/users/register}" role="button">Adicionar Usuário</a>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Role</th>
-							<th>Status</th>
-							<th>Created By</th>
-							<th>Created At</th>
-							<th>Last Modified By</th>
-							<th>Last Modified At</th>
-							<th>Detalhes</th>
-							<th>Editar</th>
-							<th>Deletar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="user : ${users}">
-							<td th:text="${user.id}"></td>
-							<td th:text="${user.fullName}"></td>
-							<td th:text="${user.email}"></td>
-							<td th:text="${user.role}"></td>
-							<td th:text="${user.status}"></td>
-							<td th:text="${user.createdBy}"></td>
-							<td th:text="${user.createdAt}"></td>
-							<td th:text="${user.lastModifiedBy}"></td>
-							<td th:text="${user.lastModifiedAt}"></td>
-							<td><a th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
-							<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
-							<td><a th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a></td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="table-responsive">
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Role</th>
+								<th>Status</th>
+								<th>Created By</th>
+								<th>Created At</th>
+								<th>Last Modified By</th>
+								<th>Last Modified At</th>
+								<th>Detalhes</th>
+								<th>Editar</th>
+								<th>Deletar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user : ${users}">
+								<td th:text="${user.id}"></td>
+								<td th:text="${user.fullName}"></td>
+								<td th:text="${user.email}"></td>
+								<td th:text="${user.role}"></td>
+								<td th:text="${user.status}"></td>
+								<td th:text="${user.createdBy}"></td>
+								<td th:text="${user.createdAt}"></td>
+								<td th:text="${user.lastModifiedBy}"></td>
+								<td th:text="${user.lastModifiedAt}"></td>
+								<td><a th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
+								<td><a th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
+								<td><a th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<p><a href="/">Home</a></p>
 		</div>
