@@ -1,9 +1,9 @@
 package com.arara.security.dto;
 
 import java.time.Instant;
-import java.util.Set;
+import java.util.List;
 
-public class ViewOrganizationDto {
+public class ViewOrganizationDto implements Comparable<ViewOrganizationDto> {
 
 	private Long id;
 	private String name;
@@ -15,7 +15,7 @@ public class ViewOrganizationDto {
     private Instant createdAt;
     private Instant lastModifiedAt;
     private Instant deletedAt;
-    Set<ViewUserDto> users;
+    List<ViewUserDto> users;
 
 	public Long getId() {
 		return id;
@@ -82,7 +82,7 @@ public class ViewOrganizationDto {
 		this.deletedAt = deletedAt;
 	}
 
-	public Set<ViewUserDto> getUsers() {
+	public List<ViewUserDto> getUsers() {
 		return users;
 	}
 
@@ -102,7 +102,7 @@ public class ViewOrganizationDto {
 		this.lastModifiedAt = lastModifiedAt;
 	}
 
-	public void setUsers(Set<ViewUserDto> users) {
+	public void setUsers(List<ViewUserDto> users) {
 		this.users = users;
 	}
 
@@ -112,5 +112,16 @@ public class ViewOrganizationDto {
 				+ ", isActive=" + isActive + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy
 				+ ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + ", deletedAt=" + deletedAt + "]";
 	}
-	
+
+	@Override
+	public int compareTo(ViewOrganizationDto o) {
+		if (this.id < o.id) {
+			return -1;
+		}
+		if (this.id > o.id) {
+			return 1;
+		}
+		return 0;
+	}
+
 }

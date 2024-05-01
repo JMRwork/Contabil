@@ -36,7 +36,7 @@ public class OrganizationsController {
     public String viewUser(@PathVariable("id") long id, Model model) {
     	Optional<Organization> organization = organizationService.findById(id);
     	ViewOrganizationDto dto = converterService.convertOrganizationModelToViewOrganizationDto(organization.get());
-    	model.addAttribute("organization", converterService.convertOrganizationModelToViewOrganizationDto(organization.get()));
+    	model.addAttribute("organization", dto);
     	logger.info(organization.get().toString());
     	logger.info(organization.get().getUsers().toString());
     	logger.info(dto.toString());
