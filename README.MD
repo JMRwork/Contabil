@@ -15,14 +15,17 @@
 - [x] user add
 - [x] user edit
 - [x] user view
+- [x] user delete
+- [x] user password change
 - [ ] organization add
 - [ ] organization edit
+- [x] organization view
 - [ ] movimento add
 - [ ] movimento edit
 - [ ] audit table
 - [x] add spring boot devtools
 - [ ] add pagination to queries and repositories
-- [ ] add header to pages
+- [x] add header to pages
 - [ ] add footer to pages
 - [ ] add menu to pages
 - [ ] add css framework - bootstrap or material
