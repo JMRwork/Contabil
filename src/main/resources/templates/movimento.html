@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Movimento')}">
-	<main class="	container-fluid">
+	<main class="container-fluid mt-3 mb-3">
 		<div th:switch="${movimento}">
 			<h2 th:case="null">No movimento yet!</h2>
 			<div th:case="*">
