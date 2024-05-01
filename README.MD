@@ -27,7 +27,7 @@
 - [ ] add pagination to queries and repositories
 - [x] add header to pages
 - [ ] add footer to pages
-- [ ] add menu to pages
+- [ ] add sidebar menu
 - [ ] add css framework - bootstrap or material
 - [ ] add table handler to pages
 

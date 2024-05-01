@@ -1,8 +1,7 @@
 package com.arara.security.service;
 
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,12 +52,26 @@ public class ConverterService {
 		viewUserDto.setEmail(user.getEmail());
 		viewUserDto.setRole(user.getRole());
 		viewUserDto.setStatus(user.getStatus());
-		viewUserDto.setOrganizations(user.getOrganizations());
 		viewUserDto.setCreatedBy(user.getCreatedBy());
 		viewUserDto.setLastModifiedBy(user.getLastModifiedBy());
 		viewUserDto.setCreatedAt(user.getLastModifiedAt());
 		viewUserDto.setLastModifiedAt(user.getLastModifiedAt());
 		viewUserDto.setLastLoginAt(user.getLastLoginAt());
+		
+		List<ViewOrganizationDto> viewOrganizationDtos = new ArrayList<>();
+		for(Organization org: user.getOrganizations()) {
+			// basic org info only
+			ViewOrganizationDto viewOrganizationDto = new ViewOrganizationDto();
+			viewOrganizationDto.setId(org.getId());
+			viewOrganizationDto.setCnpj(org.getCnpj());
+			viewOrganizationDto.setName(org.getName());
+			viewOrganizationDto.setLegalName(org.getLegalName());
+			viewOrganizationDto.setIsActive(org.getIsActive());
+			
+			viewOrganizationDtos.add(viewOrganizationDto);
+		}
+		viewUserDto.setOrganizations(viewOrganizationDtos);
+		
 		return viewUserDto;
 	}
 	
@@ -75,7 +88,7 @@ public class ConverterService {
 		viewOrganizationDto.setLastModifiedBy(org.getLastModifiedBy());
 		viewOrganizationDto.setDeletedAt(org.getDeletedAt());
 		
-		Set<ViewUserDto> viewUserDtos = new HashSet<>();
+		List<ViewUserDto> viewUserDtos = new ArrayList<>();
 		for(User user: org.getUsers()) {
 			// basic user info only
 			ViewUserDto viewUserDto = new ViewUserDto();

@@ -1,16 +1,15 @@
 package com.arara.security.dto;
 
 import java.time.Instant;
-import java.util.Set;
+import java.util.List;
 
-import com.arara.security.model.Organization;
 import com.arara.security.model.UserStatus;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class ViewUserDto {
+public class ViewUserDto implements Comparable<ViewUserDto> {
 	private Long id;
 	@Email(message = "Invalid Email.")
 	@NotBlank(message = "A Email is required.")
@@ -25,7 +24,7 @@ public class ViewUserDto {
 	private Instant createdAt;
 	private Instant lastModifiedAt;
 	private Instant lastLoginAt;
-	private Set<Organization> organizations;
+	private List<ViewOrganizationDto> organizations;
 
 	
 	public Long getId() {
@@ -108,6 +107,14 @@ public class ViewUserDto {
 		this.lastLoginAt = lastLoginAt;
 	}
 
+	public List<ViewOrganizationDto> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(List<ViewOrganizationDto> organizations) {
+		this.organizations = organizations;
+	}
+	
 	@Override
 	public String toString() {
 		return "ViewUserDto [id=" + id + ", email=" + email + ", fullName=" + fullName + ", role=" + role + ", status="
@@ -115,12 +122,16 @@ public class ViewUserDto {
 				+ createdAt + ", lastModifiedAt=" + lastModifiedAt + ", lastLoginAt=" + lastLoginAt + "]";
 	}
 
-	public Set<Organization> getOrganizations() {
-		return organizations;
+	@Override
+	public int compareTo(ViewUserDto o) {
+		if (this.id < o.id) {
+			return -1;
+		}
+		if (this.id > o.id) {
+			return 1;
+		}
+		return 0;
 	}
 
-	public void setOrganizations(Set<Organization> organizations) {
-		this.organizations = organizations;
-	}
 
 }

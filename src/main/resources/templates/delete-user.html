@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html th:replace="~{template :: layout (~{:: main}, 'Editar Usuário')}">
-	<main class="container">
+<html th:replace="~{template :: layout (~{:: main}, 'Remover Usuário')}">
+	<main class="container-fluid mt-3 mb-3">
 		<div th:switch="${user}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<form class="" th:case="*" th:action="@{/users/{id}/delete(id=${user.id})}" method="POST" th:object="${user}">

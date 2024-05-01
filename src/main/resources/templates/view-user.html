@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Detalhes do Usuário')}">
-	<main class="	container-fluid">
+	<main class="container-fluid mt-3 mb-3">
 		<div th:switch="${user}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
-				<form class="d-flex justify-content-evenly" th:object="${user}">
-					<div>
+				<div class="" th:object="${user}">
+					<div class="row">
+						<h4>Informações básicas</h4>
 						<div class="form-group mb-3">
 							<label class="form-label" for="fullName">Nome</label>
 							<div>
@@ -39,54 +40,72 @@
 								</select>
 							</div>
 						</div>
-						<a class="btn btn-success" th:href="@{/users/{userId}/edit(userId=${user.id})}" role="button">Editar</a>
-					</div>
-					<div>
-					<div class="form-group mb-3">
-						<label class="form-label">Criado por:</label>
-						<div>
-							<input type="text" class="form-control" th:field="*{createdBy}" value="${user.createdBy}" disabled>
-						</div>
-						</div>
-					<div class="form-group mb-3">
-						<label class="form-label">Criado em:</label>
-						<div>
-							<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(user.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
-						</div>
-						</div>
-					<div class="form-group mb-3">
-						<label class="form-label">Ultima modificação por:</label>
-						<div>
-							<input type="text" class="form-control" th:field="*{lastModifiedBy}" value="${user.lastModifiedBy}" disabled>
+						<div class="form-group mb-3">
+							<a class="btn btn-outline-success" th:href="@{/users/{userId}/edit(userId=${user.id})}" role="button">Editar</a>
+							<a class="btn btn-outline-danger" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>
 						</div>
 					</div>
-					<div class="form-group mb-3">
-						<label class="form-label">Ultima modificação em:</label>
-						<div>
-							<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(user.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
+					<div class="row">
+						<hr/>
+						<div class="form-check">
+							<div class="p-1 justify-content-center">
+								<h4>Escolas Associadas</h4>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>CNPJ</th>
+											<th>Nome</th>
+											<th>Detalhes</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="org : ${#lists.sort(user.organizations)}">
+											<td th:text="${org.id}"></td>
+											<td th:text="${org.cnpj}"></td>
+											<td th:text="${org.name}"></td>
+											<td><a class="btn btn-outline-info" role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a></td>
+									 	</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
-					<div class="form-group mb-3">
-						<label class="form-label">Ultimo login em:</label>
-						<div>
-							<input type="text" class="form-control" th:field="*{lastLoginAt}" value="${#temporals.format(user.lastLoginAt, 'yyyy/MM/dd HH:mm')}" disabled>
+					<div class="row">
+						<hr/>
+						<h4>Informações de auditoria</h4>
+						<div class="form-group mb-3">
+							<label class="form-label">Criado por:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{createdBy}" value="${user.createdBy}" disabled>
+							</div>
+							</div>
+						<div class="form-group mb-3">
+							<label class="form-label">Criado em:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(user.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
+							</div>
+							</div>
+						<div class="form-group mb-3">
+							<label class="form-label">Ultima modificação por:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{lastModifiedBy}" value="${user.lastModifiedBy}" disabled>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label">Ultima modificação em:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(user.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label">Ultimo login em:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{lastLoginAt}" value="${#temporals.format(user.lastLoginAt, 'yyyy/MM/dd HH:mm')}" disabled>
+							</div>
 						</div>
 					</div>
-						<a class="btn btn-success" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>
-					</div>
-					<div class="form-check">
-						<div class="p-1 justify-content-center">
-							<table class="table">
-								<tbody>
-									<tr th:each="org : ${user.organizations}">
-										<td>
-											<input class="form-check-input" type="checkbox" name="organizations" th:text="|${org.cnpj} - ${org.name}|" th:value="${org.id}" th:field="*{organizations}" disabled/>
-										</td>
-								 	</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					
 				</form>
 			</div>
 		</div>
