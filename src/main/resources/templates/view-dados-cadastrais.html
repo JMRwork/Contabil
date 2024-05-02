@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Dados Cadastrais')}">
+	<main class="container-fluid mt-3 mb-3">
+		<div th:switch="${cadastro}">
+			<h2 th:case="null" th:text="|Escola sem dados cadastrais|"></h2>
+			<div th:case="*">
+				<form class="" th:object="${cadastro}">
+					<div class="row">
+						<div class="col">
+							<h4>Cadastro</h4>
+							<div class="form-group mb-3">
+								<label class="form-label" for="id">Unidade Executora</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{unidadeExecutora}" value="${cadastro.unidadeExecutora}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="nomeEscola">Nome</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{nomeEscola}" value="${cadastro.nomeEscola}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cnpj">CNPJ</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cnpj}" value="${cadastro.cnpj}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="siglaEscola">Sigla</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{siglaEscola}" value="${cadastro.siglaEscola}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="endereco">Endereço</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{endereco}" value="${cadastro.endereco}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cidade">Cidade</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cidade}" value="${cadastro.cidade}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="uf">UF</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{uf}" value="${cadastro.uf}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cep">CEP</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cep}" value="${cadastro.cep}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="telefone">Telefone</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{telefone}" value="${cadastro.telefone}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="email">Email</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{email}" value="${cadastro.email}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="codigoInep">Código INEP</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{codigoInep}" value="${cadastro.codigoInep}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<hr/>
+						<div class="col">
+							<h4>Informações de auditoria</h4>
+							<label class="form-label">Criado por:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{createdBy}" value="${cadastro.createdBy}" disabled>
+							</div>
+							<label class="form-label">Criado em:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(cadastro.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
+							</div>
+							<label class="form-label">Ultima modificação por:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{lastModifiedBy}" value="${cadastro.lastModifiedBy}" disabled>
+							</div>
+							<label class="form-label">Ultima modificação em:</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(cadastro.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</html>
