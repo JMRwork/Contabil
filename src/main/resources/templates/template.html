@@ -11,7 +11,7 @@
 	</head>
 	<body>
 	<div class="d-flex flex-column" style="height: auto;">
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbar navbar-light bg-light" style="position: fixed; width: 100vw; z-index: 999;">
 			<div class="container-fluid">
 				<a class="navbar-brand" th:text="|Contabilidade - ${titulo}|">Contabilidade</a>
 				<ul class="nav">
@@ -19,8 +19,8 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="d-flex" style="height: 100%;">
-			<nav class="nav flex-column align-items-center bg-dark">
+		<div class="d-flex">
+			<nav class="nav flex-column align-items-center bg-dark" style="height: calc(100vh - 56px); position: fixed; top: 56px; width: 120px;">
 				<h3 class="text-light m-4">Menu</h3>
 				<ul class="list-unstyled">
 					<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
@@ -29,7 +29,9 @@
 					<li class="nav-item"><a class="nav-link" th:href="@{/movimento}">Movimentos</a></li>
 				</ul>
 			</nav>
+		<div style="height: auto; position: absolute; left: 120px; top: 56px;">
 			<main th:replace="${conteudo}"></main>
+		</div>
 		</div>
 	</div>
 	</body>
