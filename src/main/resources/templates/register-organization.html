@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Criar Escola')}">
+	<main class="container-fluid mt-3 mb-3">
+		<div th:switch="${newOrganizationDto}">
+			<h2 th:case="null" th:text="|Escola não encontrada|"></h2>
+			<div th:case="*">
+				<form th:action="@{/organizations/register}" th:object="${newOrganizationDto}" method="post">
+					<style>.error {color: red; font-size: small;}</style>
+					<div class="row">
+						<div class="col">
+							<h4>Nova Escola</h4>
+							<div class="form-group mb-3">
+								<label class="form-label" for="name">Nome</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{name}" value="${newOrganizationDto.name}" placeholder="Nome da escola.">
+								</div>
+								<p class="error" th:errors="${newOrganizationDto.name}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="legalName">Nome legal</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{legalName}" value="${newOrganizationDto.legalName}" placeholder="Razão Social.">
+									<p class="error" th:errors="${newOrganizationDto.legalName}"></p>
+								</div>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="name">CNPJ</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cnpj}" value="${newOrganizationDto.cnpj}" placeholder="CNPJ.">
+								</div>
+								<p class="error" th:errors="${newOrganizationDto.cnpj}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="isActive">Escola ativa no sistema</label>
+								<div>
+										<select class="form-control" th:field="*{isActive}" value="${newOrganizationDto.isActive}">
+											<option value="true">Ativa</option>
+											<option value="false">Desativada</option>
+										</select>
+								</div>
+							</div>
+							<div th:if="${#fields.hasErrors('global')}">
+							  	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+							</div>
+							<div class="form-group mb-3">
+								<button type="submit" class="btn btn-success mb-3">Criar</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</html>

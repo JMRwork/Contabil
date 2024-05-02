@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Editar Usuário')}">
 	<main class="container-fluid mt-3 mb-3">
-		<div th:switch="${user}">
+		<div th:switch="${editUserDto}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
-				<form class="d-flex justify-content-evenly" th:action="@{/users/{userId}/edit(userId=${user.id})}" th:object="${editUserDto}" method="post">
+				<form th:action="@{/users/{userId}/edit(userId=${editUserDto.id})}" th:object="${editUserDto}" method="post">
 					<style>.error {color: red; font-size: small;}</style>
 					<div>
 						<div class="form-group mb-3">
 							<label class="form-label" for="fullName">Novo Nome</label>
 							<div>
-								<input type="text" class="form-control" th:field="*{fullName}" value="${user.fullName}" placeholder="Enter Full Name">
+								<input type="text" class="form-control" th:field="*{fullName}" value="${editUserDto.fullName}" placeholder="Enter Full Name">
 							</div>
 							<p class="error" th:errors="${editUserDto.fullName}"></p>
 						</div>
 						<div class="form-group mb-3">
+							<label class="form-label" for="email">Email address</label>
+							<div>
+								<input type="email" class="form-control" th:field="*{email}" value="${editUserDto.email}" placeholder="Enter email">
+							</div>
+							<p class="error" th:errors="${editUserDto.email}"></p>
+						</div>
+						<div class="form-group mb-3">
 							<label class="form-label" for="role">Account Role</label>
 							<div>
-								<select class="form-control" th:field="*{role}" value="${user.role}">
+								<select class="form-control" th:field="*{role}" value="${editUserDto.role}">
 									<option value="ROLE_USER">User</option>
 									<option value="ROLE_ACCOUNTANT">Accountant</option>
 									<option value="ROLE_ADMIN">Admin</option>
@@ -27,7 +34,7 @@
 						<div class="form-group mb-3">
 							<label class="form-label" for="role">Account Status</label>
 							<div>
-								<select class="form-control" th:field="*{status}" value="${user.status}">
+								<select class="form-control" th:field="*{status}" value="${editUserDto.status}">
 									<option value="ACTIVE">Active</option>
 									<option value="DISABLED">Disabled</option>
 									<option value="DELETED">Deleted</option>
@@ -35,8 +42,11 @@
 								</select>
 							</div>
 						</div>
+						<div th:if="${#fields.hasErrors('global')}">
+						  	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+						</div>
 						<button type="submit" class="btn btn-success mb-3">Alterar</button>
-						<a class="btn btn-success mb-3" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>
+						<a class="btn btn-danger mb-3" th:href="@{/users/{userId}/password(userId=${editUserDto.id})}" role="button">Alterar Senha</a>
 					</div>
 					<div class="form-check">
 						<div class="p-1 justify-content-center">

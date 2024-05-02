@@ -50,15 +50,19 @@ public class UserService {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user.setStatus(UserStatus.ACTIVE);
 			userRepository.save(user);
-			logger.debug("User " + user.getEmail() +" created");
+			logger.info("User " + user.getEmail() +" created");
 			return true;
 		} else {
-			logger.debug("this user "+ user.getEmail() +" already exists");
+			logger.info("this user "+ user.getEmail() +" already exists");
 			return false;
 			
 		}	
 	} 
 	public Boolean updateUser(User user){
+		Optional<User> result = userRepository.findByEmail(user.getEmail());
+		if (result.isPresent() && result.get().getId() != user.getId()) {
+			return false;
+		}
 		userRepository.save(user);
 		return true;
 		// Revisar
