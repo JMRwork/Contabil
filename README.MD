@@ -70,7 +70,7 @@ inner join users_organizations
 inner join organizations 
   on users_organizations.organization_id = organizations.id
 where 
-	organizations.id = 1;
+  organizations.id = 1;
 ```
 
 ### SQL Diagram
