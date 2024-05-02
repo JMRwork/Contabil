@@ -63,12 +63,14 @@
 > Select all users from School A
 
 ```sql
-select * from users 
+select * 
+from users 
 inner join users_organizations 
   on users.id = users_organizations.user_id 
 inner join organizations 
   on users_organizations.organization_id = organizations.id
-where organizations.id = 1;
+where 
+	organizations.id = 1;
 ```
 
 ### SQL Diagram
