@@ -17,8 +17,8 @@
 - [x] user view
 - [x] user delete
 - [x] user password change
-- [ ] organization add
-- [ ] organization edit
+- [x] organization add
+- [x] organization edit
 - [x] organization view
 - [ ] movimento add
 - [ ] movimento edit
@@ -27,9 +27,14 @@
 - [ ] add pagination to queries and repositories
 - [x] add header to pages
 - [ ] add footer to pages
-- [ ] add sidebar menu
-- [ ] add css framework - bootstrap or material
+- [x] add sidebar menu
+- [ ] fix sidebar
+- [x] add css framework - bootstrap or material
 - [ ] add table handler to pages
+
+- [x] add EscolaDadosCadastrais table
+- [x] add EscolaDadosCadastrais view page
+- [ ] add EscolaDadosCadastrais edit page
 
 > [!TIP]
 > - [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
