@@ -27,7 +27,7 @@ public class ExportExcelFileService {
 	@Autowired
 	private EscolaDadosCadastraisRepository escolaDadosCadastraisRepository;
 
-	public String generateXlsxFile() {
+	public String generateXlsxFile(Long organizationId) {
 
 		Workbook workbook = new XSSFWorkbook();
 
@@ -67,14 +67,8 @@ public class ExportExcelFileService {
 		cell.setCellValue(20);
 		cell.setCellStyle(style);
 
-		File currDir = new File("files/");
-		File currFile = new File(currDir, "temp.xlsx");
-		logger.info(currDir.getAbsolutePath());
-		logger.info(currFile.getAbsolutePath());
-//		String path = currDir.getAbsolutePath();
-//		logger.info(path);
-//		String fileLocation = path.substring(0, path.length() - 1) + "temp.xlsx";
-//		logger.info(fileLocation);
+		File currDir = new File(getDirRelativePath(organizationId));
+		File currFile = new File(currDir, sanitizeFilenameString("temp.xlsx"));
 
 		try {
 			currDir.mkdirs();
@@ -90,5 +84,14 @@ public class ExportExcelFileService {
 		return currFile.getName();
 
 	}
+	
+	public String getDirRelativePath(Long organizationId) {
+		return "files/" + organizationId + "/";
+	}
+	
+	public String sanitizeFilenameString(String filename) {
+		return filename.replaceAll("[^a-zA-Z0-9-_\\.\\(\\)]", "_");
+	}
+	
 
 }
