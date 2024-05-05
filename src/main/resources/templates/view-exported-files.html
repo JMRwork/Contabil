@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Exportar Arquivos')}">
+	<main class="container-fluid mt-3 mb-3">
+		<div th:switch="${files}">
+			<h2 th:case="null">No files yet!</h2>
+			<div th:case="*">
+				<h2>Exportar Arquivos</h2>
+				<a class="btn btn-outline-primary" th:href="@{/organizations/1/files/generate-excel-file}" role="button">Gerar dados</a>
+				<div class="table-responsive">
+					<table class="table table-sm table-hover text-nowrap">
+						<thead>
+							<tr>
+								<th>Id Escola</th>
+								<th>Nome do Arquivo</th>
+								<th>Tipo de Arquivo</th>
+								<th>Propósito do Arquivo</th>
+								<th>Status</th>
+								<th>Created By</th>
+								<th>Created At</th>
+								<th>Last Modified By</th>
+								<th>Last Modified At</th>
+								<th>Download</th>
+								<th>Download2</th>
+								<th>Remover</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="file : ${files}">
+								<td th:text="${file.organizationId}"></td>
+								<td th:text="${file.filename}"></td>
+								<td th:text="${file.filetype}"></td>
+								<td th:text="${file.purpose}"></td>
+								<td th:text="${file.isAvailable ? 'Disponível' : 'Não disponível'}"></td>
+								<td th:text="${file.createdBy}"></td>
+								<td th:text="${#temporals.format(file.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
+								<td th:text="${file.lastModifiedBy}"></td>
+								<td th:text="${#temporals.format(file.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
+								<td><a class="btn btn-outline-primary" role="button" th:href="@{${file.downloadLink}}">Download</a></td>
+								<td><a class="btn btn-outline-primary" role="button" th:href="@{/organizations/{id}/files/download/{filename}(id=${file.organizationId},filename=${file.filename})}">Download2</a></td>
+								<td><a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/files/delete/{filename}(id=${file.organizationId},filename=${file.filename})}">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+</html>
