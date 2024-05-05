@@ -8,7 +8,6 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 class SpringSecurityAuditorAware implements AuditorAware<Long> {
 	
@@ -21,15 +20,7 @@ class SpringSecurityAuditorAware implements AuditorAware<Long> {
 			.map(SecurityContext::getAuthentication)
 			.filter(Authentication::isAuthenticated)
 			.map(Authentication::getPrincipal)
-			.map(UserDetails.class::cast)
-			.map(UserDetails::getUsername)
-			.map(username -> {
-				try {
-					return Long.parseLong(username);
-				} catch (Exception e) {
-					logger.error("Error parsing username {" + username + "} to Long, setting null for AuditorAware.getCurrentAuditor()", e);
-					return null;
-				}
-			});
+			.map(CustomUser.class::cast)
+			.map(CustomUser::getId);
 	}
 }

@@ -17,19 +17,30 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" th:text="|Contabilidade - ${titulo}|">Contabilidade</a>
 				<ul class="nav">
+					<li class="nav-item"><a class="nav-link" th:if="${session.currentOrganization != null}" th:text="|${session.currentOrganization?.cnpj} - ${session.currentOrganization?.name}|">Escola</a></li>
+					<li class="nav-item"><a class="nav-link" sec:authentication="name">Username</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
 				</ul>
 			</div>
 		</nav>
 		<div class="d-flex">
-			<nav class="nav flex-column align-items-center bg-dark" style="height: calc(100vh - 56px); position: fixed; top: 56px; width: 120px;">
+			<nav class="nav flex-column align-items-center bg-secondary" style="height: calc(100vh - 56px); position: fixed; top: 56px; width: 120px;">
 				<h3 class="text-light m-4">Menu</h3>
 				<ul class="list-unstyled">
-					<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/users}">Usuários</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/organizations}">Escolas</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/movimento}">Movimentos</a></li>
+					<li class="nav-item"><a class="nav-link link-light" th:href="@{/}">Home</a></li>
+					<li class="nav-item"><a class="nav-link link-light" th:href="@{/users}">Usuários</a></li>
+					<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations}">Escolas</a></li>
 				</ul>
+				<div th:switch="${session.currentOrganization}">
+					<ul class="list-unstyled" th:case="null">
+						<li class="nav-item"><a class="nav-link link-danger" th:href="@{/}">Nenhuma escola selecionada</a></li>
+					</ul>
+					<ul class="list-unstyled" th:case="*">
+						<li class="nav-item"><a class="nav-link link-light" th:href="@{/movimento/{id}(id=${session.currentOrganization?.id})}">Movimentos</a></li>
+						<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations/{id}/dados-cadastrais(id=${session.currentOrganization?.id})}">Dados Cadastrais</a></li>
+						<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations/{id}/files/view-exported-files(id=${session.currentOrganization?.id})}">Exportar Arquivos</a></li>
+					</ul>
+				</div>
 			</nav>
 		<div style="height: auto; position: absolute; left: 120px; top: 56px; width: calc(100vw - 120px);">
 			<main th:replace="${conteudo}"></main>

@@ -28,14 +28,9 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public void updateLastLoginAtByUsername(String username) {
-		try {
-			Long id = Long.parseLong(username);
-			int result = userRepository.setLastLoginAtById(Instant.now(), id);
-			logger.debug("updateLastLoginAtByUsername(" + username + ") -> " + result);
-		} catch (Exception e) {
-			logger.error("Error parsing username {" + username + "} to Long at UserService.updateLastLoginAtByUsername()", e);
-		}
+	public void updateLastLoginAtByUsername(Long id) {
+		int result = userRepository.setLastLoginAtById(Instant.now(), id);
+		logger.debug("updateLastLoginAtByUsername(" + id + ") -> " + result);
 	}
 
 	public Optional<User> findUserById(long id) {

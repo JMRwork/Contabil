@@ -21,7 +21,8 @@ public class AuthenticationEvents {
 	@EventListener
 	public void onSuccess(AuthenticationSuccessEvent success) {
 		logger.info("Login success event: " + success.toString());
-		userService.updateLastLoginAtByUsername(success.getAuthentication().getName());
+		CustomUser user = (CustomUser)success.getAuthentication().getPrincipal();
+		userService.updateLastLoginAtByUsername(user.getId());
 	}
 
 	@EventListener

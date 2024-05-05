@@ -2,10 +2,43 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Home')}">
 	<main class="container-fluid mt-3 mb-3">
 		<h1>Links</h1>
-		<p><a class="btn btn-outline-dark" role="button" href="/users/register">User register</a></p>
-		<p><a class="btn btn-outline-dark" role="button" href="/users">Users</a></p>
-		<p><a class="btn btn-outline-dark" role="button" href="/organizations">Organizations</a></p>
-		<p><a class="btn btn-outline-dark" role="button" href="/movimento/1">Movimento Organization 1</a></p>
-		<p><a class="btn btn-outline-dark" role="button" href="/organizations/1/files/view-exported-files">Exportar Arquivos Organization 1</a></p>
+		<p>
+			<a class="btn btn-outline-dark" role="button" href="/users/register">User register</a>
+			<a class="btn btn-outline-dark" role="button" href="/users">Users</a>
+			<a class="btn btn-outline-dark" role="button" href="/organizations">Organizations</a>
+			<a class="btn btn-outline-dark" role="button" href="/movimento/1">Movimento Organization 1</a>
+			<a class="btn btn-outline-dark" role="button" href="/organizations/1/files/view-exported-files">Exportar Arquivos Organization 1</a>
+		</p>
+		
+		<div th:switch="${organizations}">
+					<h2 th:case="null">No organizations yet!</h2>
+					<div th:case="*">
+						<h2>Selecione uma Escola</h2>
+						<div class="table-responsive">
+							<table class="table table-sm table-hover text-nowrap">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										<th>Legal Name</th>
+										<th>CNPJ</th>
+										<th>Status</th>
+										<th>Selecionar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="org : ${organizations}">
+										<td th:text="${org.id}"></td>
+										<td th:text="${org.name}"></td>
+										<td th:text="${org.legalName}"></td>
+										<td th:text="${org.cnpj}"></td>
+										<td th:text="${org.isActive ? 'Ativa' : 'Desativada'}"></td>
+										<td><a class="btn btn-outline-primary" role="button" th:href="@{/(organizationId=${org.id})}" th:classappend="${org.id == session.currentOrganization?.id ? 'disabled' : ''}">Selecionar</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 	</main>
 </html>

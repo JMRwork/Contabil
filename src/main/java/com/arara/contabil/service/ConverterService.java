@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.arara.contabil.dto.CurrentOrganizationDto;
 import com.arara.contabil.dto.EditOrganizationDto;
 import com.arara.contabil.dto.EditUserDto;
 import com.arara.contabil.dto.NewOrganizationDto;
@@ -150,5 +151,14 @@ public class ConverterService {
 		org.setLegalName(newOrganizationDto.getLegalName());
 		org.setIsActive(newOrganizationDto.getIsActive());
 		return org;
+	}
+	
+	public CurrentOrganizationDto convertOrganizationModelToCurrentOrganizationDto(Organization org) {
+		CurrentOrganizationDto dto = new CurrentOrganizationDto();
+		dto.setId(org.getId());
+		dto.setName(org.getName());
+		dto.setCnpj(org.getCnpj());
+		
+		return dto;
 	}
 }
