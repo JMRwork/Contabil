@@ -41,141 +41,146 @@ public class UsersController {
 	@Autowired
 	private OrganizationService organizationService;
 
-    @GetMapping
-    public String showUsers(Model model) {
-        model.addAttribute("users", userService.listUsers());
-        return "users";
-    }
-    @GetMapping("/register")
-    public String registerPage(NewUserDto newUserDto) {
-        return "register-user";
-    }
+	@GetMapping
+	public String showUsers(Model model) {
+		model.addAttribute("users", userService.listUsers());
+		return "users";
+	}
 
-    @PostMapping("/register")
-    public String userRegister(@Validated NewUserDto newUserDto, BindingResult result){
-    	if(result.hasErrors()){
-            return "register-user";
-        }
-    	User user = converterService.convertNewUserDtoToUserModel(newUserDto);
-    	if (userService.createUser(user)) {
-    		return "redirect:/users";
-    	}
-    	ObjectError error = new ObjectError("globalError", "Este e-mail já foi utilizado por outro usuário.");
-    	result.addError(error);
-    	return "register-user";
-    }
-    @GetMapping("/{id}/edit")
-    public String editPage(@PathVariable("id") Long id, EditUserDto editUserDto, Model model, BindingResult result) {
-    	Optional<User> user = userService.findUserById(id);
-    	if(user.isEmpty()) {
-    		ObjectError error = new ObjectError("globalError", "Usuário com id "+ id + " não existe.");
-        	result.addError(error);
-    		
-    	} else {
-    		model.addAttribute("editUserDto", converterService.convertUserModelToEditUserDto(user.get(), editUserDto));
-    		model.addAttribute("organizations", organizationService.listOrganizations());
-    	}
-    	return "edit-user";
-    }
-    @PostMapping("/{id}/edit")
-    public String editUser(@PathVariable("id") long id, @Validated EditUserDto editUserDto, BindingResult result, Model model) {
-    	if(id != editUserDto.getId()) {
-    		ObjectError error = new ObjectError("globalError", "Falha de validação do Id do usuário. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
-    		logger.info("id != editUserDto");
-        	result.addError(error);
-    	}
-		if(result.hasErrors()){
+	@GetMapping("/register")
+	public String registerPage(NewUserDto newUserDto) {
+		return "register-user";
+	}
+
+	@PostMapping("/register")
+	public String userRegister(@Validated NewUserDto newUserDto, BindingResult result) {
+		if (result.hasErrors()) {
+			return "register-user";
+		}
+		User user = converterService.convertNewUserDtoToUserModel(newUserDto);
+		if (userService.createUser(user)) {
+			return "redirect:/users";
+		}
+		ObjectError error = new ObjectError("globalError", "Este e-mail já foi utilizado por outro usuário.");
+		result.addError(error);
+		return "register-user";
+	}
+
+	@GetMapping("/{id}/edit")
+	public String editPage(@PathVariable("id") Long id, EditUserDto editUserDto, Model model, BindingResult result) {
+		Optional<User> user = userService.findUserById(id);
+		if (user.isEmpty()) {
+			ObjectError error = new ObjectError("globalError", "Usuário com id " + id + " não existe.");
+			result.addError(error);
+
+		} else {
+			model.addAttribute("editUserDto", converterService.convertUserModelToEditUserDto(user.get(), editUserDto));
+			model.addAttribute("organizations", organizationService.listOrganizations());
+		}
+		return "edit-user";
+	}
+
+	@PostMapping("/{id}/edit")
+	public String editUser(@PathVariable("id") long id, @Validated EditUserDto editUserDto, BindingResult result, Model model) {
+		if (id != editUserDto.getId()) {
+			ObjectError error = new ObjectError("globalError",
+					"Falha de validação do Id do usuário. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
+			logger.info("id != editUserDto");
+			result.addError(error);
+		}
+		if (result.hasErrors()) {
 			logger.info("hasErrors");
 			model.addAttribute("organizations", organizationService.listOrganizations());
 			return "edit-user";
 		}
-    	Optional<User> findUser = userService.findUserById(id);
-    	if(findUser.isPresent()) {
-    		User user = converterService.convertEditUserDtoToUserModel(editUserDto, findUser.get());
-    		if (userService.updateUser(user)) {
-    			return "redirect:/users/{id}/view";
-    		}
-    		ObjectError error = new ObjectError("globalError", "Este email já está sendo usado por outro usuário.");
-        	result.addError(error);
-    	} else { 
-    		ObjectError error = new ObjectError("globalError", "Este usuário não existe.");
-        	result.addError(error);
-    	}
-    	
-    	model.addAttribute("organizations", organizationService.listOrganizations());
-    	return "edit-user";
-    }
-    
-    @GetMapping("/{id}/view")
-    public String viewUser(@PathVariable("id") long id, Model model) {
-    	Optional<User> user = userService.findUserById(id);
-    	if (user.isEmpty()) {
-    		model.addAttribute("user", null);
-    	} else {
-    		model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));	
-    	}
-    	return "view-user";
-    }
-    
-    @GetMapping("/{id}/delete")
-    public String deleteUserPage(@PathVariable("id") long id, Model model) {
-    	Optional<User> user = userService.findUserById(id);
-    	if (user.isEmpty()) {
-    		model.addAttribute("user", null);
-    	} else {
-    		model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));	
-    	}
-    	return "delete-user";
-    }
-    
-    @PostMapping("/{id}/delete")
-    public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) {
-    	Optional<User> userToBeDeleted = userService.findUserById(id);
-    	if (userToBeDeleted.isEmpty()) {
-    		ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
-        	result.addError(error);
-        	return "delete-user";
-    	}
-    	if(!userService.deleteUser(userToBeDeleted.get())) {
-    		ObjectError error = new ObjectError("globalError", "Não foi possível deletar o usuário.");
-        	result.addError(error);
-    		return "delete-user";
-    	}
-    	return "redirect:/users";
-    }
-    
-    @GetMapping("/{id}/password")
-    public String passwordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword,Model model) {
-    	Optional<User> user = userService.findUserById(id);
-    	if (user.isEmpty()) {
-    		model.addAttribute("user", null);
-    	} else {
-    		model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));	
-    	}
-    	return "password-user";
-    }
-    
-    @PostMapping("/{id}/password")
-    public String changePasswordUser(@PathVariable("id") long id,@Validated ChangeUserPasswordDto userNewPasswordDto, BindingResult result, Model model) {
-    	Optional<User> user = userService.findUserById(id);
-    	if (user.isEmpty()) {
-    		ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
-        	result.addError(error);
-    	} else {
-        	model.addAttribute("user", user.get());
-    	}
-    	if (!userNewPasswordDto.getPassword().equals(userNewPasswordDto.getRepeatPassword())){
-    		ObjectError error = new ObjectError("globalError", "As senhas informadas não são iguais.");
-        	result.addError(error);
-    	}
-    	if(result.hasErrors()){
-    		return "password-user";
-        }  	
-    	User userNewPassword = user.get();
-    	userNewPassword.setPassword(userNewPasswordDto.getPassword());
-   		userService.changeUserPassword(userNewPassword);
-   		return "redirect:/users/{id}/view";
-    	
-    }
-    
+		Optional<User> findUser = userService.findUserById(id);
+		if (findUser.isPresent()) {
+			User user = converterService.convertEditUserDtoToUserModel(editUserDto, findUser.get());
+			if (userService.updateUser(user)) {
+				return "redirect:/users/{id}/view";
+			}
+			ObjectError error = new ObjectError("globalError", "Este email já está sendo usado por outro usuário.");
+			result.addError(error);
+		} else {
+			ObjectError error = new ObjectError("globalError", "Este usuário não existe.");
+			result.addError(error);
+		}
+
+		model.addAttribute("organizations", organizationService.listOrganizations());
+		return "edit-user";
+	}
+
+	@GetMapping("/{id}/view")
+	public String viewUser(@PathVariable("id") long id, Model model) {
+		Optional<User> user = userService.findUserById(id);
+		if (user.isEmpty()) {
+			model.addAttribute("user", null);
+		} else {
+			model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));
+		}
+		return "view-user";
+	}
+
+	@GetMapping("/{id}/delete")
+	public String deleteUserPage(@PathVariable("id") long id, Model model) {
+		Optional<User> user = userService.findUserById(id);
+		if (user.isEmpty()) {
+			model.addAttribute("user", null);
+		} else {
+			model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));
+		}
+		return "delete-user";
+	}
+
+	@PostMapping("/{id}/delete")
+	public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) {
+		Optional<User> userToBeDeleted = userService.findUserById(id);
+		if (userToBeDeleted.isEmpty()) {
+			ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
+			result.addError(error);
+			return "delete-user";
+		}
+		if (!userService.deleteUser(userToBeDeleted.get())) {
+			ObjectError error = new ObjectError("globalError", "Não foi possível deletar o usuário.");
+			result.addError(error);
+			return "delete-user";
+		}
+		return "redirect:/users";
+	}
+
+	@GetMapping("/{id}/password")
+	public String passwordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword, Model model) {
+		Optional<User> user = userService.findUserById(id);
+		if (user.isEmpty()) {
+			model.addAttribute("user", null);
+		} else {
+			model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));
+		}
+		return "password-user";
+	}
+
+	@PostMapping("/{id}/password")
+	public String changePasswordUser(@PathVariable("id") long id, @Validated ChangeUserPasswordDto userNewPasswordDto,
+			BindingResult result, Model model) {
+		Optional<User> user = userService.findUserById(id);
+		if (user.isEmpty()) {
+			ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
+			result.addError(error);
+		} else {
+			model.addAttribute("user", user.get());
+		}
+		if (!userNewPasswordDto.getPassword().equals(userNewPasswordDto.getRepeatPassword())) {
+			ObjectError error = new ObjectError("globalError", "As senhas informadas não são iguais.");
+			result.addError(error);
+		}
+		if (result.hasErrors()) {
+			return "password-user";
+		}
+		User userNewPassword = user.get();
+		userNewPassword.setPassword(userNewPasswordDto.getPassword());
+		userService.changeUserPassword(userNewPassword);
+		return "redirect:/users/{id}/view";
+
+	}
+
 }

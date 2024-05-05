@@ -76,8 +76,6 @@ public class OrganizationsController {
 		Optional<Organization> orgOpt = organizationService.findById(id);
 		if (orgOpt.isPresent()) {
 			Organization org = converterService.convertEditOrganizationDtoToOrganizationModel(editOrganizationDto, orgOpt.get());
-			logger.info(org.toString());
-			logger.info(editOrganizationDto.toString());
 			if(organizationService.updateOrganization(org)) {
 				return "redirect:/organizations/{id}/view";
 			}
@@ -90,23 +88,23 @@ public class OrganizationsController {
 		return "edit-organization";
 	}
 	
-    @GetMapping("/register")
-    public String registerPage(NewOrganizationDto newOrganizationDto) {
-        return "register-organization";
-    }
+	@GetMapping("/register")
+	public String registerPage(NewOrganizationDto newOrganizationDto) {
+		return "register-organization";
+	}
 
-    @PostMapping("/register")
-    public String organizationRegister(@Validated NewOrganizationDto newOrganizationDto, BindingResult result){
-    	if(result.hasErrors()){
-            return "register-organization";
-        }
-    	Organization org = converterService.convertNewOrganizationDtoToOrganizationModel(newOrganizationDto);
-    	if (organizationService.createOrganization(org)) {
-    		return "redirect:/organizations";
-    	}
-    	ObjectError error = new ObjectError("globalError", "Este cnpj já foi utilizado por outra escola.");
-    	result.addError(error);
-    	return "register-organization";
-    }
+	@PostMapping("/register")
+	public String organizationRegister(@Validated NewOrganizationDto newOrganizationDto, BindingResult result) {
+		if (result.hasErrors()) {
+			return "register-organization";
+		}
+		Organization org = converterService.convertNewOrganizationDtoToOrganizationModel(newOrganizationDto);
+		if (organizationService.createOrganization(org)) {
+			return "redirect:/organizations";
+		}
+		ObjectError error = new ObjectError("globalError", "Este cnpj já foi utilizado por outra escola.");
+		result.addError(error);
+		return "register-organization";
+	}
 
 }
