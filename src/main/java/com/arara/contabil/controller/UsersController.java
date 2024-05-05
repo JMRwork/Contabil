@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arara.contabil.dto.ChangeUserPasswordDto;
 import com.arara.contabil.dto.EditUserDto;
@@ -25,6 +26,7 @@ import com.arara.contabil.service.OrganizationService;
 import com.arara.contabil.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 @PreAuthorize("hasRole('ADMIN')")
 public class UsersController {
 	
@@ -39,17 +41,17 @@ public class UsersController {
 	@Autowired
 	private OrganizationService organizationService;
 
-    @GetMapping("/users")
+    @GetMapping
     public String showUsers(Model model) {
         model.addAttribute("users", userService.listUsers());
         return "users";
     }
-    @GetMapping("/users/register")
+    @GetMapping("/register")
     public String registerPage(NewUserDto newUserDto) {
         return "register-user";
     }
 
-    @PostMapping("/users/register")
+    @PostMapping("/register")
     public String userRegister(@Validated NewUserDto newUserDto, BindingResult result){
     	if(result.hasErrors()){
             return "register-user";
@@ -62,7 +64,7 @@ public class UsersController {
     	result.addError(error);
     	return "register-user";
     }
-    @GetMapping("/users/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") Long id, EditUserDto editUserDto, Model model, BindingResult result) {
     	Optional<User> user = userService.findUserById(id);
     	if(user.isEmpty()) {
@@ -75,7 +77,7 @@ public class UsersController {
     	}
     	return "edit-user";
     }
-    @PostMapping("/users/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String editUser(@PathVariable("id") long id, @Validated EditUserDto editUserDto, BindingResult result, Model model) {
     	if(id != editUserDto.getId()) {
     		ObjectError error = new ObjectError("globalError", "Falha de validação do Id do usuário. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
@@ -104,7 +106,7 @@ public class UsersController {
     	return "edit-user";
     }
     
-    @GetMapping("users/{id}/view")
+    @GetMapping("/{id}/view")
     public String viewUser(@PathVariable("id") long id, Model model) {
     	Optional<User> user = userService.findUserById(id);
     	if (user.isEmpty()) {
@@ -115,7 +117,7 @@ public class UsersController {
     	return "view-user";
     }
     
-    @GetMapping("users/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteUserPage(@PathVariable("id") long id, Model model) {
     	Optional<User> user = userService.findUserById(id);
     	if (user.isEmpty()) {
@@ -126,7 +128,7 @@ public class UsersController {
     	return "delete-user";
     }
     
-    @PostMapping("/users/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) {
     	Optional<User> userToBeDeleted = userService.findUserById(id);
     	if (userToBeDeleted.isEmpty()) {
@@ -142,7 +144,7 @@ public class UsersController {
     	return "redirect:/users";
     }
     
-    @GetMapping("users/{id}/password")
+    @GetMapping("/{id}/password")
     public String passwordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword,Model model) {
     	Optional<User> user = userService.findUserById(id);
     	if (user.isEmpty()) {
@@ -153,7 +155,7 @@ public class UsersController {
     	return "password-user";
     }
     
-    @PostMapping("users/{id}/password")
+    @PostMapping("/{id}/password")
     public String changePasswordUser(@PathVariable("id") long id,@Validated ChangeUserPasswordDto userNewPasswordDto, BindingResult result, Model model) {
     	Optional<User> user = userService.findUserById(id);
     	if (user.isEmpty()) {
