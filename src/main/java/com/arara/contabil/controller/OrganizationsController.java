@@ -25,7 +25,7 @@ import com.arara.contabil.service.OrganizationService;
 
 @Controller
 @RequestMapping("/organizations")
-@PreAuthorize("hasRole('ADMIN','ACCOUNTANT')")
+@PreAuthorize("hasRole('ADMIN') || hasRole('ACCOUNTANT')")
 public class OrganizationsController {
 
 	Logger logger = LoggerFactory.getLogger(OrganizationsController.class);
