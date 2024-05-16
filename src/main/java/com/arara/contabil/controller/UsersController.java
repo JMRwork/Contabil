@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.arara.contabil.config.CustomUser;
 import com.arara.contabil.dto.ChangeUserPasswordDto;
 import com.arara.contabil.dto.EditUserDto;
 import com.arara.contabil.dto.NewUserDto;
@@ -27,7 +29,6 @@ import com.arara.contabil.service.UserService;
 
 @Controller
 @RequestMapping("/users")
-@PreAuthorize("hasRole('ADMIN')")
 public class UsersController {
 	
 	Logger logger = LoggerFactory.getLogger(UsersController.class);
@@ -42,16 +43,18 @@ public class UsersController {
 	private OrganizationService organizationService;
 
 	@GetMapping
-	public String showUsers(Model model) {
-		model.addAttribute("users", userService.listUsers());
+	public String showUsers(@AuthenticationPrincipal CustomUser userPrincipal, Model model) {
+		model.addAttribute("users", userService.listUsers(userPrincipal));
 		return "users";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/register")
 	public String registerPage(NewUserDto newUserDto) {
 		return "register-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/register")
 	public String userRegister(@Validated NewUserDto newUserDto, BindingResult result) {
 		if (result.hasErrors()) {
@@ -66,8 +69,15 @@ public class UsersController {
 		return "register-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}/edit")
-	public String editPage(@PathVariable("id") Long id, EditUserDto editUserDto, Model model, BindingResult result) {
+	public String editPage(
+			@PathVariable("id") Long id,
+			@AuthenticationPrincipal CustomUser userPrincipal,
+			EditUserDto editUserDto,
+			Model model,
+			BindingResult result) {
+		
 		Optional<User> user = userService.findUserById(id);
 		if (user.isEmpty()) {
 			ObjectError error = new ObjectError("globalError", "Usuário com id " + id + " não existe.");
@@ -75,13 +85,20 @@ public class UsersController {
 
 		} else {
 			model.addAttribute("editUserDto", converterService.convertUserModelToEditUserDto(user.get(), editUserDto));
-			model.addAttribute("organizations", organizationService.listOrganizations());
+			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
 		}
 		return "edit-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/{id}/edit")
-	public String editUser(@PathVariable("id") long id, @Validated EditUserDto editUserDto, BindingResult result, Model model) {
+	public String editUser(
+			@PathVariable("id") long id,
+			@AuthenticationPrincipal CustomUser userPrincipal,
+			@Validated EditUserDto editUserDto,
+			BindingResult result,
+			Model model) {
+		
 		if (id != editUserDto.getId()) {
 			ObjectError error = new ObjectError("globalError",
 					"Falha de validação do Id do usuário. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
@@ -90,7 +107,7 @@ public class UsersController {
 		}
 		if (result.hasErrors()) {
 			logger.info("hasErrors");
-			model.addAttribute("organizations", organizationService.listOrganizations());
+			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
 			return "edit-user";
 		}
 		Optional<User> findUser = userService.findUserById(id);
@@ -106,10 +123,11 @@ public class UsersController {
 			result.addError(error);
 		}
 
-		model.addAttribute("organizations", organizationService.listOrganizations());
+		model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
 		return "edit-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN') || #id == principal.id ")
 	@GetMapping("/{id}/view")
 	public String viewUser(@PathVariable("id") long id, Model model) {
 		Optional<User> user = userService.findUserById(id);
@@ -121,6 +139,7 @@ public class UsersController {
 		return "view-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}/delete")
 	public String deleteUserPage(@PathVariable("id") long id, Model model) {
 		Optional<User> user = userService.findUserById(id);
@@ -132,6 +151,7 @@ public class UsersController {
 		return "delete-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/{id}/delete")
 	public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) {
 		Optional<User> userToBeDeleted = userService.findUserById(id);
@@ -148,6 +168,7 @@ public class UsersController {
 		return "redirect:/users";
 	}
 
+	@PreAuthorize("hasRole('ADMIN') || #id == principal.id ")
 	@GetMapping("/{id}/password")
 	public String passwordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword, Model model) {
 		Optional<User> user = userService.findUserById(id);
@@ -159,6 +180,7 @@ public class UsersController {
 		return "password-user";
 	}
 
+	@PreAuthorize("hasRole('ADMIN') || #id == principal.id ")
 	@PostMapping("/{id}/password")
 	public String changePasswordUser(@PathVariable("id") long id, @Validated ChangeUserPasswordDto userNewPasswordDto,
 			BindingResult result, Model model) {

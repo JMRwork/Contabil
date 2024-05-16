@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.arara.contabil.config.CustomUser;
 import com.arara.contabil.dto.EditOrganizationDto;
 import com.arara.contabil.dto.NewOrganizationDto;
 import com.arara.contabil.dto.ViewOrganizationDto;
@@ -25,7 +27,6 @@ import com.arara.contabil.service.OrganizationService;
 
 @Controller
 @RequestMapping("/organizations")
-@PreAuthorize("hasRole('ADMIN') || hasRole('ACCOUNTANT')")
 public class OrganizationsController {
 
 	Logger logger = LoggerFactory.getLogger(OrganizationsController.class);
@@ -37,8 +38,8 @@ public class OrganizationsController {
 	private OrganizationService organizationService;
 
 	@GetMapping
-	public String showUsers(Model model) {
-		model.addAttribute("organizations", organizationService.listOrganizations());
+	public String showOrganizations(@AuthenticationPrincipal CustomUser userPrincipal, Model model) {
+		model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
 		return "organizations";
 	}
 
@@ -51,6 +52,7 @@ public class OrganizationsController {
 		return "view-organization";
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@GetMapping("/{id}/edit")
 	public String editOrganization(@PathVariable("id") Long id, EditOrganizationDto editOrganizationDto, Model model, BindingResult result) {
 		Optional<Organization> organization = organizationService.findById(id);
@@ -63,6 +65,7 @@ public class OrganizationsController {
 		return "edit-organization";
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@PostMapping("/{id}/edit")
 	public String editUser(@PathVariable("id") Long id, @Validated EditOrganizationDto editOrganizationDto, BindingResult result, Model model) {
 		if (id != editOrganizationDto.getId()) {
@@ -88,11 +91,13 @@ public class OrganizationsController {
 		return "edit-organization";
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@GetMapping("/register")
 	public String registerPage(NewOrganizationDto newOrganizationDto) {
 		return "register-organization";
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@PostMapping("/register")
 	public String organizationRegister(@Validated NewOrganizationDto newOrganizationDto, BindingResult result) {
 		if (result.hasErrors()) {

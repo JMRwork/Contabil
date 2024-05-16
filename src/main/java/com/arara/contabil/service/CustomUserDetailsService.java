@@ -27,14 +27,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 		UserDetails userDetails = userRepository.findByEmail(email).map(u -> {
 			
 			Long id = u.getId();
+			List<Long> organizationIds = userRepository.findAllOrganizationIdsByUserId(id);
 			String username = u.getEmail();
 			String password = u.getPassword();
 			Boolean enabledUser = !u.getStatus().equals(UserStatus.DELETED);
 			Boolean accountNonExpired = u.getStatus().equals(UserStatus.ACTIVE) || u.getStatus().equals(UserStatus.RESET_PASSWORD);
 			Boolean credentialsNonExpired = !u.getStatus().equals(UserStatus.RESET_PASSWORD);
 			Boolean accountNonLocked = !u.getStatus().equals(UserStatus.DISABLED);
-			List<GrantedAuthority> listGrantAuthority = Arrays.asList(new SimpleGrantedAuthority(u.getRole()));
-			return new CustomUser(id, username, password, enabledUser, accountNonExpired, credentialsNonExpired, accountNonLocked, listGrantAuthority);
+			List<GrantedAuthority> listGrantAuthority = Arrays.asList(new SimpleGrantedAuthority(String.valueOf(u.getRole())));
+
+			return new CustomUser(id, organizationIds, username, password, enabledUser, accountNonExpired, credentialsNonExpired, accountNonLocked, listGrantAuthority);
 
 		}).orElseThrow(() -> new UsernameNotFoundException("Bad credentials!"));
 		

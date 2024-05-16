@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +25,15 @@ import com.arara.contabil.service.ExportExcelFileService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/organizations/{organization_id}/files")
+@RequestMapping("/organizations/{organizationId}/files")
+@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
 public class ExportExcelFileController {
 
 	@Autowired
 	private ExportExcelFileService exportExcelFileService;
 
 	@GetMapping("/view-exported-files")
-	public String showExportedFiles(@PathVariable("organization_id") Long organizationId,
+	public String showExportedFiles(@PathVariable("organizationId") Long organizationId,
 			@RequestParam(required = false) String filename, Model model) {
 
 		List<ViewOrganizationFileDto> files = new ArrayList<>();
@@ -52,21 +54,21 @@ public class ExportExcelFileController {
 	}
 
 	@GetMapping("/generate-excel-file")
-	public String generateExcelFile(@PathVariable("organization_id") Long organizationId,
+	public String generateExcelFile(@PathVariable("organizationId") Long organizationId,
 			RedirectAttributes redirectAttributes) {
 
 		String filename = exportExcelFileService.generateXlsxFile(organizationId);
 
 		redirectAttributes.addAttribute("filename", filename);
 
-		return "redirect:/organizations/{organization_id}/files/view-exported-files";
+		return "redirect:/organizations/{organizationId}/files/view-exported-files";
 	}
 
 
 	@GetMapping(value = "/download/{filename}", produces = "application/vnd.ms-excel.sheet.macroEnabled.12")
 	@ResponseBody
 	public FileSystemResource downloadfile( //
-			@PathVariable("organization_id") Long organizationId, //
+			@PathVariable("organizationId") Long organizationId, //
 			@PathVariable("filename") String filename, //
 			HttpServletResponse response) throws IOException {
 		
@@ -81,7 +83,7 @@ public class ExportExcelFileController {
 	
 	@GetMapping(value = "/delete/{filename}")
 	public String deleteFile( //
-			@PathVariable("organization_id") Long organizationId, //
+			@PathVariable("organizationId") Long organizationId, //
 			@PathVariable("filename") String filename) throws IOException {
 
 		String safeFilename = exportExcelFileService.sanitizeFilenameString(filename);
@@ -92,7 +94,7 @@ public class ExportExcelFileController {
 			currFile.delete();
 		}
 
-		return "redirect:/organizations/{organization_id}/files/view-exported-files";
+		return "redirect:/organizations/{organizationId}/files/view-exported-files";
 	}
 	
 

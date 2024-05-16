@@ -37,7 +37,9 @@ public class User {
 	
 	private String password;
 	private String fullName;
-	private String role;
+	
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 	
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
@@ -97,11 +99,11 @@ public class User {
 		this.fullName = fullName;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 	

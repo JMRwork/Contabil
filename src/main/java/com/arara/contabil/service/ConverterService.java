@@ -16,10 +16,11 @@ import com.arara.contabil.dto.ViewOrganizationDto;
 import com.arara.contabil.dto.ViewUserDto;
 import com.arara.contabil.model.Organization;
 import com.arara.contabil.model.User;
+import com.arara.contabil.model.UserRole;
 
 @Service
 public class ConverterService {
-	
+
 	Logger logger = LoggerFactory.getLogger(ConverterService.class);
 
 	public User convertNewUserDtoToUserModel(NewUserDto newUserDto) {
@@ -27,7 +28,7 @@ public class ConverterService {
 		user.setFullName(newUserDto.getFullName());
 		user.setEmail(newUserDto.getEmail());
 		user.setPassword(newUserDto.getPassword());
-		user.setRole(newUserDto.getRole());
+		user.setRole(UserRole.valueOf(newUserDto.getRole()));
 		return user;
 	}
 
@@ -39,7 +40,7 @@ public class ConverterService {
 		if (editUserDto.getEmail() != "" || editUserDto.getEmail() != null) {
 			user.setEmail(editUserDto.getEmail());
 		}
-		user.setRole(editUserDto.getRole());
+		user.setRole(UserRole.valueOf(editUserDto.getRole()));
 		user.setStatus(editUserDto.getStatus());
 		user.setOrganizations(editUserDto.getOrganizations());
 		return user;
@@ -48,7 +49,7 @@ public class ConverterService {
 	public EditUserDto convertUserModelToEditUserDto(User user, EditUserDto editUserDto) {
 		editUserDto.setFullName(user.getFullName());
 		editUserDto.setEmail(user.getEmail());
-		editUserDto.setRole(user.getRole());
+		editUserDto.setRole(String.valueOf(user.getRole()));
 		editUserDto.setStatus(user.getStatus());
 		editUserDto.setOrganizations(user.getOrganizations());
 		return editUserDto;
@@ -59,7 +60,7 @@ public class ConverterService {
 		viewUserDto.setId(user.getId());
 		viewUserDto.setFullName(user.getFullName());
 		viewUserDto.setEmail(user.getEmail());
-		viewUserDto.setRole(user.getRole());
+		viewUserDto.setRole(String.valueOf(user.getRole()));
 		viewUserDto.setStatus(user.getStatus());
 		viewUserDto.setCreatedBy(user.getCreatedBy());
 		viewUserDto.setLastModifiedBy(user.getLastModifiedBy());
@@ -104,7 +105,7 @@ public class ConverterService {
 			viewUserDto.setId(user.getId());
 			viewUserDto.setEmail(user.getEmail());
 			viewUserDto.setFullName(user.getFullName());
-			viewUserDto.setRole(user.getRole());
+			viewUserDto.setRole(String.valueOf(user.getRole()));
 			viewUserDto.setStatus(user.getStatus());
 
 			viewUserDtos.add(viewUserDto);
@@ -143,7 +144,7 @@ public class ConverterService {
 
 		return org;
 	}
-	
+
 	public Organization convertNewOrganizationDtoToOrganizationModel(NewOrganizationDto newOrganizationDto) {
 		Organization org = new Organization();
 		org.setCnpj(newOrganizationDto.getCnpj());
@@ -152,13 +153,13 @@ public class ConverterService {
 		org.setIsActive(newOrganizationDto.getIsActive());
 		return org;
 	}
-	
+
 	public CurrentOrganizationDto convertOrganizationModelToCurrentOrganizationDto(Organization org) {
 		CurrentOrganizationDto dto = new CurrentOrganizationDto();
 		dto.setId(org.getId());
 		dto.setName(org.getName());
 		dto.setCnpj(org.getCnpj());
-		
+
 		return dto;
 	}
 }

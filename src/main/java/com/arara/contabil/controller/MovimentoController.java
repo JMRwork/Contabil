@@ -2,6 +2,7 @@ package com.arara.contabil.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,9 @@ public class MovimentoController {
 	@Autowired
 	private MovimentoService movimentoService;
 
-	@GetMapping("/movimento/{organization_id}")
-	public String showUsers(@PathVariable("organization_id") Long organizationId, Model model) {
+	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
+	@GetMapping("/movimento/{organizationId}")
+	public String showUsers(@PathVariable("organizationId") Long organizationId, Model model) {
 		Organization org = new Organization();
 		org.setId(organizationId);
 		Pageable pageable = Pageable.unpaged();

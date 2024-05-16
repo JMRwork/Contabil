@@ -16,5 +16,7 @@ public interface OrganizationRepository extends Repository<Organization, Long> {
 	Optional<Organization> findByCnpj(String cnpj);
 
 	List<Organization> findAll();
+	
+	List<Organization> findAllByIdIn(List<Long> organizationIds);
 
 }

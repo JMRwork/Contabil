@@ -22,11 +22,17 @@ public interface UserRepository extends Repository<User, Long> {
 	// Busca todos os usuarios
 	List<User> findAll();
 	
+	// Busca todos os usuarios da organização, exceto deletados
+	List<User> findAllByOrganizationsIn(List<Long> organizationIds);
+	
 	// Busca todos os usuarios, exceto deletados
 	List<User> findAllByDeletedAtNull();
 
 	// Busca todos usuarios deletados
 	List<User> findAllByDeletedAtNotNull();
+	
+	@Query("select uo.id from User u inner join u.organizations uo where u.id = :id")
+	List<Long> findAllOrganizationIdsByUserId(@Param("id") Long id);
 	
 	@Modifying
 	@Query("update User u set u.lastLoginAt = :lastLoginAt where u.email = :email")
