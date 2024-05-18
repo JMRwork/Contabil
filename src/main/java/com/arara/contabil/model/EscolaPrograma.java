@@ -30,20 +30,20 @@ public class EscolaPrograma {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(nullable = false)
 	private String nomePrograma;
 
 	@Column
 	private String origemRecursos;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String exercicio;
 
 	@Column
-	private Integer numOficioEncaminhamento;
+	private String numOficioEncaminhamento;
 
 	@Column
-	private Integer numConvenio;
+	private String numConvenio;
 
 	@Column
 	private String banco;
@@ -108,19 +108,19 @@ public class EscolaPrograma {
 		this.exercicio = exercicio;
 	}
 
-	public Integer getNumOficioEncaminhamento() {
+	public String getNumOficioEncaminhamento() {
 		return numOficioEncaminhamento;
 	}
 
-	public void setNumOficioEncaminhamento(Integer numOficioEncaminhamento) {
+	public void setNumOficioEncaminhamento(String numOficioEncaminhamento) {
 		this.numOficioEncaminhamento = numOficioEncaminhamento;
 	}
 
-	public Integer getNumConvenio() {
+	public String getNumConvenio() {
 		return numConvenio;
 	}
 
-	public void setNumConvenio(Integer numConvenio) {
+	public void setNumConvenio(String numConvenio) {
 		this.numConvenio = numConvenio;
 	}
 
