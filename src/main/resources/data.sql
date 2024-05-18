@@ -21,3 +21,10 @@ INSERT INTO movimento (id, descricao, tipo, data_lancamento, valor, organization
 INSERT INTO movimento (id, descricao, tipo, data_lancamento, valor, organization_id, created_by, last_modified_by, created_at, last_modified_at, deleted_at) VALUES (default, 'pagamento aluguel imovel',        'DEBITO',  '2024-04-10', 500.00,  1, 3, null, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), null);
 INSERT INTO escola_dados_cadastrais (organization_id, unidade_executora, nome_escola, cnpj, sigla_escola, endereco, cidade, uf, cep, telefone, email, codigo_inep, created_by, last_modified_by, created_at, last_modified_at) VALUES (1, 'Associação da Escola A', 'Escola A', '11111111111111', 'EA-TO', 'rua primeira nº 200', 'cidade', 'TO', '75250000', '3414-1212', 'escola.a@email.com', '175247', 1, null, CURRENT_TIMESTAMP(), null);
 INSERT INTO escola_dados_cadastrais (organization_id, unidade_executora, nome_escola, cnpj, sigla_escola, endereco, cidade, uf, cep, telefone, email, codigo_inep, created_by, last_modified_by, created_at, last_modified_at) VALUES (2, 'Associação da Escola B', 'Escola B', '22222222222222', 'EB-TO', 'rua segunda nº 500', 'cidade', 'TO', '75500000', '3414-3030', 'escola.b@email.com', '241565', 1, null, CURRENT_TIMESTAMP(), null);
+INSERT INTO banco (codigo, nome) VALUES ('001','Banco do Brasil S.A.');
+INSERT INTO banco (codigo, nome) VALUES ('003','Banco da Amazonia S.A.');
+INSERT INTO banco (codigo, nome) VALUES ('004','Banco do Nordeste do Brasil S.A.');
+INSERT INTO banco (codigo, nome) VALUES ('033','Banco Santander (Brasil) S.A.');
+INSERT INTO banco (codigo, nome) VALUES ('104','Caixa Econômica Federal');
+INSERT INTO banco (codigo, nome) VALUES ('237','Banco Bradesco S.A.');
+INSERT INTO banco (codigo, nome) VALUES ('341','Banco Itaú S.A.');

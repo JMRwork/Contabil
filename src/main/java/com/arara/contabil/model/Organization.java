@@ -57,6 +57,9 @@ public class Organization {
     
     @OneToMany(mappedBy = "organization")
     private List<Movimento> movimento;
+    
+    @OneToMany(mappedBy = "organization")
+    private List<DomicilioBancario> domiciolioBancarios;
 
 	public Long getId() {
 		return id;
