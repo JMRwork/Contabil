@@ -61,6 +61,9 @@ public class Organization {
     @OneToMany(mappedBy = "organization")
     private List<DomicilioBancario> domiciolioBancarios;
 
+    @ManyToMany(mappedBy = "organizations")
+    Set<RolResponsaveis> responsaveis;
+    
 	public Long getId() {
 		return id;
 	}
@@ -128,6 +131,14 @@ public class Organization {
 
 	public Set<User> getUsers() {
 		return users;
+	}
+
+	public Set<RolResponsaveis> getResponsaveis() {
+		return responsaveis;
+	}
+
+	public void setResponsaveis(Set<RolResponsaveis> responsaveis) {
+		this.responsaveis = responsaveis;
 	}
 
 	@Override
