@@ -21,6 +21,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+
 public class EscolaPrograma {
 
 	@Id
