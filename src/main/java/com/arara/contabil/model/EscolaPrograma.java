@@ -13,6 +13,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,61 +22,63 @@ import jakarta.persistence.ManyToOne;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class EscolaPrograma {
+
 	@Id
-	private Long programaId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column
 	private String nomePrograma;
-	
+
 	@Column
 	private String origemRecursos;
-	
-	@Column
-	private Integer exercicio;
-	
+
+	@Column(nullable = false, unique = true)
+	private String exercicio;
+
 	@Column
 	private Integer numOficioEncaminhamento;
-	
+
 	@Column
 	private Integer numConvenio;
-	
+
 	@Column
 	private String banco;
-	
+
 	@Column
 	private String agencia;
-	
+
 	@Column
 	private List<String> numConta;
-	
+
 	@Column
 	private String cidade;
-	
+
 	@Column
 	private String nomeSecretarioEdu;
-	
+
 	@CreatedBy
 	private Long createdBy;
-	
+
 	@LastModifiedBy
 	private Long lastModifiedBy;
-	
-    @CreatedDate
-    private Instant createdAt;
-    
-    @LastModifiedDate
-    private Instant lastModifiedAt;
-    
-    @ManyToOne
-    @JoinColumn(name="programa_id", nullable = false)
-    private Organization organization;
 
-	public Long getProgramaId() {
-		return programaId;
+	@CreatedDate
+	private Instant createdAt;
+
+	@LastModifiedDate
+	private Instant lastModifiedAt;
+
+	@ManyToOne
+	@JoinColumn(name = "organization_id", nullable = false)
+	private Organization organization;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setProgramaId(Long programaId) {
-		this.programaId = programaId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNomePrograma() {
@@ -93,11 +97,11 @@ public class EscolaPrograma {
 		this.origemRecursos = origemRecursos;
 	}
 
-	public Integer getExercicio() {
+	public String getExercicio() {
 		return exercicio;
 	}
 
-	public void setExercicio(Integer exercicio) {
+	public void setExercicio(String exercicio) {
 		this.exercicio = exercicio;
 	}
 
@@ -157,45 +161,33 @@ public class EscolaPrograma {
 		this.nomeSecretarioEdu = nomeSecretarioEdu;
 	}
 
-	public Long getCreatedBy() {
-		return createdBy;
+	public Organization getOrganization() {
+		return organization;
 	}
 
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 
 	public Long getLastModifiedBy() {
 		return lastModifiedBy;
 	}
 
-	public void setLastModifiedBy(Long lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
-	}
-
 	public Instant getCreatedAt() {
 		return createdAt;
-	}
-
-	public void setCreatedAt(Instant createdAt) {
-		this.createdAt = createdAt;
 	}
 
 	public Instant getLastModifiedAt() {
 		return lastModifiedAt;
 	}
 
-	public void setLastModifiedAt(Instant lastModifiedAt) {
-		this.lastModifiedAt = lastModifiedAt;
-	}
-
-	public Organization getOrganization() {
-		return organization;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(programaId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -207,18 +199,16 @@ public class EscolaPrograma {
 		if (getClass() != obj.getClass())
 			return false;
 		EscolaPrograma other = (EscolaPrograma) obj;
-		return Objects.equals(programaId, other.programaId);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "EscolaPrograma [programaId=" + programaId + ", nomePrograma=" + nomePrograma + ", origemRecursos="
-				+ origemRecursos + ", exercicio=" + exercicio + ", numOficioEncaminhamento=" + numOficioEncaminhamento
-				+ ", numConvenio=" + numConvenio + ", banco=" + banco + ", agencia=" + agencia + ", numConta="
-				+ numConta + ", cidade=" + cidade + ", nomeSecretarioEdu=" + nomeSecretarioEdu + ", createdBy="
-				+ createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt=" + createdAt + ", lastModifiedAt="
-				+ lastModifiedAt + ", organization=" + organization + "]";
+		return "EscolaPrograma [id=" + id + ", nomePrograma=" + nomePrograma + ", origemRecursos=" + origemRecursos
+				+ ", exercicio=" + exercicio + ", numOficioEncaminhamento=" + numOficioEncaminhamento + ", numConvenio="
+				+ numConvenio + ", banco=" + banco + ", agencia=" + agencia + ", numConta=" + numConta + ", cidade="
+				+ cidade + ", nomeSecretarioEdu=" + nomeSecretarioEdu + ", createdBy=" + createdBy + ", lastModifiedBy="
+				+ lastModifiedBy + ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + "]";
 	}
-    
-    
+
 }
