@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+
 public class EscolaPrograma {
 	@Id
 	private Long programaId;
@@ -66,7 +67,7 @@ public class EscolaPrograma {
     private Instant lastModifiedAt;
     
     @ManyToOne
-    @JoinColumn(name="programa_id", nullable = false)
+    @JoinColumn(name="organization_id", nullable = false)
     private Organization organization;
 
 	public Long getProgramaId() {
