@@ -1,12 +1,14 @@
 package com.arara.contabil.controller;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,8 @@ import com.arara.contabil.dto.EditOrganizationDto;
 import com.arara.contabil.dto.NewOrganizationDto;
 import com.arara.contabil.dto.ViewOrganizationDto;
 import com.arara.contabil.model.Organization;
+import com.arara.contabil.model.User;
+import com.arara.contabil.model.UserRole;
 import com.arara.contabil.service.ConverterService;
 import com.arara.contabil.service.OrganizationService;
 
@@ -43,6 +47,7 @@ public class OrganizationsController {
 		return "organizations";
 	}
 
+	@PreAuthorize("principal.organizationIds.contains(#organizationId)")
 	@GetMapping("/{id}/view")
 	public String viewOrganization(@PathVariable("id") Long id, Model model) {
 		ViewOrganizationDto dto = organizationService.findById(id)
@@ -52,34 +57,46 @@ public class OrganizationsController {
 		return "view-organization";
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
+	@PreAuthorize("hasRole('ADMIN') || ( hasRole('ACCOUNTANT') && principal.organizationIds.contains(#organizationId) )")
 	@GetMapping("/{id}/edit")
-	public String editOrganization(@PathVariable("id") Long id, EditOrganizationDto editOrganizationDto, Model model, BindingResult result) {
+	public String editOrganization( //
+			@PathVariable("id") Long id, //
+			EditOrganizationDto editOrganizationDto, //
+			Model model, //
+			BindingResult result) {
+
 		Optional<Organization> organization = organizationService.findById(id);
 		if (organization.isEmpty()) {
 			ObjectError error = new ObjectError("globalError", "Organização com id " + id + " não existe.");
 			result.addError(error);
 		} else {
-			model.addAttribute("editOrganizationDto", converterService.convertOrganizationModelToEditOrganizationDto(organization.get(), editOrganizationDto));
+			model.addAttribute("editOrganizationDto", converterService
+					.convertOrganizationModelToEditOrganizationDto(organization.get(), editOrganizationDto));
 		}
 		return "edit-organization";
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
+	@PreAuthorize("hasRole('ADMIN') || ( hasRole('ACCOUNTANT') && principal.organizationIds.contains(#organizationId) )")
 	@PostMapping("/{id}/edit")
-	public String editUser(@PathVariable("id") Long id, @Validated EditOrganizationDto editOrganizationDto, BindingResult result, Model model) {
+	public String editUser( //
+			@PathVariable("id") Long id, //
+			@Validated EditOrganizationDto editOrganizationDto, //
+			BindingResult result, //
+			Model model) {
+
 		if (id != editOrganizationDto.getId()) {
 			ObjectError error = new ObjectError("globalError",
-				"Falha de validação do Id da organização. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
+					"Falha de validação do Id da organização. Tente novamente mais tarde. Caso ocorra novamente contate o administrador do sistema.");
 			result.addError(error);
 		}
-		if(result.hasErrors()){
+		if (result.hasErrors()) {
 			return "edit-organization";
 		}
 		Optional<Organization> orgOpt = organizationService.findById(id);
 		if (orgOpt.isPresent()) {
-			Organization org = converterService.convertEditOrganizationDtoToOrganizationModel(editOrganizationDto, orgOpt.get());
-			if(organizationService.updateOrganization(org)) {
+			Organization org = converterService.convertEditOrganizationDtoToOrganizationModel(editOrganizationDto,
+					orgOpt.get());
+			if (organizationService.updateOrganization(org)) {
 				return "redirect:/organizations/{id}/view";
 			}
 			ObjectError error = new ObjectError("globalError", "Este Cnpj já está sendo usando por outra organização.");
@@ -90,7 +107,7 @@ public class OrganizationsController {
 		}
 		return "edit-organization";
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@GetMapping("/register")
 	public String registerPage(NewOrganizationDto newOrganizationDto) {
@@ -99,11 +116,22 @@ public class OrganizationsController {
 
 	@PreAuthorize("hasAnyRole('ADMIN', 'ACCOUNTANT')")
 	@PostMapping("/register")
-	public String organizationRegister(@Validated NewOrganizationDto newOrganizationDto, BindingResult result) {
+	public String organizationRegister( //
+			@Validated NewOrganizationDto newOrganizationDto, //
+			@AuthenticationPrincipal CustomUser userPrincipal, //
+			BindingResult result) {
+
 		if (result.hasErrors()) {
 			return "register-organization";
 		}
 		Organization org = converterService.convertNewOrganizationDtoToOrganizationModel(newOrganizationDto);
+		if (userPrincipal.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_ACCOUNTANT.toString()))) {
+			// Vincular usuário atual com role_accountant com a nova organização
+			User currentUser = new User();
+			currentUser.setId(userPrincipal.getId());
+			Set<User> users = Set.of(currentUser);
+			org.setUsers(users);
+		}
 		if (organizationService.createOrganization(org)) {
 			return "redirect:/organizations";
 		}

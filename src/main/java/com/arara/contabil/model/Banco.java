@@ -16,7 +16,7 @@ public class Banco {
 	@Id
 	private String codigo;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
 
 	public String getCodigo() {

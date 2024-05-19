@@ -36,7 +36,7 @@
 						<li class="nav-item"><a class="nav-link link-danger" th:href="@{/}">Nenhuma escola selecionada</a></li>
 					</ul>
 					<ul class="list-unstyled" th:case="*">
-						<li class="nav-item"><a class="nav-link link-light" th:href="@{/movimento/{id}(id=${session.currentOrganization?.id})}">Movimentos</a></li>
+						<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations/{id}/movimento(id=${session.currentOrganization?.id})}">Movimentos</a></li>
 						<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations/{id}/dados-cadastrais(id=${session.currentOrganization?.id})}">Dados Cadastrais</a></li>
 						<li class="nav-item"><a class="nav-link link-light" th:href="@{/organizations/{id}/files/view-exported-files(id=${session.currentOrganization?.id})}">Exportar Arquivos</a></li>
 					</ul>

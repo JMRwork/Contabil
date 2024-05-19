@@ -133,6 +133,10 @@ public class Organization {
 		return users;
 	}
 
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 	public Set<RolResponsaveis> getResponsaveis() {
 		return responsaveis;
 	}

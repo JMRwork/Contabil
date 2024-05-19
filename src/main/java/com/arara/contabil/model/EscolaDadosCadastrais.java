@@ -17,13 +17,19 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "organizationId", "exercicio" }) })
 public class EscolaDadosCadastrais {
 
 	@Id
 	private Long organizationId;
+	
+	@Column(nullable = false)
+	private String exercicio;
 	
 	@Column(nullable = false)
 	private String unidadeExecutora;

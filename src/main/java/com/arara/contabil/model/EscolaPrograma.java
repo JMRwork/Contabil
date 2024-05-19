@@ -1,7 +1,6 @@
 package com.arara.contabil.model;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -44,15 +43,6 @@ public class EscolaPrograma {
 
 	@Column
 	private String numConvenio;
-
-	@Column
-	private String banco;
-
-	@Column
-	private String agencia;
-
-	@Column
-	private List<String> numConta;
 
 	@Column
 	private String cidade;
@@ -124,30 +114,6 @@ public class EscolaPrograma {
 		this.numConvenio = numConvenio;
 	}
 
-	public String getBanco() {
-		return banco;
-	}
-
-	public void setBanco(String banco) {
-		this.banco = banco;
-	}
-
-	public String getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(String agencia) {
-		this.agencia = agencia;
-	}
-
-	public List<String> getNumConta() {
-		return numConta;
-	}
-
-	public void setNumConta(List<String> numConta) {
-		this.numConta = numConta;
-	}
-
 	public String getCidade() {
 		return cidade;
 	}
@@ -209,9 +175,9 @@ public class EscolaPrograma {
 	public String toString() {
 		return "EscolaPrograma [id=" + id + ", nomePrograma=" + nomePrograma + ", origemRecursos=" + origemRecursos
 				+ ", exercicio=" + exercicio + ", numOficioEncaminhamento=" + numOficioEncaminhamento + ", numConvenio="
-				+ numConvenio + ", banco=" + banco + ", agencia=" + agencia + ", numConta=" + numConta + ", cidade="
-				+ cidade + ", nomeSecretarioEdu=" + nomeSecretarioEdu + ", createdBy=" + createdBy + ", lastModifiedBy="
-				+ lastModifiedBy + ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + "]";
+				+ numConvenio + ", cidade=" + cidade + ", nomeSecretarioEdu=" + nomeSecretarioEdu + ", createdBy="
+				+ createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt=" + createdAt + ", lastModifiedAt="
+				+ lastModifiedAt + "]";
 	}
 
 }
