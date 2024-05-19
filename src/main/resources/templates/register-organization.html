@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Criar Escola')}">
-	<main class="container-fluid mt-3 mb-3">
+	<main class="container-fluid">
 		<div th:switch="${newOrganizationDto}">
 			<h2 th:case="null" th:text="|Escola não encontrada|"></h2>
 			<div th:case="*">

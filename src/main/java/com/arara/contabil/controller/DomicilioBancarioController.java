@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.arara.contabil.model.Organization;
+import com.arara.contabil.service.BancoService;
 import com.arara.contabil.service.DomicilioBancarioService;
 
 @Controller
@@ -15,6 +16,9 @@ public class DomicilioBancarioController {
 
 	@Autowired
 	private DomicilioBancarioService domicilioBancarioService;
+	
+	@Autowired
+	private BancoService bancoService; 
 
 	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
 	@GetMapping("/organizations/{organizationId}/domicilio-bancarios")
@@ -25,4 +29,6 @@ public class DomicilioBancarioController {
 		model.addAttribute("currentOrganization", org);
 		return "domicilio-bancarios";
 	}
+	
+	
 }

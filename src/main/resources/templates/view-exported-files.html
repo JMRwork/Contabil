@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Exportar Arquivos')}">
-	<main class="container-fluid mt-3 mb-3">
+	<main class="container-fluid">
 		<div th:switch="${files}">
 			<h2 th:case="null">No files yet!</h2>
 			<div th:case="*">

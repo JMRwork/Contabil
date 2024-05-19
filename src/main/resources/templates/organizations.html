@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Escolas')}">
-	<main class="container-fluid mt-3 mb-3">
+	<main class="container-fluid">
 		<div th:switch="${organizations}">
 			<h2 th:case="null">No organizations yet!</h2>
 			<div th:case="*">

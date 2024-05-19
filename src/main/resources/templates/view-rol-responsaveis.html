@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Rol de Responsáveis')}">
-	<main class="container-fluid mt-3 mb-3">
+	<main class="container-fluid">
 		<div th:switch="${rolResponsaveis}">
 			<h2 th:case="null" th:text="|Escola sem dados no Rol de Responsáveis|"></h2>
 			<div th:case="*">

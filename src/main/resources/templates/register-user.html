@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:replace="~{template :: layout (~{:: main}, 'Criar Usuário')}">
 
-	<main class="container-fluid mt-3 mb-3">
+	<main class="container-fluid">
 		<style>.error {color: red; font-size: small;}</style>
 		<form th:action="@{/users/register}" th:object="${newUserDto}" method="post">
 			<div class="form-group mb-3">
