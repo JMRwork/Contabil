@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Rol de Responsáveis')}">
+	<main class="container-fluid mt-3 mb-3">
+		<div th:switch="${rolResponsaveis}">
+			<h2 th:case="null" th:text="|Escola sem dados no Rol de Responsáveis|"></h2>
+			<div th:case="*">
+				<div class="table-responsive">
+									<table class="table table-sm table-hover text-nowrap">
+										<thead>
+											<tr>
+												<th>Nome</th>
+												<th>CPF(id)</th>
+												<th>Cargo / Função</th>
+												<th>RG</th>
+												<th>Orgão Emissor</th>
+												<th>Periodo da Gestão</th>
+												<th>Ata de Nomeação</th>
+												<th>Endereço</th>
+												<th>Cidade</th>
+												<th>UF</th>
+												<th>CEP</th>
+												<th>Telefone</th>
+												<th>Email</th>
+												<th>Editar</th>
+												<th>Deletar</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="responsavel : ${rolResponsaveis}">
+												<td th:text="${responsavel.nome}"></td>
+												<td th:text="${responsavel.id}"></td>
+												<td th:text="${responsavel.funcao}"></td>
+												<td th:text="${responsavel.rg}"></td>
+												<td th:text="${responsavel.orgaoEmissor}"></td>
+												<td th:text="${responsavel.periodoGestao}"></td>
+												<td th:text="${responsavel.ataNomeacao}"></td>
+												<td th:text="${responsavel.endereco}"></td>
+												<td th:text="${responsavel.cidade}"></td>
+												<td th:text="${responsavel.uf}"></td>
+												<td th:text="${responsavel.cep}"></td>
+												<td th:text="${responsavel.telefone}"></td>
+												<td th:text="${responsavel.email}"></td>
+												<td><a class="btn btn-outline-success" role="button" th:href="@{}">Editar</a></td>
+												<td><a class="btn btn-outline-danger"  role="button" th:href="@{}">Deletar</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+			</div>
+		</div>
+	</main>
+</html>

@@ -1,8 +1,13 @@
 package com.arara.contabil.model;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
@@ -59,6 +64,18 @@ public class RolResponsaveis {
 	
 	@Column
 	private String email;
+	
+	@CreatedBy
+	private Long createdBy;
+	
+	@LastModifiedBy
+	private Long lastModifiedBy;
+	
+    @CreatedDate
+    private Instant createdAt;
+    
+    @LastModifiedDate
+    private Instant lastModifiedAt;
 	
 	@ManyToMany
 	@JoinTable(
@@ -151,10 +168,36 @@ public class RolResponsaveis {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Long getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+	public void setLastModifiedBy(Long lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Instant getLastModifiedAt() {
+		return lastModifiedAt;
+	}
+	public void setLastModifiedAt(Instant lastModifiedAt) {
+		this.lastModifiedAt = lastModifiedAt;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
