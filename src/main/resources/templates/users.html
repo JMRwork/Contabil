@@ -15,13 +15,8 @@
 								<th>Email</th>
 								<th>Role</th>
 								<th>Status</th>
-								<th>Created By</th>
-								<th>Created At</th>
-								<th>Last Modified By</th>
-								<th>Last Modified At</th>
-								<th>Detalhes</th>
-								<th>Editar</th>
-								<th>Deletar</th>
+								<th>Último Login</th>
+								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -31,13 +26,12 @@
 								<td th:text="${user.email}"></td>
 								<td th:text="${user.role}"></td>
 								<td th:text="${user.status}"></td>
-								<td th:text="${user.createdBy}"></td>
-								<td th:text="${#temporals.format(user.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td th:text="${user.lastModifiedBy}"></td>
-								<td th:text="${#temporals.format(user.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td><a class="btn btn-outline-info"    role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
-								<td><a class="btn btn-outline-success" role="button" th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a></td>
-								<td><a class="btn btn-outline-danger"  role="button" th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a></td>
+								<td th:text="${#temporals.format(user.lastLoginAt, 'yyyy/MM/dd HH:mm')}"></td>
+								<td>
+									<a class="btn btn-outline-info"    role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a>
+									<a class="btn btn-outline-success" role="button" th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>

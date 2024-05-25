@@ -15,15 +15,7 @@
 								<th>Legal Name</th>
 								<th>CNPJ</th>
 								<th>Status</th>
-								<th>Created By</th>
-								<th>Created At</th>
-								<th>Last Modified By</th>
-								<th>Last Modified At</th>
-								<th>Movimento</th>
-								<th>Dados de Cadastro</th>
-								<th>Detalhes</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,15 +25,12 @@
 								<td th:text="${org.legalName}"></td>
 								<td th:text="${org.cnpj}"></td>
 								<td th:text="${org.isActive ? 'Ativa' : 'Desativada'}"></td>
-								<td th:text="${org.createdBy}"></td>
-								<td th:text="${#temporals.format(org.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td th:text="${org.lastModifiedBy}"></td>
-								<td th:text="${#temporals.format(org.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td><a class="btn btn-outline-primary" role="button" th:href="@{/organizations/{id}/movimento(id=${org.id})}">Ver Movimento</a></td>
-								<td><a class="btn btn-outline-primary" role="button" th:href="@{/organizations/{id}/dados-cadastrais(id=${org.id})}">Ver Cadastro</a></td>
-								<td><a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a></td>
-								<td><a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Edit</a></td>
-								<td><a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/delete(id=${org.id})}">Delete</a></td>
+								<td>
+									<a class="btn btn-outline-primary" role="button" th:href="@{/organizations/{id}/dados-cadastrais(id=${org.id})}">Ver Cadastro</a>
+									<a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a>
+									<a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Edit</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/delete(id=${org.id})}">Delete</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
