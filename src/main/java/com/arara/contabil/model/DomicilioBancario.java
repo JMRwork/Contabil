@@ -171,7 +171,9 @@ public class DomicilioBancario {
 	@Override
 	public String toString() {
 		return "DomicilioBancario [id=" + id + ", nome=" + nome + ", banco=" + banco + ", agencia=" + agencia
-				+ ", contaCorrente=" + contaCorrente + ", cidade=" + cidade + ", estado=" + estado + "]";
+				+ ", contaCorrente=" + contaCorrente + ", cidade=" + cidade + ", estado=" + estado + ", createdBy="
+				+ createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdAt=" + createdAt + ", lastModifiedAt="
+				+ lastModifiedAt + "]";
 	}
 
 }
