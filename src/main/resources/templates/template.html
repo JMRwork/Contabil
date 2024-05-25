@@ -46,54 +46,56 @@
 			</nav>
 		</div>
 		<div class="row">
-			<div id="mysidebar" class="nav flex-column d-none d-md-block bg-secondary p-0 vh-100" style="width: 230px;">
-				<h3 class="text-light m-3"><span>Menu</span></h3>
-				<hr class="border border-light border-2">
-				<ul class=" btn-toggle-nav list-unstyled fw-normal pb-1">
-					<li class="nav-item">
-						<a class="nav-link link-light" th:href="@{/}">
-							<i class="bi bi-house"></i><span class="ms-2">Home</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link link-light" th:href="@{/users}">
-							<i class="bi bi-people"></i><span class="ms-2">Usuários</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link link-light" th:href="@{/organizations}">
-							<i class="bi bi-building"></i><span class="ms-2">Escolas</span>
-						</a>
-					</li>
-				</ul>
-				<div th:switch="${session.currentOrganization}">
-					<ul class="list-unstyled" th:case="null">
+			<div class="col-md-2 p-0">
+				<div id="mysidebar" class="nav flex-column d-none d-md-block bg-secondary p-0 vh-100" >
+					<h3 class="text-light p-3"><span>Menu</span></h3>
+					<hr class="border border-light border-2">
+					<ul class=" btn-toggle-nav list-unstyled fw-normal pb-1">
 						<li class="nav-item">
-							<a class="nav-link link-warning" th:href="@{/}">
-								<i class="bi bi-exclamation-triangle"></i><span class="ms-2">Nenhuma escola selecionada</span>
+							<a class="nav-link link-light" th:href="@{/}">
+								<i class="bi bi-house"></i><span class="ms-2">Home</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link link-light" th:href="@{/users}">
+								<i class="bi bi-people"></i><span class="ms-2">Usuários</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link link-light" th:href="@{/organizations}">
+								<i class="bi bi-building"></i><span class="ms-2">Escolas</span>
 							</a>
 						</li>
 					</ul>
-					<ul class="list-unstyled" th:case="*">
-						<li class="nav-item">
-							<a class="nav-link link-light" th:href="@{/organizations/{id}/movimento(id=${session.currentOrganization?.id})}">
-								<i class="bi bi-list-columns-reverse"></i><span class="ms-2">Movimentos</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link link-light" th:href="@{/organizations/{id}/dados-cadastrais(id=${session.currentOrganization?.id})}">
-								<i class="bi bi-journal-text"></i><span class="ms-2">Dados Cadastrais</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link link-light" th:href="@{/organizations/{id}/files/view-exported-files(id=${session.currentOrganization?.id})}">
-								<i class="bi bi-file-earmark-text"></i><span class="ms-2">Exportar Arquivos</span>
-							</a>
-						</li>
-					</ul>
+					<div th:switch="${session.currentOrganization}">
+						<ul class="list-unstyled" th:case="null">
+							<li class="nav-item">
+								<a class="nav-link link-warning" th:href="@{/}">
+									<i class="bi bi-exclamation-triangle"></i><span class="ms-2">Nenhuma escola selecionada</span>
+								</a>
+							</li>
+						</ul>
+						<ul class="list-unstyled" th:case="*">
+							<li class="nav-item">
+								<a class="nav-link link-light" th:href="@{/organizations/{id}/movimento(id=${session.currentOrganization?.id})}">
+									<i class="bi bi-list-columns-reverse"></i><span class="ms-2">Movimentos</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link link-light" th:href="@{/organizations/{id}/dados-cadastrais(id=${session.currentOrganization?.id})}">
+									<i class="bi bi-journal-text"></i><span class="ms-2">Dados Cadastrais</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link link-light" th:href="@{/organizations/{id}/files/view-exported-files(id=${session.currentOrganization?.id})}">
+									<i class="bi bi-file-earmark-text"></i><span class="ms-2">Exportar Arquivos</span>
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-			<div class="col p-4">
+			<div class="col-md-10 pt-3 ps-3">
 				<main th:replace="${conteudo}"></main>
 			</div>
 		</div>
