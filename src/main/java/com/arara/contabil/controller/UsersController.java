@@ -44,7 +44,7 @@ public class UsersController {
 
 	@GetMapping
 	public String showUsers(@AuthenticationPrincipal CustomUser userPrincipal, Model model) {
-		model.addAttribute("users", userService.listUsers(userPrincipal));
+		model.addAttribute("users", userService.listUsers(userPrincipal)); // TODO: use DTO
 		return "users";
 	}
 
@@ -85,7 +85,7 @@ public class UsersController {
 
 		} else {
 			model.addAttribute("editUserDto", converterService.convertUserModelToEditUserDto(user.get(), editUserDto));
-			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
+			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal)); // TODO: use DTO
 		}
 		return "edit-user";
 	}
@@ -107,7 +107,7 @@ public class UsersController {
 		}
 		if (result.hasErrors()) {
 			logger.info("hasErrors");
-			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
+			model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal)); // TODO: use DTO
 			return "edit-user";
 		}
 		Optional<User> findUser = userService.findUserById(id);
@@ -123,7 +123,7 @@ public class UsersController {
 			result.addError(error);
 		}
 
-		model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal));
+		model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal)); // TODO: use DTO
 		return "edit-user";
 	}
 
@@ -189,7 +189,7 @@ public class UsersController {
 			ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
 			result.addError(error);
 		} else {
-			model.addAttribute("user", user.get());
+			model.addAttribute("user", user.get()); // TODO: use DTO
 		}
 		if (!userNewPasswordDto.getPassword().equals(userNewPasswordDto.getRepeatPassword())) {
 			ObjectError error = new ObjectError("globalError", "As senhas informadas não são iguais.");

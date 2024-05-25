@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arara.contabil.config.CustomUser;
 import com.arara.contabil.dto.EditOrganizationDto;
@@ -27,6 +28,7 @@ import com.arara.contabil.service.BancoService;
 import com.arara.contabil.service.DomicilioBancarioService;
 
 @Controller
+@RequestMapping("/organizations/{organizationId}/domicilio-bancario")
 public class DomicilioBancarioController {
 
 	@Autowired
@@ -36,13 +38,13 @@ public class DomicilioBancarioController {
 	private BancoService bancoService; 
 
 	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
-	@GetMapping("/organizations/{organizationId}/domicilio-bancarios")
+	@GetMapping
 	public String showDomicilioBancarios(@PathVariable("organizationId") Long organizationId, Model model) {
 		Organization org = new Organization();
 		org.setId(organizationId);
-		model.addAttribute("domicilio-bancarios", domicilioBancarioService.listDomiciliosBancariosByOrganization(org));
+		model.addAttribute("domiciliosBancarios", domicilioBancarioService.listDomiciliosBancariosByOrganization(org)); // TODO: use DTO
 		model.addAttribute("currentOrganization", org);
-		return "domicilio-bancarios";
+		return "domicilio-bancario";
 	}
 	
 //	@PreAuthorize("principal.organizationIds.contains(#organizationId)")

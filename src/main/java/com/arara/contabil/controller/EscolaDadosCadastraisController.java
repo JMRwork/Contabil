@@ -18,7 +18,7 @@ public class EscolaDadosCadastraisController {
 	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
 	@GetMapping("/organizations/{organizationId}/dados-cadastrais")
 	public String showDadosCadastrais(@PathVariable("organizationId") Long organizationId, Model model) {
-		model.addAttribute("cadastro", escolaDadosCadastraisService.findById(organizationId));
+		model.addAttribute("cadastro", escolaDadosCadastraisService.findById(organizationId)); // TODO: use DTO
 		return "view-dados-cadastrais";
 	}
 }

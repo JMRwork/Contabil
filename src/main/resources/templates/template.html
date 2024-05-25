@@ -92,7 +92,12 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link link-light" th:href="@{/organizations/{id}/files/view-exported-files(id=${session.currentOrganization?.id})}">
+								<a class="nav-link link-light" th:href="@{/organizations/{id}/domicilio-bancario(id=${session.currentOrganization?.id})}">
+									<i class="bi bi-bank"></i><span class="ms-2">Domicílio Bancário</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link link-light" th:href="@{/organizations/{id}/files(id=${session.currentOrganization?.id})}">
 									<i class="bi bi-file-earmark-text"></i><span class="ms-2">Exportar Arquivos</span>
 								</a>
 							</li>

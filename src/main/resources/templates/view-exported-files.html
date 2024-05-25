@@ -29,8 +29,8 @@
 								<td th:text="${#temporals.format(file.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td>
 									<a class="btn btn-outline-primary" role="button" th:href="@{${file.downloadLink}}">Download</a>
-									<a class="btn btn-outline-info" role="button" th:href="@{/organizations/{id}/files/view/{filename}(id=${file.organizationId},filename=${file.filename})}">Detalhes</a>
-									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/files/delete/{filename}(id=${file.organizationId},filename=${file.filename})}">Remover</a>
+									<a class="btn btn-outline-info" role="button" th:href="@{/organizations/{id}/files/{filename}/view(id=${file.organizationId},filename=${file.filename})}">Detalhes</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/files/{filename}/delete(id=${file.organizationId},filename=${file.filename})}">Remover</a>
 								</td>
 							</tr>
 						</tbody>

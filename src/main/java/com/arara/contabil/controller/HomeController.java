@@ -51,7 +51,7 @@ public class HomeController {
 			}
 		}
 		
-		model.addAttribute("organizations", organizations);
+		model.addAttribute("organizations", organizations); // TODO: use DTO
 		
 		return "index";
 	}
