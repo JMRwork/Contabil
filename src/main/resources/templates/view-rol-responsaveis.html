@@ -28,7 +28,7 @@
 										<tbody>
 											<tr th:each="responsavel : ${rolResponsaveis}">
 												<td th:text="${responsavel.nome}"></td>
-												<td th:text="${responsavel.id}"></td>
+												<td th:text="${responsavel.cpf}"></td>
 												<td th:text="${responsavel.funcao}"></td>
 												<td th:text="${responsavel.rg}"></td>
 												<td th:text="${responsavel.orgaoEmissor}"></td>
@@ -40,8 +40,8 @@
 												<td th:text="${responsavel.cep}"></td>
 												<td th:text="${responsavel.telefone}"></td>
 												<td th:text="${responsavel.email}"></td>
-												<td><a class="btn btn-outline-success" role="button" th:href="@{}">Editar</a></td>
-												<td><a class="btn btn-outline-danger"  role="button" th:href="@{}">Deletar</a></td>
+												<td><a class="btn btn-outline-success" role="button">Editar</a></td>
+												<td><a class="btn btn-outline-danger"  role="button">Deletar</a></td>
 											</tr>
 										</tbody>
 									</table>
