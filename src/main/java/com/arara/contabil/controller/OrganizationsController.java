@@ -47,7 +47,7 @@ public class OrganizationsController {
 		return "organizations";
 	}
 
-	@PreAuthorize("principal.organizationIds.contains(#organizationId)")
+	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
 	@GetMapping("/{id}/view")
 	public String viewOrganization(@PathVariable("id") Long id, Model model) {
 		ViewOrganizationDto dto = organizationService.findById(id)
