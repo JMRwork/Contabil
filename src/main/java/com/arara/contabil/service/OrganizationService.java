@@ -1,5 +1,6 @@
 package com.arara.contabil.service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,14 @@ public class OrganizationService {
 			return organizationRepository.findAllByIdIn(userPrincipal.getOrganizationIds());
 		}
 	}
+	
+	public List<Organization> listActiveOrganizations(CustomUser userPrincipal) {
+		if (userPrincipal.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_ADMIN.toString()))) {
+			return organizationRepository.findAllByIsActiveTrue();
+		} else {
+			return organizationRepository.findAllByIdInAndIsActiveTrue(userPrincipal.getOrganizationIds());
+		}
+	}
 
 	public Optional<Organization> findById(long id) {
 		return organizationRepository.findById(id);
@@ -53,6 +62,30 @@ public class OrganizationService {
 		} else {
 			logger.error("this organization " + org.getCnpj() + " already exists");
 			return false;
+		}
+	}
+	
+	public Boolean deleteOrganization(Organization org) {
+		if (org.getIsActive()) {
+			// soft delete
+			org.setDeletedAt(Instant.now());
+			org.setIsActive(false);
+			organizationRepository.save(org);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean undoDeleteOrganization(Organization org) {
+		if (org.getIsActive()) {
+			return false;
+		} else {
+			// undo soft delete
+			org.setDeletedAt(null);
+			org.setIsActive(true);
+			organizationRepository.save(org);
+			return true;
 		}
 	}
 }

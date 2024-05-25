@@ -4,6 +4,7 @@
 		<div th:switch="${editUserDto}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
+				<h2>Editar usuário</h2>
 				<form th:action="@{/users/{userId}/edit(userId=${editUserDto.id})}" th:object="${editUserDto}" method="post">
 					<style>.error {color: red; font-size: small;}</style>
 					<div>

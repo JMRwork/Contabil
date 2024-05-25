@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Domicílio Bancário')}">
+	<main class="container-fluid">
+		<div th:switch="${domiciliosBancarios}">
+			<h2 th:case="null">Nenhum domicílio bancário!</h2>
+			<div th:case="*">
+				<h2>Domicílios Bancarios</h2>
+				<a class="btn btn-outline-primary" th:href="@{/organizations/{orgId}/domicilio-bancario/register(orgId=${currentOrganization.id})}" role="button">Adicionar Domicílio Bancário</a>
+				<div class="table-responsive">
+					<table class="table table-sm table-hover text-nowrap">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Nome</th>
+								<th>Banco</th>
+								<th>Agência</th>
+								<th>Conta Corrente</th>
+								<th>Cidade</th>
+								<th>Estado</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="db : ${domiciliosBancarios}">
+								<td th:text="${db.id}"></td>
+								<td th:text="${db.nome}"></td>
+								<td th:text="${db.banco.nome}"></td>
+								<td th:text="${db.agencia}"></td>
+								<td th:text="${db.contaCorrente}"></td>
+								<td th:text="${db.cidade}"></td>
+								<td th:text="${db.estado}"></td>
+								<td>
+									<a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{orgId}/domicilio-bancario/{id}/view(orgId=${currentOrganization.id},id=${db.id})}">Detalhes</a>
+									<a class="btn btn-outline-success" role="button" th:href="@{/organizations/{orgId}/domicilio-bancario/{id}/edit(orgId=${currentOrganization.id},id=${db.id})}">Editar</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{orgId}/domicilio-bancario/{id}/delete(orgId=${currentOrganization.id},id=${db.id})}">Apagar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+</html>

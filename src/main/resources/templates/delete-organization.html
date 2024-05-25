@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Remover Usuário')}">
+	<main class="container-fluid">
+		<div th:switch="${org}">
+			<h2 th:case="null" th:text="|Escola não encontrada|"></h2>
+			<div th:case="*">
+				<form class="" th:action="@{/organizations/{id}/delete(id=${org.id})}" method="POST" th:object="${org}">
+					<h2 th:text="${undo ? 'Restaurar escola' : 'Remover escola'}">Remover organização</h2>
+					<div class="form-group mb-3">
+						<label class="form-label" for="fullName">Nome</label>
+						<div>
+							<input type="text" class="form-control" th:field="*{name}" value="${org.name}" disabled>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<label class="form-label" for="email">CNPJ</label>
+						<div>
+							<input type="text" class="form-control" th:field="*{cnpj}" value="${org.cnpj}" disabled>
+						</div>
+					</div>
+					<input type="hidden" th:name="undo" th:value="${undo}">
+					<button type="submit" th:text="${undo ? 'Restaurar' : 'Remover'}" class="btn btn-danger"></button>	
+					<div th:if="${#fields.hasErrors('global')}">
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</html>

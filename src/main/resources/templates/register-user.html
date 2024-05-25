@@ -3,6 +3,7 @@
 
 	<main class="container-fluid">
 		<style>.error {color: red; font-size: small;}</style>
+		<h2>Novo usuário</h2>
 		<form th:action="@{/users/register}" th:object="${newUserDto}" method="post">
 			<div class="form-group mb-3">
 				<label class="col-form-label col-sm-2" for="fullName">Full Name</label>

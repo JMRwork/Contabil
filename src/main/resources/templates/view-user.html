@@ -4,6 +4,7 @@
 		<div th:switch="${user}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
+				<h2>Detalhes usuário</h2>
 				<div class="" th:object="${user}">
 					<div class="row">
 						<h4>Informações básicas</h4>

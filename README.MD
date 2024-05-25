@@ -3,12 +3,13 @@
 ## TODO
 
 - [x] login
+- [ ] login page
 - [x] users table
 - [x] organizations table
 - [x] movimento table
 - [x] users x organizations
 - [x] organizations x movimento
-- [ ] users x organizations x movimento authorization
+- [x] users x organizations x movimento authorization
 - [x] users page
 - [x] organizations page
 - [x] movimento page
@@ -28,13 +29,29 @@
 - [x] add header to pages
 - [ ] add footer to pages
 - [x] add sidebar menu
-- [ ] fix sidebar
+- [x] fix sidebar
 - [x] add css framework - bootstrap or material
 - [ ] add table handler to pages
-
+- [x] disable organization page
+- [x] select organization page
+- [x] exported files page
 - [x] add EscolaDadosCadastrais table
 - [x] add EscolaDadosCadastrais view page
 - [ ] add EscolaDadosCadastrais edit page
+- [x] add Rol de Responsáveis page
+- [ ] add Rol de Responsáveis view page
+- [ ] add Rol de Responsáveis edit page
+- [ ] add Rol de Responsáveis delete page
+- [x] add Domicílio Bancário page
+- [ ] add Domicílio Bancário view page
+- [ ] add Domicílio Bancário edit page
+- [ ] add Domicílio Bancário delete page
+- [ ] add Escola Programa page
+- [ ] add Escola Programa view page
+- [ ] add Escola Programa edit page
+- [ ] add Escola Programa delete page
+
+
 
 > [!TIP]
 > - [Access this docs for readme.md markdown syntax](https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
@@ -83,6 +100,13 @@ erDiagram
     users ||--o{ users_organizations : has
     users_organizations }o--|| organizations : has
     organizations ||--o{ movimento : has
+    banco ||--o{ domicilio_bancario : has
+    domicilio_bancario }o--|| escola_programa : has
+    escola_programa }o--|| organizations : has
+    domicilio_bancario }o--|| organizations : has
+    escola_dados_cadastrais ||--|| organizations : has
+    responsaveis ||--o{ funcao_responsaveis : has
+    funcao_responsaveis }o--|| organizations : has
     users {
       int id
       string email
@@ -120,10 +144,94 @@ erDiagram
       date data_lancamento
       numeric valor
       int organization_id
-      id created_by
+      int created_by
       int last_modified_by
       timestamp created_at
       timestamp last_modified_at
       timestamp deleted_at
+    }
+    banco {
+      string codigo
+      string nome
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+    }
+    domicilio_bancario {
+      int id
+      int escola_programa_id
+      int organization_id
+      int banco_id
+      string cidade
+      string conta_corrente
+      string estado
+      string nome
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+    }
+    escola_dados_cadastrais {
+      int organization_id
+      string cnpj
+      string cep
+      string cidade
+      string codigo_inep
+      string email
+      string endereco
+      string exercicio
+      string nome_escola
+      string sigla_escola
+      string telefone
+      string uf
+      string unidade_executora
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+    }
+    escola_programa {
+      int id
+      int organization_id
+      string cidade
+      string exercicio
+      string nome_programa
+      string nome_secretario_edu
+      string num_convenio
+      string num_oficio_encaminhamento
+      string origem_recursos
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+    }
+    funcao_responsaveis {
+      int id
+      int organization_id
+      int responsavel_id
+      string ata_nomeacao
+      string funcao
+      string periodo_gestao
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
+    }
+    responsaveis {
+      string cpf
+      string cep
+      string cidade
+      string email
+      string endereco
+      string nome
+      string orgao_emissor
+      string rg
+      string telefone
+      string uf
+      int created_by
+      int last_modified_by
+      timestamp created_at
+      timestamp last_modified_at
     }
 ```

@@ -33,7 +33,7 @@ public class HomeController {
 			HttpSession session,
 			Model model) {
 		
-		List<Organization> organizations = organizationService.listOrganizations(userPrincipal);
+		List<Organization> organizations = organizationService.listActiveOrganizations(userPrincipal);
 		
 		// se usuário tem apenas uma organização, escolha esta organização automaticamente
 		if (session.getAttribute("currentOrganization") == null && organizationId == null && organizations.size() == 1) {
@@ -51,7 +51,7 @@ public class HomeController {
 			}
 		}
 		
-		model.addAttribute("organizations", organizations);
+		model.addAttribute("organizations", organizations); // TODO: use DTO
 		
 		return "index";
 	}

@@ -4,6 +4,7 @@
 		<div th:switch="${editOrganizationDto}">
 			<h2 th:case="null" th:text="|Escola não encontrada|"></h2>
 			<div th:case="*">
+				<h2>Editar escola</h2>
 				<form th:action="@{/organizations/{id}/edit(id=${editOrganizationDto.id})}" th:object="${editOrganizationDto}" method="post">
 					<style>.error {color: red; font-size: small;}</style>
 					<div class="row">
@@ -49,7 +50,7 @@
 							  	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
 							</div>
 							<div class="form-group mb-3">
-								<button type="submit" class="btn btn-success mb-3">Alterar</button>
+								<button type="submit" class="btn btn-outline-success mb-3">Alterar</button>
 							</div>
 						</div>
 					</div>

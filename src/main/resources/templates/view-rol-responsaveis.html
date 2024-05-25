@@ -4,6 +4,7 @@
 		<div th:switch="${rolResponsaveis}">
 			<h2 th:case="null" th:text="|Escola sem dados no Rol de Responsáveis|"></h2>
 			<div th:case="*">
+				<h2>Rol de Responsáveis</h2>
 				<div class="table-responsive">
 									<table class="table table-sm table-hover text-nowrap">
 										<thead>

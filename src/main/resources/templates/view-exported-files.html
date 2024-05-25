@@ -2,7 +2,7 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Exportar Arquivos')}">
 	<main class="container-fluid">
 		<div th:switch="${files}">
-			<h2 th:case="null">No files yet!</h2>
+			<h2 th:case="null">Nenhum arquivo!</h2>
 			<div th:case="*">
 				<h2>Exportar Arquivos</h2>
 				<a class="btn btn-outline-primary" th:href="@{/organizations/1/files/generate-excel-file}" role="button">Gerar dados</a>
@@ -29,8 +29,8 @@
 								<td th:text="${#temporals.format(file.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
 								<td>
 									<a class="btn btn-outline-primary" role="button" th:href="@{${file.downloadLink}}">Download</a>
-									<a class="btn btn-outline-info" role="button" th:href="@{/organizations/{id}/files/view/{filename}(id=${file.organizationId},filename=${file.filename})}">Detalhes</a>
-									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/files/delete/{filename}(id=${file.organizationId},filename=${file.filename})}">Apagar</a>
+									<a class="btn btn-outline-info" role="button" th:href="@{/organizations/{id}/files/{filename}/view(id=${file.organizationId},filename=${file.filename})}">Detalhes</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/files/{filename}/delete(id=${file.organizationId},filename=${file.filename})}">Remover</a>
 								</td>
 							</tr>
 						</tbody>

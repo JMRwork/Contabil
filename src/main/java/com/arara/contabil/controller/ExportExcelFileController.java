@@ -32,7 +32,7 @@ public class ExportExcelFileController {
 	@Autowired
 	private ExportExcelFileService exportExcelFileService;
 
-	@GetMapping("/view-exported-files")
+	@GetMapping
 	public String showExportedFiles(@PathVariable("organizationId") Long organizationId,
 			@RequestParam(required = false) String filename, Model model) {
 
@@ -44,7 +44,7 @@ public class ExportExcelFileController {
 			newFile.setFiletype("xlsx");
 			newFile.setPurpose("test");
 			newFile.setIsAvailable(true);
-			newFile.setDownloadLink("/organizations/" + organizationId + "/files/download/" + filename);
+			newFile.setDownloadLink("/organizations/" + organizationId + "/files/" + filename + "/download");
 			newFile.setCreatedAt(Instant.now());
 			newFile.setCreatedBy(1l);
 			files.add(newFile);
@@ -61,11 +61,11 @@ public class ExportExcelFileController {
 
 		redirectAttributes.addAttribute("filename", filename);
 
-		return "redirect:/organizations/{organizationId}/files/view-exported-files";
+		return "redirect:/organizations/{organizationId}/files";
 	}
 
 
-	@GetMapping(value = "/download/{filename}", produces = "application/vnd.ms-excel.sheet.macroEnabled.12")
+	@GetMapping(value = "/{filename}/download", produces = "application/vnd.ms-excel.sheet.macroEnabled.12")
 	@ResponseBody
 	public FileSystemResource downloadfile( //
 			@PathVariable("organizationId") Long organizationId, //
@@ -81,7 +81,7 @@ public class ExportExcelFileController {
 		return new FileSystemResource(currFile);
 	}
 	
-	@GetMapping(value = "/delete/{filename}")
+	@GetMapping(value = "/{filename}/delete")
 	public String deleteFile( //
 			@PathVariable("organizationId") Long organizationId, //
 			@PathVariable("filename") String filename) throws IOException {
@@ -94,7 +94,7 @@ public class ExportExcelFileController {
 			currFile.delete();
 		}
 
-		return "redirect:/organizations/{organizationId}/files/view-exported-files";
+		return "redirect:/organizations/{organizationId}/files";
 	}
 	
 
