@@ -4,6 +4,7 @@
 		<div th:switch="${user}">
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<form class="" th:case="*" th:action="@{/users/{id}/delete(id=${user.id})}" method="POST" th:object="${user}">
+				<h2>Remover usuário</h2>
 				<div class="form-group mb-3">
 					<label class="form-label" for="fullName">Nome</label>
 					<div>

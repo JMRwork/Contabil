@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.arara.contabil.config.CustomUser;
 import com.arara.contabil.dto.EditOrganizationDto;
 import com.arara.contabil.dto.NewOrganizationDto;
 import com.arara.contabil.dto.ViewOrganizationDto;
+import com.arara.contabil.dto.ViewUserDto;
 import com.arara.contabil.model.Organization;
 import com.arara.contabil.model.User;
 import com.arara.contabil.model.UserRole;
@@ -138,6 +140,54 @@ public class OrganizationsController {
 		ObjectError error = new ObjectError("globalError", "Este cnpj já foi utilizado por outra escola.");
 		result.addError(error);
 		return "register-organization";
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/{id}/delete")
+	public String deleteUserPage( //
+			@PathVariable("id") long id, //
+			@RequestParam(value="undo", required = false, defaultValue = "false") boolean undo, //
+			Model model) {
+		
+		Optional<Organization> org = organizationService.findById(id);
+		model.addAttribute("undo", undo);
+		if (org.isEmpty()) {
+			model.addAttribute("org", null);
+		} else {
+			var orgDto = new EditOrganizationDto();
+			model.addAttribute("org", converterService.convertOrganizationModelToEditOrganizationDto(org.get(), orgDto));
+		}
+		return "delete-organization";
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/{id}/delete")
+	public String deleteOrganization( //
+			@PathVariable("id") long id, //
+			@RequestParam(value="undo", required = false, defaultValue = "false") boolean undo, //
+			ViewUserDto viewUserDto, //
+			BindingResult result) {
+		
+		Optional<Organization> org = organizationService.findById(id);
+		if (org.isEmpty()) {
+			ObjectError error = new ObjectError("globalError", "Escola não foi encontrada.");
+			result.addError(error);
+			return "delete-organization";
+		}
+		if (undo) {
+			if (!organizationService.undoDeleteOrganization(org.get())) {
+				ObjectError error = new ObjectError("globalError", "Não foi possível restaurar a escola.");
+				result.addError(error);
+				return "delete-organization";
+			}
+		} else {
+			if (!organizationService.deleteOrganization(org.get())) {
+				ObjectError error = new ObjectError("globalError", "Não foi possível remover a escola.");
+				result.addError(error);
+				return "delete-organization";
+			}
+		}
+		return "redirect:/organizations";
 	}
 
 }

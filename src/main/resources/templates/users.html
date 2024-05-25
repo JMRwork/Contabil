@@ -2,9 +2,9 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Usuários')}">
 	<main class="container-fluid">
 		<div th:switch="${users}">
-			<h2 th:case="null">No users yet!</h2>
+			<h2 th:case="null">Nenhum usuário cadastrado!</h2>
 			<div th:case="*">
-				<h2>Users</h2>
+				<h2>Usuários</h2>
 				<a class="btn btn-outline-primary" th:href="@{/users/register}" role="button">Adicionar Usuário</a>
 				<div class="table-responsive">
 					<table class="table table-sm table-hover text-nowrap">
@@ -30,7 +30,7 @@
 								<td>
 									<a class="btn btn-outline-info"    role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a>
 									<a class="btn btn-outline-success" role="button" th:href="@{/users/{id}/edit(id=${user.id})}">Editar</a>
-									<a class="btn btn-outline-danger"  role="button" th:href="@{/users/{id}/delete(id=${user.id})}">Deletar</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/users/{id}/delete(id=${user.id})}">Remover</a>
 								</td>
 							</tr>
 						</tbody>

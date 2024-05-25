@@ -4,6 +4,7 @@
 		<div th:switch="${organization}">
 			<h2 th:case="null" th:text="|Escola não encontrada|"></h2>
 			<div th:case="*">
+				<h2>Detalhes escola</h2>
 				<form class="" th:object="${organization}">
 					<div class="row">
 						<div class="col">
@@ -43,7 +44,7 @@
 							</div>
 							<div class="form-group mb-3">
 								<a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${organization.id})}">Editar</a>
-								<a class="btn btn-outline-danger" role="button" th:href="@{/organizations/{id}/delete(id=${organization.id})}">Deletar</a>
+								<a class="btn btn-outline-danger" role="button" th:href="@{/organizations/{id}/delete(id=${organization.id})}">Remover</a>
 							</div>
 						</div>
 					</div>
@@ -70,7 +71,7 @@
 											<td th:text="${user.fullName}"></td>
 											<td th:text="${user.role}"></td>
 											<td th:text="${user.status}"></td>
-											<td><a class="btn btn-outline-info"    role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
+											<td><a class="btn btn-outline-info" role="button" th:href="@{/users/{id}/view(id=${user.id})}">Detalhes</a></td>
 									 	</tr>
 									</tbody>
 								</table>

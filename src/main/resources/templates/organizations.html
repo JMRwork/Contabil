@@ -2,9 +2,9 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Escolas')}">
 	<main class="container-fluid">
 		<div th:switch="${organizations}">
-			<h2 th:case="null">No organizations yet!</h2>
+			<h2 th:case="null">Nenhuma escola cadastrada!</h2>
 			<div th:case="*">
-				<h2>Organizations</h2>
+				<h2>Escolas</h2>
 				<a class="btn btn-outline-primary" th:href="@{/organizations/register}" role="button">Adicionar Escola</a>
 				<div class="table-responsive">
 					<table class="table table-sm table-hover text-nowrap">
@@ -26,10 +26,9 @@
 								<td th:text="${org.cnpj}"></td>
 								<td th:text="${org.isActive ? 'Ativa' : 'Desativada'}"></td>
 								<td>
-									<a class="btn btn-outline-primary" role="button" th:href="@{/organizations/{id}/dados-cadastrais(id=${org.id})}">Ver Cadastro</a>
 									<a class="btn btn-outline-info"    role="button" th:href="@{/organizations/{id}/view(id=${org.id})}">Detalhes</a>
-									<a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Edit</a>
-									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/delete(id=${org.id})}">Delete</a>
+									<a class="btn btn-outline-success" role="button" th:href="@{/organizations/{id}/edit(id=${org.id})}">Editar</a>
+									<a class="btn btn-outline-danger"  role="button" th:href="@{/organizations/{id}/delete(id=${org.id},undo=${!org.isActive})}" th:text="${org.isActive ? 'Remover' : 'Restaurar'}">Remover</a>
 								</td>
 							</tr>
 						</tbody>
