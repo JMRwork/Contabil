@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.arara.contabil.dto.CurrentOrganizationDto;
+import com.arara.contabil.dto.EditEscolaDadosCadastraisDto;
 import com.arara.contabil.dto.EditOrganizationDto;
 import com.arara.contabil.dto.EditUserDto;
 import com.arara.contabil.dto.NewOrganizationDto;
 import com.arara.contabil.dto.NewUserDto;
 import com.arara.contabil.dto.ViewOrganizationDto;
 import com.arara.contabil.dto.ViewUserDto;
+import com.arara.contabil.model.EscolaDadosCadastrais;
 import com.arara.contabil.model.Organization;
 import com.arara.contabil.model.User;
 import com.arara.contabil.model.UserRole;
@@ -161,5 +163,22 @@ public class ConverterService {
 		dto.setCnpj(org.getCnpj());
 
 		return dto;
+	}
+	
+	public EditEscolaDadosCadastraisDto convertEscolaDadosCadastraisModelToEditEscolaDadosCadastraisDto(EscolaDadosCadastrais escolaDadosCadastrais, EditEscolaDadosCadastraisDto editEscolaDadosCadastraisDto) {
+		editEscolaDadosCadastraisDto.setOrganizationId(escolaDadosCadastrais.getOrganizationId());
+		editEscolaDadosCadastraisDto.setExercicio(escolaDadosCadastrais.getExercicio());
+		editEscolaDadosCadastraisDto.setUnidadeExecutora(escolaDadosCadastrais.getUnidadeExecutora());
+		editEscolaDadosCadastraisDto.setNomeEscola(escolaDadosCadastrais.getNomeEscola());
+		editEscolaDadosCadastraisDto.setCnpj(escolaDadosCadastrais.getCnpj());
+		editEscolaDadosCadastraisDto.setSiglaEscola(escolaDadosCadastrais.getSiglaEscola());
+		editEscolaDadosCadastraisDto.setEndereco(escolaDadosCadastrais.getEndereco());
+		editEscolaDadosCadastraisDto.setCidade(escolaDadosCadastrais.getCidade());
+		editEscolaDadosCadastraisDto.setUf(escolaDadosCadastrais.getUf());
+		editEscolaDadosCadastraisDto.setCep(escolaDadosCadastrais.getCep());
+		editEscolaDadosCadastraisDto.setTelefone(escolaDadosCadastrais.getTelefone());
+		editEscolaDadosCadastraisDto.setEmail(escolaDadosCadastrais.getEmail());
+		editEscolaDadosCadastraisDto.setCodigoInep(escolaDadosCadastrais.getCodigoInep());
+		return editEscolaDadosCadastraisDto;
 	}
 }

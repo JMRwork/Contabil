@@ -9,6 +9,12 @@
 						<div class="col">
 							<h4>Cadastro</h4>
 							<div class="form-group mb-3">
+								<label class="form-label" for="anoExercicio">Ano do Exercício</label>
+									<div>
+									<input type="text" class="form-control" th:field="*{exercicio}" value="${cadastro.exercicio}" placeholder="Em branco." disabled>
+								</div>
+							</div>
+							<div class="form-group mb-3">
 								<label class="form-label" for="id">Unidade Executora</label>
 								<div>
 									<input type="text" class="form-control" th:field="*{unidadeExecutora}" value="${cadastro.unidadeExecutora}" placeholder="Em branco." disabled>
@@ -74,6 +80,7 @@
 									<input type="text" class="form-control" th:field="*{codigoInep}" value="${cadastro.codigoInep}" placeholder="Em branco." disabled>
 								</div>
 							</div>
+							<a class="btn btn-success mb-3" th:href="@{/organizations/{organizationId}/dados-cadastrais/edit(organizationId=${cadastro.organizationId})}" role="button">Alterar Cadastro</a>
 						</div>
 					</div>
 					<div class="row">

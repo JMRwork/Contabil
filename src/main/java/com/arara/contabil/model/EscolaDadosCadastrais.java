@@ -92,6 +92,17 @@ public class EscolaDadosCadastrais {
 		this.organizationId = organizationId;
 	}
 
+	
+
+	public String getExercicio() {
+		return exercicio;
+	}
+
+
+	public void setExercicio(String exercicio) {
+		this.exercicio = exercicio;
+	}
+
 
 	public String getUnidadeExecutora() {
 		return unidadeExecutora;

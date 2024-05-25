@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Editar Dados Cadastrais')}">
+	<main class="container-fluid">
+		<div th:switch="${editEscolaDadosCadastraisDto}">
+			<h2 th:case="null" th:text="|Escola sem dados cadastrais|"></h2>
+			<div th:case="*">
+				<form class="" th:action="@{/organizations/{organizationId}/dados-cadastrais/edit(organizationId=${editEscolaDadosCadastraisDto.organizationId})}" th:object="${editEscolaDadosCadastraisDto}">
+					<style>.error {color: red; font-size: small;}</style>
+					<div class="row">
+						<div class="col">
+							<h2>Cadastro</h2>
+							<div th:if="${#fields.hasErrors('global')}">
+													<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+												</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="anoExercicio">Ano de Exercício</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{exercicio}" value="${editEscolaDadosCadastraisDto.exercicio}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.exercicio}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="id">Unidade Executora</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{unidadeExecutora}" value="${editEscolaDadosCadastraisDto.unidadeExecutora}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.unidadeExecutora}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="nomeEscola">Nome</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{nomeEscola}" value="${editEscolaDadosCadastraisDto.nomeEscola}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.nomeEscola}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cnpj">CNPJ</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cnpj}" value="${editEscolaDadosCadastraisDto.cnpj}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.cnpj}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="siglaEscola">Sigla da Escola</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{siglaEscola}" value="${editEscolaDadosCadastraisDto.siglaEscola}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.siglaEscola}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="endereco">Endereço</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{endereco}" value="${editEscolaDadosCadastraisDto.endereco}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.endereco}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cidade">Cidade</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cidade}" value="${editEscolaDadosCadastraisDto.cidade}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.cidade}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="uf">UF</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{uf}" value="${editEscolaDadosCadastraisDto.uf}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.uf}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="cep">CEP</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{cep}" value="${editEscolaDadosCadastraisDto.cep}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.cep}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="telefone">Telefone</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{telefone}" value="${editEscolaDadosCadastraisDto.telefone}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.telefone}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="email">Email</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{email}" value="${editEscolaDadosCadastraisDto.email}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.email}"></p>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="codigoInep">Código INEP</label>
+								<div>
+									<input type="text" class="form-control" th:field="*{codigoInep}" value="${editEscolaDadosCadastraisDto.codigoInep}" placeholder="Em branco.">
+								</div>
+								<p class="error" th:errors="${editEscolaDadosCadastraisDto.codigoInep}"></p>
+							</div>
+						</div>
+					</div>
+					<div th:if="${#fields.hasErrors('global')}">
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					</div>
+					<button type="submit" class="btn btn-success mb-3">Alterar</button>
+				</form>
+			</div>
+		</div>
+	</main>
+</html>
