@@ -2,7 +2,7 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Movimento')}">
 	<main class="container-fluid">
 		<div th:switch="${movimento}">
-			<h2 th:case="null">No movimento yet!</h2>
+			<h2 th:case="null">Sem movimento!</h2>
 			<div th:case="*">
 				<h2>Movimento</h2>
 				<a class="btn btn-outline-primary" th:href="@{/organization/{id}/movimento/register(id=${currentOrganization.id})}" role="button">Adicionar Lançamento</a>
@@ -15,12 +15,7 @@
 								<th>Tipo</th>
 								<th>Data Lançamento</th>
 								<th>Valor</th>
-								<th>Created By</th>
-								<th>Created At</th>
-								<th>Last Modified By</th>
-								<th>Last Modified At</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -30,18 +25,15 @@
 								<td th:text="${lancamento.tipo}"></td>
 								<td th:text="${#temporals.format(lancamento.dataLancamento, 'yyyy/MM/dd HH:mm')}"></td>
 								<td th:text="${lancamento.valor}"></td>
-								<td th:text="${lancamento.createdBy}"></td>
-								<td th:text="${#temporals.format(lancamento.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td th:text="${lancamento.lastModifiedBy}"></td>
-								<td th:text="${#temporals.format(lancamento.lastModifiedAt, 'yyyy/MM/dd HH:mm')}"></td>
-								<td><a class="btn btn-outline-success" role="button" href="">Edit</a></td>
-								<td><a class="btn btn-outline-danger"  role="button" href="">Delete</a></td>
+								<td>
+									<a class="btn btn-outline-success" role="button" href="">Editar</a>
+									<a class="btn btn-outline-danger"  role="button" href="">Apagar</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<p><a class="btn btn-outline-dark" role="button" href="/">Home</a></p>
 		</div>
 	</main>
 </html>

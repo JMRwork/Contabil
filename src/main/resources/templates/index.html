@@ -4,15 +4,10 @@
 		<h1>Links</h1>
 		<p>
 			<a class="btn btn-outline-dark" role="button" href="/h2-console">H2 Console</a>
-			<a class="btn btn-outline-dark" role="button" href="/users/register">User register</a>
-			<a class="btn btn-outline-dark" role="button" href="/users">Users</a>
-			<a class="btn btn-outline-dark" role="button" href="/organizations">Organizations</a>
-			<a class="btn btn-outline-dark" role="button" href="/organizations/1/movimento">Movimento Organization 1</a>
-			<a class="btn btn-outline-dark" role="button" href="/organizations/1/files/view-exported-files">Exportar Arquivos Organization 1</a>
 		</p>
 		
 		<div th:switch="${organizations}">
-					<h2 th:case="null">No organizations yet!</h2>
+					<h2 th:case="null">Nenhuma escola cadastrada!</h2>
 					<div th:case="*">
 						<h2>Selecione uma Escola</h2>
 						<div class="table-responsive">
@@ -20,11 +15,11 @@
 								<thead>
 									<tr>
 										<th>Id</th>
-										<th>Name</th>
-										<th>Legal Name</th>
+										<th>Nome</th>
+										<th>Razão Social</th>
 										<th>CNPJ</th>
-										<th>Status</th>
-										<th>Selecionar</th>
+										<th>Situação</th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
