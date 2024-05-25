@@ -1,7 +1,12 @@
 package com.arara.contabil.model;
 
+import java.time.Instant;
 import java.util.Objects;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
@@ -37,6 +42,18 @@ public class DomicilioBancario {
 	private String cidade;
 
 	private UF estado;
+	
+	@CreatedBy
+	private Long createdBy;
+	
+	@LastModifiedBy
+	private Long lastModifiedBy;
+	
+    @CreatedDate
+    private Instant createdAt;
+    
+    @LastModifiedDate
+    private Instant lastModifiedAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "organization_id", nullable = false)
@@ -102,6 +119,22 @@ public class DomicilioBancario {
 		this.estado = estado;
 	}
 	
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+
+	public Long getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public Instant getLastModifiedAt() {
+		return lastModifiedAt;
+	}
+
 	public Organization getOrganization() {
 		return organization;
 	}
