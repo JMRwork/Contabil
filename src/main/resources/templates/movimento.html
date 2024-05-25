@@ -2,7 +2,7 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Movimento')}">
 	<main class="container-fluid">
 		<div th:switch="${movimento}">
-			<h2 th:case="null">No movimento yet!</h2>
+			<h2 th:case="null">Sem movimento!</h2>
 			<div th:case="*">
 				<h2>Movimento</h2>
 				<a class="btn btn-outline-primary" th:href="@{/organization/{id}/movimento/register(id=${currentOrganization.id})}" role="button">Adicionar Lançamento</a>
@@ -26,15 +26,14 @@
 								<td th:text="${#temporals.format(lancamento.dataLancamento, 'yyyy/MM/dd HH:mm')}"></td>
 								<td th:text="${lancamento.valor}"></td>
 								<td>
-									<a class="btn btn-outline-success" role="button" href="">Edit</a>
-									<a class="btn btn-outline-danger"  role="button" href="">Delete</a>
+									<a class="btn btn-outline-success" role="button" href="">Editar</a>
+									<a class="btn btn-outline-danger"  role="button" href="">Apagar</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<p><a class="btn btn-outline-dark" role="button" href="/">Home</a></p>
 		</div>
 	</main>
 </html>
