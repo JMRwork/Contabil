@@ -61,8 +61,8 @@ public class Organization {
     @OneToMany(mappedBy = "organization")
     private List<DomicilioBancario> domiciolioBancarios;
 
-    @ManyToMany(mappedBy = "organizations")
-    Set<RolResponsaveis> responsaveis;
+    @ManyToMany(mappedBy = "organization")
+    Set<FuncaoResponsaveis> responsaveis;
     
 	public Long getId() {
 		return id;
@@ -137,11 +137,11 @@ public class Organization {
 		this.users = users;
 	}
 
-	public Set<RolResponsaveis> getResponsaveis() {
+	public Set<FuncaoResponsaveis> getResponsaveis() {
 		return responsaveis;
 	}
 
-	public void setResponsaveis(Set<RolResponsaveis> responsaveis) {
+	public void setResponsaveis(Set<FuncaoResponsaveis> responsaveis) {
 		this.responsaveis = responsaveis;
 	}
 

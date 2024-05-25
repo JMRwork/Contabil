@@ -9,12 +9,9 @@
 										<thead>
 											<tr>
 												<th>Nome</th>
-												<th>CPF(id)</th>
-												<th>Cargo / Função</th>
+												<th>CPF</th>
 												<th>RG</th>
 												<th>Orgão Emissor</th>
-												<th>Periodo da Gestão</th>
-												<th>Ata de Nomeação</th>
 												<th>Endereço</th>
 												<th>Cidade</th>
 												<th>UF</th>
@@ -29,11 +26,8 @@
 											<tr th:each="responsavel : ${rolResponsaveis}">
 												<td th:text="${responsavel.nome}"></td>
 												<td th:text="${responsavel.cpf}"></td>
-												<td th:text="${responsavel.funcao}"></td>
 												<td th:text="${responsavel.rg}"></td>
 												<td th:text="${responsavel.orgaoEmissor}"></td>
-												<td th:text="${responsavel.periodoGestao}"></td>
-												<td th:text="${responsavel.ataNomeacao}"></td>
 												<td th:text="${responsavel.endereco}"></td>
 												<td th:text="${responsavel.cidade}"></td>
 												<td th:text="${responsavel.uf}"></td>
