@@ -22,7 +22,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "nomePrograma", "exercicio", "organization" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "nomePrograma", "exercicio", "organization_id" }) })
 public class EscolaPrograma {
 
 	@Id

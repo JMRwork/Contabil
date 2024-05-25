@@ -32,19 +32,10 @@ public class RolResponsaveis {
 	private String nome;
 	
 	@Column
-	private String funcao;
-	
-	@Column
 	private String rg;
 	
 	@Column
 	private String orgaoEmissor;
-	
-	@Column
-	private String periodoGestao;
-	
-	@Column
-	private String ataNomeacao;
 	
 	@Column
 	private String endereco;
@@ -76,31 +67,15 @@ public class RolResponsaveis {
     
     @LastModifiedDate
     private Instant lastModifiedAt;
+    
+    @ManyToMany(mappedBy = "responsavel")
+    Set<FuncaoResponsaveis> funcaoResponsaveis;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "responsaveis_organizations",
-			joinColumns = @JoinColumn(name = "responsavel_id"),
-			inverseJoinColumns = @JoinColumn(name = "organization_id"))
-	Set<Organization> organizations;
-	
-	public Set<Organization> getOrganizations() {
-		return organizations;
-	}
-	public void setOrganizations(Set<Organization> organizations) {
-		this.organizations = organizations;
-	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getFuncao() {
-		return funcao;
-	}
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
 	}
 	public String getCpf() {
 		return cpf;
@@ -119,18 +94,6 @@ public class RolResponsaveis {
 	}
 	public void setOrgaoEmissor(String orgaoEmissor) {
 		this.orgaoEmissor = orgaoEmissor;
-	}
-	public String getPeriodoGestao() {
-		return periodoGestao;
-	}
-	public void setPeriodoGestao(String periodoGestao) {
-		this.periodoGestao = periodoGestao;
-	}
-	public String getAtaNomeacao() {
-		return ataNomeacao;
-	}
-	public void setAtaNomeacao(String ataNomeacao) {
-		this.ataNomeacao = ataNomeacao;
 	}
 	public String getEndereco() {
 		return endereco;
@@ -212,9 +175,9 @@ public class RolResponsaveis {
 	
 	@Override
 	public String toString() {
-		return "RolResponsaveis [cpf=" + cpf + ", nome=" + nome + ", funcao=" + funcao + ", rg=" + rg
-				+ ", orgaoEmissor=" + orgaoEmissor + ", periodoGestao=" + periodoGestao + ", ataNomeacao=" + ataNomeacao
+		return "RolResponsaveis [cpf=" + cpf + ", nome=" + nome + ", rg=" + rg + ", orgaoEmissor=" + orgaoEmissor
 				+ ", endereco=" + endereco + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + ", telefone="
-				+ telefone + ", email=" + email + ", Organizations=" + organizations + "]";
+				+ telefone + ", email=" + email + ", createdBy=" + createdBy + ", lastModifiedBy=" + lastModifiedBy
+				+ ", createdAt=" + createdAt + ", lastModifiedAt=" + lastModifiedAt + "]";
 	}	
 }

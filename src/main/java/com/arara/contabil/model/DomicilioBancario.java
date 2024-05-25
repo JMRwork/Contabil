@@ -15,7 +15,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "banco", "agencia", "contaCorrente" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "banco_id", "agencia", "contaCorrente" }) })
 public class DomicilioBancario {
 
 	@Id

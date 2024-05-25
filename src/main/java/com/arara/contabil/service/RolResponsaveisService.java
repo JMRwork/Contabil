@@ -25,12 +25,10 @@ public class RolResponsaveisService {
 	}
 	
 	public List<RolResponsaveis> findAllByOrganization(Organization organization) {
-		return rolResponsaveisRepository.findAllByOrganizations(organization);
+		return rolResponsaveisRepository.findAllByOrganizations(organization.getId());
 	}
 	
 	public List<RolResponsaveis> findAllByOrganization(Long organizationId) {
-		var organization = new Organization();
-		organization.setId(organizationId);
-		return rolResponsaveisRepository.findAllByOrganizations(organization);
+		return rolResponsaveisRepository.findAllByOrganizations(organizationId);
 	}
 }
