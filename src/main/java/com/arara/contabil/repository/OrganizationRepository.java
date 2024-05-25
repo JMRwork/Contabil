@@ -17,6 +17,10 @@ public interface OrganizationRepository extends Repository<Organization, Long> {
 
 	List<Organization> findAll();
 	
+	List<Organization> findAllByIsActiveTrue();
+	
 	List<Organization> findAllByIdIn(List<Long> organizationIds);
+	
+	List<Organization> findAllByIdInAndIsActiveTrue(List<Long> organizationIds);
 
 }

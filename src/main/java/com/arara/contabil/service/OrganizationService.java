@@ -30,6 +30,14 @@ public class OrganizationService {
 			return organizationRepository.findAllByIdIn(userPrincipal.getOrganizationIds());
 		}
 	}
+	
+	public List<Organization> listActiveOrganizations(CustomUser userPrincipal) {
+		if (userPrincipal.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_ADMIN.toString()))) {
+			return organizationRepository.findAllByIsActiveTrue();
+		} else {
+			return organizationRepository.findAllByIdInAndIsActiveTrue(userPrincipal.getOrganizationIds());
+		}
+	}
 
 	public Optional<Organization> findById(long id) {
 		return organizationRepository.findById(id);
