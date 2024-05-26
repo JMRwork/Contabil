@@ -2,7 +2,10 @@
 <html th:replace="~{template :: layout (~{:: main}, 'Dados Cadastrais')}">
 	<main class="container-fluid">
 		<div th:switch="${cadastro}">
-			<h2 th:case="null" th:text="|Escola sem dados cadastrais|"></h2>
+			<div th:case="null">
+				<h2  th:text="|Escola sem dados cadastrais|"></h2>
+				<a class="btn btn-success mb-3" th:href="@{/organizations/{organizationId}/dados-cadastrais/edit(organizationId=${organizationId}, create='true')}" role="button">Criar Cadastro</a>
+			</div>
 			<div th:case="*">
 				<form class="" th:object="${cadastro}">
 					<div class="row">
