@@ -108,7 +108,7 @@ erDiagram
     responsaveis ||--o{ funcao_responsaveis : has
     funcao_responsaveis }o--|| organizations : has
     users {
-      int id
+      int id PK
       string email
       string password
       string full_name
@@ -122,11 +122,11 @@ erDiagram
       timestamp deleted_at
     }
     users_organizations {
-      int user_id
-      int organization_id
+      int user_id PK, FK
+      int organization_id PK, FK
     }
     organizations {
-      int id
+      int id PK
       string name
       string legal_name
       string cnpj
@@ -138,7 +138,7 @@ erDiagram
       timestamp deleted_at
     }
     movimento {
-      int id
+      int id PK
       string descricao
       enum tipo
       date data_lancamento
@@ -151,7 +151,7 @@ erDiagram
       timestamp deleted_at
     }
     banco {
-      string codigo
+      string codigo PK
       string nome
       int created_by
       int last_modified_by
@@ -159,10 +159,10 @@ erDiagram
       timestamp last_modified_at
     }
     domicilio_bancario {
-      int id
-      int escola_programa_id
-      int organization_id
-      int banco_id
+      int id PK
+      int escola_programa_id FK
+      int organization_id FK
+      int banco_id FK
       string cidade
       string conta_corrente
       string estado
@@ -173,7 +173,7 @@ erDiagram
       timestamp last_modified_at
     }
     escola_dados_cadastrais {
-      int organization_id
+      int organization_id PK, FK
       string cnpj
       string cep
       string cidade
@@ -192,8 +192,8 @@ erDiagram
       timestamp last_modified_at
     }
     escola_programa {
-      int id
-      int organization_id
+      int id PK
+      int organization_id FK
       string cidade
       string exercicio
       string nome_programa
@@ -207,9 +207,9 @@ erDiagram
       timestamp last_modified_at
     }
     funcao_responsaveis {
-      int id
-      int organization_id
-      int responsavel_id
+      int id PK
+      int organization_id FK
+      int responsavel_id FK
       string ata_nomeacao
       string funcao
       string periodo_gestao
@@ -219,7 +219,7 @@ erDiagram
       timestamp last_modified_at
     }
     responsaveis {
-      string cpf
+      string cpf PK
       string cep
       string cidade
       string email
