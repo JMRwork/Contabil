@@ -28,41 +28,41 @@ public class EscolaDadosCadastrais {
 	@Id
 	private Long organizationId;
 	
-	@Column(nullable = false)
+	@Column
 	private String exercicio;
 	
-	@Column(nullable = false)
+	@Column
 	private String unidadeExecutora;
 	
-	@Column(nullable = false)
+	@Column
 	private String nomeEscola;
 	
-	@Column(length = 14, nullable = false, unique = true)
+	@Column(length = 14, unique = true)
 	private String cnpj;
 	
-	@Column(nullable = false)
+	@Column
 	private String siglaEscola;
 
-	@Column(nullable = false)
+	@Column
 	private String endereco;
 	
-	@Column(nullable = false)
+	@Column
 	private String cidade;
 	
-	@Column(nullable = false)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private UF uf;
 	
-	@Column(nullable = false)
+	@Column
 	private String cep;
 	
-	@Column(nullable = false)
+	@Column
 	private String telefone;
 	
-	@Column(nullable = false)
+	@Column
 	private String email;
 	
-	@Column(nullable = false)
+	@Column
 	private String codigoInep;
 	
 	@CreatedBy

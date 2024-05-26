@@ -22,7 +22,6 @@ public class EditEscolaDadosCadastraisDto {
 	private String endereco;
 	@NotBlank(message = "O nome da cidade da Escola é necessario.")
 	private String cidade;
-	@NotBlank(message = "A sigla do Estado é necessaria.")
 	private UF uf;
 	@NotBlank(message = "O CEP da Escola é necessario.")
 	private String cep;

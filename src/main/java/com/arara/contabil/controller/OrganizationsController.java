@@ -61,7 +61,7 @@ public class OrganizationsController {
 
 	@PreAuthorize("hasRole('ADMIN') || ( hasRole('ACCOUNTANT') && principal.organizationIds.contains(#organizationId) )")
 	@GetMapping("/{id}/edit")
-	public String editOrganization( //
+	public String editOrganizationPage( //
 			@PathVariable("id") Long id, //
 			EditOrganizationDto editOrganizationDto, //
 			Model model, //
@@ -80,7 +80,7 @@ public class OrganizationsController {
 
 	@PreAuthorize("hasRole('ADMIN') || ( hasRole('ACCOUNTANT') && principal.organizationIds.contains(#organizationId) )")
 	@PostMapping("/{id}/edit")
-	public String editUser( //
+	public String editOrganization( //
 			@PathVariable("id") Long id, //
 			@Validated EditOrganizationDto editOrganizationDto, //
 			BindingResult result, //
@@ -144,7 +144,7 @@ public class OrganizationsController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}/delete")
-	public String deleteUserPage( //
+	public String deleteOrganizationPage( //
 			@PathVariable("id") long id, //
 			@RequestParam(value="undo", required = false, defaultValue = "false") boolean undo, //
 			Model model) {

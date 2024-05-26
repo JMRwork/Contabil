@@ -117,7 +117,8 @@ public class ConverterService {
 		return viewOrganizationDto;
 	}
 
-	public EditOrganizationDto convertOrganizationModelToEditOrganizationDto(Organization org, EditOrganizationDto dto) {
+	public EditOrganizationDto convertOrganizationModelToEditOrganizationDto(Organization org,
+			EditOrganizationDto dto) {
 		dto.setId(org.getId());
 		dto.setCnpj(org.getCnpj());
 		dto.setName(org.getName());
@@ -164,8 +165,9 @@ public class ConverterService {
 
 		return dto;
 	}
-	
-	public EditEscolaDadosCadastraisDto convertEscolaDadosCadastraisModelToEditEscolaDadosCadastraisDto(EscolaDadosCadastrais escolaDadosCadastrais, EditEscolaDadosCadastraisDto editEscolaDadosCadastraisDto) {
+
+	public EditEscolaDadosCadastraisDto convertEscolaDadosCadastraisModelToEditEscolaDadosCadastraisDto(
+			EscolaDadosCadastrais escolaDadosCadastrais, EditEscolaDadosCadastraisDto editEscolaDadosCadastraisDto) {
 		editEscolaDadosCadastraisDto.setOrganizationId(escolaDadosCadastrais.getOrganizationId());
 		editEscolaDadosCadastraisDto.setExercicio(escolaDadosCadastrais.getExercicio());
 		editEscolaDadosCadastraisDto.setUnidadeExecutora(escolaDadosCadastrais.getUnidadeExecutora());
@@ -180,5 +182,53 @@ public class ConverterService {
 		editEscolaDadosCadastraisDto.setEmail(escolaDadosCadastrais.getEmail());
 		editEscolaDadosCadastraisDto.setCodigoInep(escolaDadosCadastrais.getCodigoInep());
 		return editEscolaDadosCadastraisDto;
+	}
+
+	public EscolaDadosCadastrais convertEditEscolaDadosCadastraisDtoToEscolaDadosCadastraisModel(
+			EditEscolaDadosCadastraisDto editEscolaDadosCadastraisDto, EscolaDadosCadastrais escolaDadosCadastrais) {
+		if (editEscolaDadosCadastraisDto.getOrganizationId() != null) {
+			escolaDadosCadastrais.setOrganizationId(editEscolaDadosCadastraisDto.getOrganizationId());
+		}
+		if (editEscolaDadosCadastraisDto.getExercicio() != "" || editEscolaDadosCadastraisDto.getExercicio() != null) {
+			escolaDadosCadastrais.setExercicio(editEscolaDadosCadastraisDto.getExercicio());
+		}
+		if (editEscolaDadosCadastraisDto.getUnidadeExecutora() != ""
+				|| editEscolaDadosCadastraisDto.getUnidadeExecutora() != null) {
+			escolaDadosCadastrais.setUnidadeExecutora(editEscolaDadosCadastraisDto.getUnidadeExecutora());
+		}
+		if (editEscolaDadosCadastraisDto.getNomeEscola() != ""
+				|| editEscolaDadosCadastraisDto.getNomeEscola() != null) {
+			escolaDadosCadastrais.setNomeEscola(editEscolaDadosCadastraisDto.getNomeEscola());
+		}
+		if (editEscolaDadosCadastraisDto.getCnpj() != "" || editEscolaDadosCadastraisDto.getCnpj() != null) {
+			escolaDadosCadastrais.setCnpj(editEscolaDadosCadastraisDto.getCnpj());
+		}
+		if (editEscolaDadosCadastraisDto.getSiglaEscola() != ""
+				|| editEscolaDadosCadastraisDto.getSiglaEscola() != null) {
+			escolaDadosCadastrais.setSiglaEscola(editEscolaDadosCadastraisDto.getSiglaEscola());
+		}
+		if (editEscolaDadosCadastraisDto.getEndereco() != "" || editEscolaDadosCadastraisDto.getEndereco() != null) {
+			escolaDadosCadastrais.setEndereco(editEscolaDadosCadastraisDto.getEndereco());
+		}
+		if (editEscolaDadosCadastraisDto.getCidade() != "" || editEscolaDadosCadastraisDto.getCidade() != null) {
+			escolaDadosCadastrais.setCidade(editEscolaDadosCadastraisDto.getCidade());
+		}
+		if (editEscolaDadosCadastraisDto.getUf() != null) {
+			escolaDadosCadastrais.setUf(editEscolaDadosCadastraisDto.getUf());
+		}
+		if (editEscolaDadosCadastraisDto.getCep() != "" || editEscolaDadosCadastraisDto.getCep() != null) {
+			escolaDadosCadastrais.setCep(editEscolaDadosCadastraisDto.getCep());
+		}
+		if (editEscolaDadosCadastraisDto.getTelefone() != "" || editEscolaDadosCadastraisDto.getTelefone() != null) {
+			escolaDadosCadastrais.setTelefone(editEscolaDadosCadastraisDto.getTelefone());
+		}
+		if (editEscolaDadosCadastraisDto.getEmail() != "" || editEscolaDadosCadastraisDto.getEmail() != null) {
+			escolaDadosCadastrais.setEmail(editEscolaDadosCadastraisDto.getEmail());
+		}
+		if (editEscolaDadosCadastraisDto.getCodigoInep() != ""
+				|| editEscolaDadosCadastraisDto.getCodigoInep() != null) {
+			escolaDadosCadastrais.setCodigoInep(editEscolaDadosCadastraisDto.getCodigoInep());
+		}
+		return escolaDadosCadastrais;
 	}
 }

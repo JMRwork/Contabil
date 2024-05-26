@@ -4,7 +4,7 @@
 		<div th:switch="${editEscolaDadosCadastraisDto}">
 			<h2 th:case="null" th:text="|Escola sem dados cadastrais|"></h2>
 			<div th:case="*">
-				<form class="" th:action="@{/organizations/{organizationId}/dados-cadastrais/edit(organizationId=${editEscolaDadosCadastraisDto.organizationId})}" th:object="${editEscolaDadosCadastraisDto}">
+				<form class="" th:action="@{/organizations/{organizationId}/dados-cadastrais/edit(organizationId=${editEscolaDadosCadastraisDto.organizationId})}" th:method="POST" th:object="${editEscolaDadosCadastraisDto}">
 					<style>.error {color: red; font-size: small;}</style>
 					<div class="row">
 						<div class="col">
@@ -64,7 +64,9 @@
 							<div class="form-group mb-3">
 								<label class="form-label" for="uf">UF</label>
 								<div>
-									<input type="text" class="form-control" th:field="*{uf}" value="${editEscolaDadosCadastraisDto.uf}" placeholder="Em branco.">
+									<select class="form-control" th:field="*{uf}" value="${editEscolaDadosCadastraisDto.uf}">
+										<option th:each="estado : ${T(com.arara.contabil.model.UF).values()}" th:value="${estado}" th:text="${estado.ufName}"></option>
+									</select>
 								</div>
 								<p class="error" th:errors="${editEscolaDadosCadastraisDto.uf}"></p>
 							</div>

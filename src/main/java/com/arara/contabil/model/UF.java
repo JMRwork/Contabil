@@ -35,7 +35,7 @@ public enum UF {
 		ufName = name;
 	}
 	
-	public String getName() {
+	public String getUfName() {
 		return ufName;
 	}
 }
