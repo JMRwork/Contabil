@@ -5,6 +5,7 @@
 			<h2 th:case="null" th:text="|Escola sem dados no Rol de Responsáveis|"></h2>
 			<div th:case="*">
 				<h2>Rol de Responsáveis</h2>
+				<a class="btn btn-primary" role="button">Adicionar Responsável</a>
 				<div class="table-responsive">
 									<table class="table table-sm table-hover text-nowrap">
 										<thead>
@@ -35,7 +36,7 @@
 												<td th:text="${responsavel.cep}"></td>
 												<td th:text="${responsavel.telefone}"></td>
 												<td th:text="${responsavel.email}"></td>
-												<td><a class="btn btn-outline-success" role="button">Editar</a></td>
+												<td><a class="btn btn-outline-success" role="button" th:href="@{/organizations/{organizationId}/responsaveis/{responsavelId}/edit(organizationId=${session.currentOrganization.id},responsavelId=${responsavel.cpf})}">Editar</a></td>
 												<td><a class="btn btn-outline-danger"  role="button">Deletar</a></td>
 											</tr>
 										</tbody>
