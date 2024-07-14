@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Editar Responsável')}">
+	<main class="container-fluid">
+		<div th:switch="${responsavel}">
+			<h2 th:case="null" th:text="|Responsavel não encontrado|"></h2>
+			<div th:case="*">
+				<h2>Editar Responsável</h2>
+				<form th:action="@{/organizations/{organizationId}/responsavel/{responsavelId}/edit(organizationId=${session.currentOrganization.id},responsavelId=${responsavel.cpf})}" th:object="${responsavel}" method="post">
+					<style>.error {color: red; font-size: small;}</style>
+					<div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="cpf">CPF</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{cpf}" value="${responsavel.cpf}" placeholder="Digite o CPF">
+							</div>
+							<p class="error" th:errors="${responsavel.cpf}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="nome">Nome</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{nome}" value="${responsavel.nome}" placeholder="Digite o Nome">
+							</div>
+							<p class="error" th:errors="${responsavel.nome}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="rg">RG</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{rg}" value="${responsavel.rg}" placeholder="Digite o RG">
+							</div>
+							<p class="error" th:errors="${responsavel.rg}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="orgaoEmissor">Orgão Emissor</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{orgaoEmissor}" value="${responsavel.orgaoEmissor}" placeholder="Digite o Orgão Emissor">
+							</div>
+							<p class="error" th:errors="${responsavel.orgaoEmissor}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="endereco">Endereço</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{endereco}" value="${responsavel.endereco}" placeholder="Digite o Endereço">
+							</div>
+							<p class="error" th:errors="${responsavel.endereco}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="cidade">Cidade</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{cidade}" value="${responsavel.cidade}" placeholder="Digite a Cidade">
+							</div>
+							<p class="error" th:errors="${responsavel.cidade}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="uf">UF</label>
+							<div>
+								<select class="form-control" th:field="*{uf}" value="${responsavel.uf}">
+									<option th:each="estado : ${T(com.arara.contabil.model.UF).values()}" th:value="${estado}" th:text="${estado.ufName}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="cep">CEP</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{cep}" value="${responsavel.cep}" placeholder="Digite o CEP">
+							</div>
+							<p class="error" th:errors="${responsavel.cep}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="telefone">Telefone</label>
+							<div>
+								<input type="text" class="form-control" th:field="*{telefone}" value="${responsavel.telefone}" placeholder="Digite a Cidade">
+							</div>
+							<p class="error" th:errors="${responsavel.telefone}"></p>
+						</div>
+						<div class="form-group mb-3">
+							<label class="form-label" for="email">Endereço de Email</label>
+							<div>
+								<input type="email" class="form-control" th:field="*{email}" value="${responsavel.email}" placeholder="Digite o email">
+							</div>
+							<p class="error" th:errors="${responsavel.email}"></p>
+						</div>
+						<div th:if="${#fields.hasErrors('global')}">
+						  	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+						</div>
+						<button type="submit" class="btn btn-success mb-3">Alterar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</html>
