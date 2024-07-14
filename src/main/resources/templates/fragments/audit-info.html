@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<fieldset th:fragment="audit(obj)">
+		<legend>Informações de auditoria</legend>
+		<div class="mb-3">
+			<label for="createdBy" class="form-label">Criado por:</label>
+			<input id="createdBy" type="text" class="form-control" th:value="${__${obj}__.createdBy}" placeholder="n/a" readonly>
+			<a class="form-text" th:if="${__${obj}__.createdBy != null}" th:href="@{/users/{id}/view(id=${__${obj}__.createdBy})}">Detalhes</a>
+		</div>
+		<div class="mb-3">
+			<label for="createdAt" class="form-label">Criado em:</label>
+			<input id="createdAt" type="text" class="form-control" th:value="${#temporals.format(__${obj}__.createdAt, 'yyyy/MM/dd HH:mm')}" placeholder="n/a" readonly>
+		</div>
+		<div class="mb-3">
+			<label for="lastModifiedBy" class="form-label">Ultima modificação por:</label>
+			<input id="lastModifiedBy" type="text" class="form-control" th:value="${__${obj}__.lastModifiedBy}" placeholder="n/a" readonly>
+			<a class="form-text" th:if="${__${obj}__.lastModifiedBy != null}" th:href="@{/users/{id}/view(id=${__${obj}__.lastModifiedBy})}">Detalhes</a>
+		</div>
+		<div class="mb-3">
+			<label for="lastModifiedAt" class="form-label">Ultima modificação em:</label>
+			<input id="lastModifiedAt" type="text" class="form-control" th:value="${#temporals.format(__${obj}__.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" placeholder="n/a" readonly>
+		</div>
+		<div class="mb-3" th:if="${__${obj}__ instanceof T(com.arara.contabil.dto.ViewOrganizationDto)}">
+			<label for="deletedAt" class="form-label">Desativada em:</label>
+			<input id="deletedAt" type="text" class="form-control" th:value="${#temporals.format(__${obj}__.deletedAt, 'yyyy/MM/dd HH:mm')}" placeholder="n/a" readonly>
+		</div>
+		<div class="mb-3" th:if="${__${obj}__ instanceof T(com.arara.contabil.dto.ViewUserDto)}"}>
+			<label for="lastLoginAt" class="form-label">Ultimo login em:</label>
+			<input id="lastLoginAt" type="text" class="form-control" th:value="${#temporals.format(__${obj}__.lastLoginAt, 'yyyy/MM/dd HH:mm')}" placeholder="n/a" readonly>
+		</div>
+	</fieldset>
+
+</body>
+
+</html>
