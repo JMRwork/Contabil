@@ -5,52 +5,56 @@
 			<h2 th:case="null" th:text="|Usuário não encontrado|"></h2>
 			<div th:case="*">
 				<h2>Detalhes usuário</h2>
-				<div class="" th:object="${user}">
+				<form th:object="${user}">
 					<div class="row">
-						<h4>Informações básicas</h4>
-						<div class="form-group mb-3">
-							<label class="form-label" for="fullName">Nome</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{fullName}" value="${user.fullName}" disabled>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<label class="form-label" for="email">Email</label>
-								<div>
-									<input type="text" class="form-control" th:field="*{email}" value="${user.email}" disabled>
+						<div class="col">
+							<fieldset>
+								<legend>Informações básicas</legend>
+								<div class="form-group mb-3">
+									<label class="form-label" for="fullName">Nome</label>
+									<div>
+										<input type="text" class="form-control" th:field="*{fullName}" value="${user.fullName}" disabled>
+									</div>
 								</div>
-							</div>
-						<div class="form-group mb-3">
-							<label class="form-label" for="role">Account Role</label>
-							<div>
-								<select class="form-control" th:field="*{role}" value="${user.role}" disabled>
-									<option value="ROLE_USER">User</option>
-									<option value="ROLE_ACCOUNTANT">Accountant</option>
-									<option value="ROLE_ADMIN">Admin</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<label class="form-label" for="role">Account Status</label>
-							<div>
-								<select class="form-control" th:field="*{status}" value="${user.status}" disabled>
-									<option value="ACTIVE">Active</option>
-									<option value="DISABLED">Disabled</option>
-									<option value="DELETED">Deleted</option>
-									<option value="RESET_PASSWORD">Reset Password</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<a class="btn btn-outline-success" th:href="@{/users/{userId}/edit(userId=${user.id})}" role="button">Editar</a>
-							<a class="btn btn-outline-danger" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>
+								<div class="form-group mb-3">
+									<label class="form-label" for="email">Email</label>
+										<div>
+											<input type="text" class="form-control" th:field="*{email}" value="${user.email}" disabled>
+										</div>
+									</div>
+								<div class="form-group mb-3">
+									<label class="form-label" for="role">Account Role</label>
+									<div>
+										<select class="form-control" th:field="*{role}" value="${user.role}" disabled>
+											<option value="ROLE_USER">User</option>
+											<option value="ROLE_ACCOUNTANT">Accountant</option>
+											<option value="ROLE_ADMIN">Admin</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<label class="form-label" for="role">Account Status</label>
+									<div>
+										<select class="form-control" th:field="*{status}" value="${user.status}" disabled>
+											<option value="ACTIVE">Active</option>
+											<option value="DISABLED">Disabled</option>
+											<option value="DELETED">Deleted</option>
+											<option value="RESET_PASSWORD">Reset Password</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group mb-3">
+									<a class="btn btn-outline-success" th:href="@{/users/{userId}/edit(userId=${user.id})}" role="button">Editar</a>
+									<a class="btn btn-outline-danger" th:href="@{/users/{userId}/password(userId=${user.id})}" role="button">Alterar Senha</a>
+								</div>
+							</fieldset>
 						</div>
 					</div>
 					<div class="row">
 						<hr/>
-						<div class="form-check">
-							<div class="p-1 justify-content-center">
-								<h4>Escolas Associadas</h4>
+						<div class="col">
+							<fieldset>
+								<legend>Escolas Associadas</legend>
 								<table class="table">
 									<thead>
 										<tr>
@@ -69,44 +73,13 @@
 									 	</tr>
 									</tbody>
 								</table>
-							</div>
+							</fieldset>
 						</div>
 					</div>
 					<div class="row">
 						<hr/>
-						<h4>Informações de auditoria</h4>
-						<div class="form-group mb-3">
-							<label class="form-label">Criado por:</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{createdBy}" value="${user.createdBy}" disabled>
-							</div>
-							</div>
-						<div class="form-group mb-3">
-							<label class="form-label">Criado em:</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{createdAt}" value="${#temporals.format(user.createdAt, 'yyyy/MM/dd HH:mm')}" disabled>
-							</div>
-							</div>
-						<div class="form-group mb-3">
-							<label class="form-label">Ultima modificação por:</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{lastModifiedBy}" value="${user.lastModifiedBy}" disabled>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<label class="form-label">Ultima modificação em:</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{lastModifiedAt}" value="${#temporals.format(user.lastModifiedAt, 'yyyy/MM/dd HH:mm')}" disabled>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<label class="form-label">Ultimo login em:</label>
-							<div>
-								<input type="text" class="form-control" th:field="*{lastLoginAt}" value="${#temporals.format(user.lastLoginAt, 'yyyy/MM/dd HH:mm')}" disabled>
-							</div>
-						</div>
+						<div class="col" th:insert="~{fragments/audit-info :: audit (user)}"></div>
 					</div>
-					
 				</form>
 			</div>
 		</div>
