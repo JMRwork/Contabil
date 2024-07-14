@@ -21,7 +21,7 @@ public class RolResponsaveisController {
 	@GetMapping("/organizations/{organizationId}/responsaveis")
 	public String showRolResponsaveis(@PathVariable("organizationId") Long organizationId, Model model) {
 		model.addAttribute("rolResponsaveis", rolResponsaveisService.findAllByOrganization(organizationId)); // TODO: use DTO
-		return "view-rol-responsaveis";
+		return "list-rol-responsaveis";
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")
