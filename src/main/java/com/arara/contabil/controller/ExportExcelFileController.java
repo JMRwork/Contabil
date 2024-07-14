@@ -50,7 +50,7 @@ public class ExportExcelFileController {
 			files.add(newFile);
 		}
 		model.addAttribute("files", files);
-		return "view-exported-files";
+		return "list-exported-files";
 	}
 
 	@GetMapping("/generate-excel-file")

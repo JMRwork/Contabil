@@ -25,6 +25,6 @@ public class MovimentoController {
 		Pageable pageable = Pageable.unpaged();
 		model.addAttribute("movimento", movimentoService.listMovimentoPage(org, pageable)); // TODO: use DTO
 		model.addAttribute("currentOrganization", org); // TODO: use DTO
-		return "movimento";
+		return "list-movimento";
 	}
 }

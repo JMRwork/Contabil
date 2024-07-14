@@ -44,7 +44,7 @@ public class DomicilioBancarioController {
 		org.setId(organizationId);
 		model.addAttribute("domiciliosBancarios", domicilioBancarioService.listDomiciliosBancariosByOrganization(org)); // TODO: use DTO
 		model.addAttribute("currentOrganization", org);
-		return "domicilio-bancario";
+		return "list-domicilio-bancario";
 	}
 	
 //	@PreAuthorize("principal.organizationIds.contains(#organizationId)")

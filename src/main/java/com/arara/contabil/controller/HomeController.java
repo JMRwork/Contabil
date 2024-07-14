@@ -53,7 +53,7 @@ public class HomeController {
 		
 		model.addAttribute("organizations", organizations); // TODO: use DTO
 		
-		return "index";
+		return "home";
 	}
 
 }

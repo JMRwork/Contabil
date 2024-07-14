@@ -46,7 +46,7 @@ public class OrganizationsController {
 	@GetMapping
 	public String showOrganizations(@AuthenticationPrincipal CustomUser userPrincipal, Model model) {
 		model.addAttribute("organizations", organizationService.listOrganizations(userPrincipal)); // TODO: use DTO
-		return "organizations";
+		return "list-organizations";
 	}
 
 	@PreAuthorize("hasRole('ADMIN') || principal.organizationIds.contains(#organizationId)")

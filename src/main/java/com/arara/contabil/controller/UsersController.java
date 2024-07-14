@@ -45,7 +45,7 @@ public class UsersController {
 	@GetMapping
 	public String showUsers(@AuthenticationPrincipal CustomUser userPrincipal, Model model) {
 		model.addAttribute("users", userService.listUsers(userPrincipal)); // TODO: use DTO
-		return "users";
+		return "list-users";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
@@ -177,7 +177,7 @@ public class UsersController {
 		} else {
 			model.addAttribute("user", converterService.convertUserModelToViewUserDto(user.get()));
 		}
-		return "password-user";
+		return "register-password-user";
 	}
 
 	@PreAuthorize("hasRole('ADMIN') || #id == principal.id ")
