@@ -153,7 +153,7 @@ public class UsersController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/{id}/delete")
-	public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) {
+	public String deleteUser(@PathVariable("id") long id, ViewUserDto viewUserDto, BindingResult result) { // TODO: delete viewUserDto and test
 		Optional<User> userToBeDeleted = userService.findUserById(id);
 		if (userToBeDeleted.isEmpty()) {
 			ObjectError error = new ObjectError("globalError", "Este usuário não foi encontrado.");
@@ -170,7 +170,7 @@ public class UsersController {
 
 	@PreAuthorize("hasRole('ADMIN') || #id == principal.id ")
 	@GetMapping("/{id}/password")
-	public String passwordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword, Model model) {
+	public String changePasswordUserPage(@PathVariable("id") long id, ChangeUserPasswordDto userNewPassword, Model model) {
 		Optional<User> user = userService.findUserById(id);
 		if (user.isEmpty()) {
 			model.addAttribute("user", null);

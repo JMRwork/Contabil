@@ -35,7 +35,7 @@ public class EscolaDadosCadastraisController {
 	public String showDadosCadastrais(@PathVariable("organizationId") Long organizationId, Model model) {
 		var cadastro = escolaDadosCadastraisService.findById(organizationId);
 		if (cadastro.isPresent()) {
-			model.addAttribute("cadastro", cadastro.get());
+			model.addAttribute("cadastro", cadastro.get()); // TODO: use DTO
 		}
 		return "view-dados-cadastrais";
 	}

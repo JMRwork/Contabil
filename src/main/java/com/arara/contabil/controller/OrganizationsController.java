@@ -165,7 +165,7 @@ public class OrganizationsController {
 	public String deleteOrganization( //
 			@PathVariable("id") long id, //
 			@RequestParam(value="undo", required = false, defaultValue = "false") boolean undo, //
-			ViewUserDto viewUserDto, //
+			ViewUserDto viewUserDto, // // TODO: delete and test
 			BindingResult result) {
 		
 		Optional<Organization> org = organizationService.findById(id);
